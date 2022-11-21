@@ -4,9 +4,7 @@ const baseurl = 'http://localhost/web_recetas/public/';
 const viewdir = __DIR__ . '/app/Views/';
 const appdir = __DIR__ . '/app/';
 
-require_once appdir . 'Common.php';
-require_once appdir . 'Controllers/BaseController.php';
-require_once appdir . 'Models/BaseModel.php';
+require_once appdir . 'Config/Config.php';
 
 use \Controllers\BaseController as go;
 

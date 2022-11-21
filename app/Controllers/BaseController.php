@@ -18,13 +18,19 @@ class BaseController
     function signin()
     {
         $data ['page'] = 'signin';
-        if (isset($_POST['username']) && isset($_POST['email'])
-            && isset($_POST['passwd']) && isset($_POST['passwd_repeat'])) {
+        if (isset($_POST['username']) && $_POST['username'] != '' &&
+            isset($_POST['email']) && $_POST['email'] != '' &&
+            isset($_POST['passwd']) && $_POST['passwd'] != '' &&
+            isset($_POST['passwd_repeat']) && $_POST['passwd_repeat'] != '') {
             $username = trim(htmlspecialchars($_POST['username']));
             $email = trim(htmlspecialchars($_POST['email']));
             $passwd = trim(htmlspecialchars($_POST['passwd']));
             $passwd_repeat = trim(htmlspecialchars($_POST['passwd_repeat']));
-            model('Users');
+            if ($passwd === $passwd_repeat) {
+                model('Users')->new_user($username, $email, $passwd);
+            } else {
+                $data ['session_error'] = 'Las contraseñas no coinciden';
+            }
         } else {
             $data['session_error'] = 'No se completaron todos los campos';
         }

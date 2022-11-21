@@ -10,8 +10,9 @@ class Users extends model
 
     private string $table = 'usuarios';
 
-    function new_user($username, $email, $passwd, $permissions)
+    function new_user($username, $email, $passwd, $permissions = null)
     {
+        if (!isset($permissions)) $permissions = 0;
         $query = "INSERT INTO $this->table (username, email, passwd, permisos) VALUES (?, ?, ?, ?);";
         try {
             $stmt = $this->conn->prepare($query);
