@@ -37,6 +37,7 @@
     --bs-danger: #dc3545;
     --bs-light: #F0F0F0;
     --bs-dark: #212529;
+    --bs-pink-rgb: 255, 204, 255;
     --bs-primary-rgb: 204, 102, 153;
     --bs-secondary-rgb: 153, 0, 0;
     --bs-success-rgb: 25, 135, 84;
@@ -2265,7 +2266,7 @@ progress {
     background-color: #fff;
     border-color: #8ddece;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(26, 188, 156, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .form-control::-webkit-date-and-time-value {
@@ -2508,7 +2509,7 @@ textarea.form-control-lg {
 .form-select:focus {
     border-color: #8ddece;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(26, 188, 156, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .form-select[multiple], .form-select[size]:not([size="1"]) {
@@ -2585,7 +2586,7 @@ textarea.form-control-lg {
 .form-check-input:focus {
     border-color: #8ddece;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(26, 188, 156, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .form-check-input:checked {
@@ -2677,11 +2678,11 @@ textarea.form-control-lg {
 }
 
 .form-range:focus::-webkit-slider-thumb {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(26, 188, 156, 0.25);
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .form-range:focus::-moz-range-thumb {
-    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(26, 188, 156, 0.25);
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .form-range::-moz-focus-outer {
@@ -2962,7 +2963,7 @@ textarea.form-control-lg {
     margin-top: 0.1rem;
     font-size: 0.875rem;
     color: #fff;
-    background-color: rgba(25, 135, 84, 0.9);
+    background-color: rgba(var(--bs-pink-rgb), 0.9);
     border-radius: 0.5rem;
 }
 
@@ -2984,7 +2985,7 @@ textarea.form-control-lg {
 
 .was-validated .form-control:valid:focus, .form-control.is-valid:focus {
     border-color: #198754;
-    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .was-validated textarea.form-control:valid, textarea.form-control.is-valid {
@@ -3005,7 +3006,7 @@ textarea.form-control-lg {
 
 .was-validated .form-select:valid:focus, .form-select.is-valid:focus {
     border-color: #198754;
-    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .was-validated .form-check-input:valid, .form-check-input.is-valid {
@@ -3017,7 +3018,7 @@ textarea.form-control-lg {
 }
 
 .was-validated .form-check-input:valid:focus, .form-check-input.is-valid:focus {
-    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
@@ -3169,7 +3170,7 @@ textarea.form-control-lg {
 
 .btn-check:focus + .btn, .btn:focus {
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(26, 188, 156, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.25);
 }
 
 .btn:disabled, .btn.disabled, fieldset:disabled .btn {
@@ -3185,21 +3186,21 @@ textarea.form-control-lg {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #16a085;
+    background-color: var(--bs-secondary);
     border-color: var(--bs-primary);
 }
 
 .btn-check:focus + .btn-primary, .btn-primary:focus {
     color: #fff;
-    background-color: #16a085;
+    background-color: var(--bs-secondary);
     border-color: var(--bs-primary);
-    box-shadow: 0 0 0 0.25rem rgba(60, 198, 171, 0.5);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.5);
 }
 
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
     color: #fff;
     background-color: var(--bs-primary);
-    border-color: #148d75;
+    border-color: var(--bs-secondary);
 }
 
 .btn-check:checked + .btn-primary:focus, .btn-check:active + .btn-primary:focus, .btn-primary:active:focus, .btn-primary.active:focus, .show > .btn-primary.dropdown-toggle:focus {
@@ -3529,7 +3530,7 @@ textarea.form-control-lg {
 }
 
 .btn-check:focus + .btn-outline-success, .btn-outline-success:focus {
-    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.5);
 }
 
 .btn-check:checked + .btn-outline-success, .btn-check:active + .btn-outline-success, .btn-outline-success:active, .btn-outline-success.active, .btn-outline-success.dropdown-toggle.show {
@@ -3539,7 +3540,7 @@ textarea.form-control-lg {
 }
 
 .btn-check:checked + .btn-outline-success:focus, .btn-check:active + .btn-outline-success:focus, .btn-outline-success:active:focus, .btn-outline-success.active:focus, .btn-outline-success.dropdown-toggle.show:focus {
-    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.5);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.5);
 }
 
 .btn-outline-success:disabled, .btn-outline-success.disabled {

@@ -1,10 +1,15 @@
 <?php
-$username = $_POST['username'] ?? null;
-$passwd = $_POST['passwd'] ?? null;
-$passwd_repeat = $_POST['passwd_repeat'] ?? null;
-if (isset($username) && isset($passwd) && isset($passwd_repeat)) {
+
+if (isset($_POST['username']) && isset($_POST['passwd'])) {
+
+    $username = trim(htmlspecialchars($_POST['username']));
+
+    $passwd = trim(htmlspecialchars($_POST['passwd']));
+
     // check validity of user
+
 }
+
 ?>
 
 <section class="page-section" id="contact">
@@ -20,7 +25,7 @@ if (isset($username) && isset($passwd) && isset($passwd_repeat)) {
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="login_form" method="post" action="?login">
+                <form id="login_form" method="post" action="?session_login">
                     <!-- Name input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="username" type="text" name="username"
@@ -40,7 +45,7 @@ if (isset($username) && isset($passwd) && isset($passwd_repeat)) {
                     <button class="btn btn-primary btn-xl disabled my-3" id="submitButton" type="submit">Send</button>
                     <p class="card-subtitle">
                         ¿No tienes cuenta todavía? Rellena nuestro
-                        <a href="?signin">formulario</a>, solo cuesta dos minutos.
+                        <a href="?session_signin">formulario</a>, solo cuesta dos minutos.
                     </p>
                 </form>
             </div>
