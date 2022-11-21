@@ -9,5 +9,8 @@ function template($page, array $data = null)
 
 function view($page, array $data = null)
 {
-    include viewdir . "$page.php";
+    $file = viewdir . $page . '.php';
+    if (is_file($file)) {
+        include viewdir . $page . '.php';
+    }
 }
