@@ -1,5 +1,3 @@
 <?php
 
-echo 'Esto es el init, ';
-
-include 'public/index.php';
+const baseurl = 'http://localhost/web_recetas/public';
