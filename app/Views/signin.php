@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <!-- Submit Button-->
-                    <button class="btn btn-primary btn-xl my-3" id="submitButton" type="button">Send</button>
+                    <button class="btn btn-primary btn-xl my-3" id="submitButton" type="submit">Send</button>
                     <p class="card-subtitle">
                         ¿Ya tienes cuenta? Entra <a href="?login">aqui</a>.
                     </p>

@@ -14,3 +14,11 @@ function view($page, array $data = null)
         include viewdir . $page . '.php';
     }
 }
+
+function model($modelname)
+{
+    if (is_file(appdir.'Models/' . $modelname . '.php')) {
+        $class = '\\Models\\' . $modelname;
+        return new $class();
+    }
+}

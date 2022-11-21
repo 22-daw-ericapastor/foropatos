@@ -24,6 +24,7 @@ class BaseController
             $email = trim(htmlspecialchars($_POST['email']));
             $passwd = trim(htmlspecialchars($_POST['passwd']));
             $passwd_repeat = trim(htmlspecialchars($_POST['passwd_repeat']));
+            model('Users');
         } else {
             $data['session_error'] = 'No se completaron todos los campos';
         }
