@@ -1,15 +1,27 @@
-CREATE DATABASE IF NOT EXISTS web_recetas;
+DROP DATABASE IF EXISTS web_recetas;
+
+CREATE DATABASE web_recetas;
 
 USE web_recetas;
 
-CREATE TABLE usuarios (
-    ciff VARCHAR(9) PRIMARY KEY,
-    nombre VARCHAR(15),
-    apellido1 VARCHAR(15),
-    apellido2 VARCHAR(15),
-    bday DATE,
-    username VARCHAR(20),
-    pwd VARCHAR(100),
-    email VARCHAR(50),
-    permisos TINYINT(1)
+CREATE TABLE IF NOT EXISTS usuarios (
+  id INT UNSIGNED AUTO_INCREMENT,
+  username VARCHAR(20),
+  email VARCHAR(50),
+  pwd VARCHAR(100),
+  permisos TINYINT(1),
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS recetas (
+  id INT UNSIGNED AUTO_INCREMENT,
+  elaboracion DATETIME,
+  PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS ingredientes (
+  id INT UNSIGNED AUTO_INCREMENT,
+  id_receta INT UNSIGNED,
+  PRIMARY KEY(id),
+  FOREIGN KEY(id_receta) REFERENCES recetas(id)
 );

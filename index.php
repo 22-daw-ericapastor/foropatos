@@ -10,10 +10,17 @@ const appdir = __DIR__ . '/app/';
 
 require appdir . 'Common.php';
 
-// session check
+$route = array_keys($_GET)[0] ?? 'home';
 
+// session check
 if (!isset($_SESSION['id_user'])) {
 
-    template('login', ['title' => 'Home']);
+    if ($route != 'signin' || $route != 'login') $route = 'login';
+
+} else {
+
+    if ($route == 'login') $route = 'home';
 
 }
+
+template($route, ['title' => $route]);

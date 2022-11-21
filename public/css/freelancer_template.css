@@ -73,7 +73,7 @@
 }
 
 body {
-    cursor: pointer;
+    cursor: default;
     margin: 0;
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
@@ -12164,4 +12164,26 @@ html {
 
 .copyright {
     background-color: #1a252f;
+}
+
+#contact .svg-inline--fa.fa-star {
+    color: var(--bs-primary);
+}
+
+#contact .divider-custom-line {
+    background-color: var(--bs-secondary);
+}
+
+form {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+}
+
+form .form-floating {
+    min-width: 100%;
+}
+
+form a {
+    color: var(--bs-primary);
 }
