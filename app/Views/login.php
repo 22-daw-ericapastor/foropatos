@@ -1,17 +1,3 @@
-<?php
-
-if (isset($_POST['username']) && isset($_POST['passwd'])) {
-
-    $username = trim(htmlspecialchars($_POST['username']));
-
-    $passwd = trim(htmlspecialchars($_POST['passwd']));
-
-    // check validity of user
-
-}
-
-?>
-
 <section class="page-section" id="contact">
     <div class="container">
         <!-- Contact Section Heading-->
@@ -25,7 +11,7 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="login_form" method="post" action="?session_login">
+                <form id="login_form" method="post" action="?login">
                     <!-- Name input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="username" type="text" name="username"
@@ -45,7 +31,7 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
                     <button class="btn btn-primary btn-xl disabled my-3" id="submitButton" type="submit">Send</button>
                     <p class="card-subtitle">
                         ¿No tienes cuenta todavía? Rellena nuestro
-                        <a href="?session_signin">formulario</a>, solo cuesta dos minutos.
+                        <a href="?signin">formulario</a>, solo cuesta dos minutos.
                     </p>
                 </form>
             </div>
