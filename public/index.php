@@ -1,3 +1,5 @@
 <?php
 
-echo 'y te lleva al index.';
+// session check
+
+template('body');
