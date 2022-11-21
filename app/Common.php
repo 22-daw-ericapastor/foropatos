@@ -3,8 +3,8 @@
 function template($page, array $data = null)
 {
     view('header', $data);
-    view($page);
-    view('footer');
+    view($page, $data);
+    view('footer', $data);
 }
 
 function view($page, array $data = null)

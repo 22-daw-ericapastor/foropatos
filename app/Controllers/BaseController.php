@@ -43,7 +43,12 @@ class BaseController
         if (isset($_POST['username']) && isset($_POST['passwd'])) {
             $username = trim(htmlspecialchars($_POST['username']));
             $passwd = trim(htmlspecialchars($_POST['passwd']));
-            // check validity of user
+            if ($user = model('Users')->get_user($username, $passwd)) {
+                $_SESSION['user'] = $user;
+                $data['user'] = $user;
+                template('home', $data);
+                return;
+            }
         } else {
             $data['session_error'] = 'No se completaron todos los campos';
         }

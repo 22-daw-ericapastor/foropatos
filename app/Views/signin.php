@@ -12,6 +12,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
                 <form id="signin_form" method="post" action="?signin">
+                    <?php if (isset($data['session_error'])) {
+                        echo '<p class="card-subtitle text-danger">' . $data['session_error'] . '</p>';
+                    } ?>
                     <!-- Username input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="username" type="text" name="username"
@@ -46,10 +49,6 @@
                     </div>
                     <!-- Submit Button-->
                     <button class="btn btn-primary btn-xl my-3" id="submitButton" type="submit">Send</button>
-                    <?php if (isset($data['session_error']) && $data['session_error'] != '') {
-                        echo '<p class="invalid-feedback">' . $data['session_error'] . '</p>';
-                    } ?>
-                    <p><?php var_dump($data);?></p>
                     <p class="card-subtitle">
                         ¿Ya tienes cuenta? Entra <a href="?login">aqui</a>.
                     </p>

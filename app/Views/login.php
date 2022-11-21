@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <!-- Submit Button-->
-                    <button class="btn btn-primary btn-xl disabled my-3" id="submitButton" type="submit">Send</button>
+                    <button class="btn btn-primary btn-xl my-3" id="submitButton" type="submit">Send</button>
                     <p class="card-subtitle">
                         ¿No tienes cuenta todavía? Rellena nuestro
                         <a href="?signin">formulario</a>, solo cuesta dos minutos.
@@ -38,3 +38,5 @@
         </div>
     </div>
 </section>
+
+<?php var_dump($data);

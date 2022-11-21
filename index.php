@@ -8,10 +8,12 @@ require_once appdir . 'Config/Config.php';
 
 use \Controllers\BaseController as go;
 
+session_start();
+
 // declare route
 $route = array_keys($_GET)[0] ?? 'home';
 // session check
-if (!isset($_SESSION['id_user'])) {
+if (!isset($_SESSION['user'])) {
     if ($route != 'signin' && $route != 'login') $route = 'login';
 } else {
     if ($route == 'login') $route = 'home';
@@ -19,3 +21,5 @@ if (!isset($_SESSION['id_user'])) {
 
 // go to route
 new go($route);
+
+var_dump($_SESSION);
