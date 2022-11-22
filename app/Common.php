@@ -2,9 +2,9 @@
 
 function template($page, array $data = null)
 {
-    view('header', $data);
+    view('template/header', $data);
     view($page, $data);
-    view('footer', $data);
+    view('template/footer', $data);
 }
 
 function view($page, array $data = null)

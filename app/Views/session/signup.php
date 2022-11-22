@@ -1,23 +1,11 @@
-<section class="page-section" id="contact">
+<section class="page-section" id="signup">
     <div class="container">
-        <!-- Contact Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Registrarse</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
                 <form id="signin_form" method="post" action="?signup">
-                    <p class="h6 text-danger" id="session_error">
-                        <?php if (isset($data['session_error'])) echo $data['session_error']; ?>
-                    </p>
-                    <p class="h6 text-success">
-                        <?php if (isset($data['signup_success'])) echo $data['signup_success']; ?>
-                    </p>
+                    <p class="h6 text-danger" id="session_error"><?php if (isset($data['session_error'])) echo $data['session_error']; ?></p>
+                    <p class="h6 text-success"><?php if (isset($data['signup_success'])) echo $data['signup_success']; ?></p>
                     <!-- Username input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="username" type="text" name="username"

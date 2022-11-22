@@ -56,15 +56,22 @@
 <!-- Masthead-->
 <header class="masthead bg-primary text-light text-center">
     <div class="container d-flex align-items-center flex-column">
-        <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar" src="<?= baseurl ?>assets/imgs/cake.png" alt="..."/>
+        <?php if (isset($data) && $data['page'] != 'signup' && $data['page'] != 'signin'): ?>
+            <!-- Masthead Avatar Image-->
+            <img class="masthead-avatar" src="<?= baseurl ?>assets/imgs/cake.png" alt="..."/>
+        <?php endif; ?>
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0 mt-5 text-light">Foroplatos</h1>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0">Foro de recetas</h1>
+        <?php if (isset($data) && $data['page'] === 'signup'): ?>
+            <h2 class="page-section-heading text-center text-uppercase text-light mb-0">Registrarse</h2>
+        <?php elseif (isset($data) && $data['page'] === 'signin'): ?>
+            <h2 class="page-section-heading text-center text-uppercase text-light mb-0">Entrar</h2>
+        <?php endif; ?>
     </div>
 </header>

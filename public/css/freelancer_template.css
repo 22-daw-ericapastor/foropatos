@@ -8362,6 +8362,11 @@ textarea.form-control-lg {
     color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-pink {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-pink-rgb), var(--bs-text-opacity)) !important;
+}
+
 .text-light {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
@@ -12187,4 +12192,22 @@ form .form-floating {
 
 form a {
     color: var(--bs-primary);
+}
+
+.divider-custom.session-divider {
+    margin: 0.5rem 0;
+}
+
+.divider-custom.session-divider .divider-custom-line {
+    width: 80%;
+    max-width: 4rem;
+    height: 0.2rem;
+}
+
+.divider-custom.session-divider .divider-custom-icon {
+    font-size: 1.5rem;
+}
+
+#signin, #signup {
+    padding: 3rem 0 6rem;
 }
