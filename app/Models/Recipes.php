@@ -7,7 +7,7 @@ use \Models\BaseModel as model;
 class Recipes extends model
 {
 
-    private string $table='recetas';
+    private string $table = 'recipes';
 
     function get_recipes($recipe = null)
     {

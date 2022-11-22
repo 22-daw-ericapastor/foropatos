@@ -15,3 +15,5 @@ $route = array_keys($_GET)[0] ?? 'home';
 
 // go to route
 new go($route);
+
+echo password_hash('druid', PASSWORD_DEFAULT);

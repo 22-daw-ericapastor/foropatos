@@ -8,7 +8,7 @@ use mysqli_sql_exception;
 class Users extends model
 {
 
-    private string $table = 'usuarios';
+    private string $table = 'users';
 
     function new_user($username, $email, $passwd, $permissions = null): bool
     {

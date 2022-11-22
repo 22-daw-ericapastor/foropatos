@@ -2,31 +2,37 @@
   "0": {
     "img_alt": "Burger image",
     "img_src": "public/assets/imgs/recipes/burger.png",
-    "title": "La Pikaburger...<br/>Pika... pikaaa... ¡achú!"
+    "description": "La Pikaburger...<br/>Pika... pikaaa... ¡achú!",
+    "title": "PIKABURGER"
   },
   "1": {
     "img_alt": "Salad image",
     "img_src": "public/assets/imgs/recipes/salad.png",
-    "title": "La verdadera ensalada mediterránea... ¿Con cebolla o sin cebolla?"
+    "description": "La verdadera ensalada mediterránea... ¿Con cebolla o sin cebolla?",
+    "title": "ENSALADA MEDITERRÁNEA"
   },
   "2": {
     "img_alt": "Ramen image",
     "img_src": "public/assets/imgs/recipes/ramen.png",
-    "title": "Fideos de esos... japoneses"
+    "description": "Fideos de esos... japoneses",
+    "title": "RAMEN"
   },
   "3": {
     "img_alt": "Cupcake image",
     "img_src": "public/assets/imgs/recipes/cupcake.png",
-    "title": "Auténticos <em>capqueiks</em> de todos los sabores"
+    "description": "Auténticos <em>capqueiks</em> de todos los sabores",
+    "title": "CUPCAKES"
   },
   "4": {
     "img_alt": "Pet food image",
     "img_src": "public/assets/imgs/recipes/petfood.png",
-    "title": "Aprende a cocinar para tu mejor amigo de manera segura"
+    "description": "Aprende a cocinar para tu mejor amigo de manera segura",
+    "title": "COMIDA CASERA PARA MASCOTAS"
   },
   "5": {
     "img_alt": " image",
     "img_src": "public/assets/imgs/recipes/tuna.png",
-    "title": "Todo lo que puedes hacer con una lata de atún y... ¿más?"
+    "description": "Todo lo que puedes hacer con una lata de atún y... ¿más?",
+    "title": "RECETAS CON ATÚN EN LATA"
   }
 }

@@ -30,7 +30,7 @@ class BaseController
                 if ($passwd === $passwd_repeat) {
                     if (model('Users')->new_user($username, $email, $passwd)) {
                         $data ['signup_success'] = 'El formulario se envió con éxito.';
-                    }else{
+                    } else {
                         $data ['session_error'] = 'El formulario no pudo enviarse, disculpe las molestias.';
                     }
                 } else {
@@ -67,6 +67,15 @@ class BaseController
         session_destroy();
         session_start();
         $this->signin();
+    }
+
+    function comment()
+    {
+        if (model('Comments')->publish_comment($_GET['comment'])) {
+            echo json_encode(['response' => true]);
+        } else {
+            echo json_encode(['response' => false]);
+        }
     }
 
 }
