@@ -21,14 +21,14 @@
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top">Start</a>
+        <a class="navbar-brand" href="#page-top">Inicio</a>
         <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
         </button>
-        <?php if (isset($data) && $data['page'] != 'signin' && $data['page'] != 'login'): ?>
+        <?php if (isset($data) && $data['page'] != 'signup' && $data['page'] != 'signin'): ?>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">LINK
@@ -57,6 +57,7 @@
 </nav>
 <!-- Masthead-->
 <header class="masthead bg-primary text-light text-center">
+    <?php if (isset($data) && $data['page'] != 'signup' && $data['page'] != 'signin'): ?>
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
         <img class="masthead-avatar mb-5" src="<?= baseurl ?>assets/imgs/cake.png" alt="..."/>
@@ -71,4 +72,5 @@
         <!-- Masthead Subheading-->
         <p class="masthead-subheading font-weight-light mb-0">Descripcion de la pagina - Comentario adicional</p>
     </div>
+    <?php endif; ?>
 </header>

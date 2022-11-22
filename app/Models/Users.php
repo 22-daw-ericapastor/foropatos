@@ -32,9 +32,9 @@ class Users extends model
             $query = "SELECT * FROM $this->table WHERE username=?;";
             try {
                 $stmt = $this->conn->prepare($query);
-                $stmt->bind_param('ss', $username);
+                $stmt->bind_param('s', $username);
                 $stmt->execute();
-                return $stmt->num_rows();
+                return $stmt->get_result()->num_rows;
             } catch (mysqli_sql_exception $e) {
                 echo $e->getMessage();
             }
@@ -44,9 +44,8 @@ class Users extends model
                 $stmt = $this->conn->prepare($query);
                 $stmt->bind_param('ss', $username, $passwd);
                 $stmt->execute();
-                if ($stmt->num_rows() == 1) {
-                    $res = $stmt->get_result();
-                    var_dump($res->fetch_assoc());
+                $res = $stmt->get_result()->num_rows;
+                if ($res->num_rows === 1) {
                     return $res->fetch_assoc();
                 }
             } catch (mysqli_sql_exception $e) {

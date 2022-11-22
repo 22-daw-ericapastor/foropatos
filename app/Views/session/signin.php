@@ -11,27 +11,24 @@
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="login_form" method="post" action="?login">
+                <form id="login_form" method="post" action="?signin">
                     <!-- Name input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="username" type="text" name="username"
-                               data-sb-validations="required" placeholder="Enter your name..."/>
+                               placeholder="Enter your name..."/>
                         <label for="username">Username</label>
-                        <div class="invalid-feedback" data-sb-feedback="username:required">A name is required.</div>
                     </div>
                     <!-- Password input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="passwd" type="password" name="passwd"
-                               placeholder="Write your password..." data-sb-validations="required"/>
+                               placeholder="Write your password..."/>
                         <label for="passwd">Password</label>
-                        <div class="invalid-feedback" data-sb-feedback="passwd:required">A phone number is required.
-                        </div>
                     </div>
                     <!-- Submit Button-->
-                    <button class="btn btn-primary btn-xl my-3" id="submitButton" type="submit">Send</button>
+                    <button disabled class="btn btn-primary btn-xl my-3" id="submitButton" type="submit">Send</button>
                     <p class="card-subtitle">
                         ¿No tienes cuenta todavía? Rellena nuestro
-                        <a href="?signin">formulario</a>, solo cuesta dos minutos.
+                        <a href="?signup">formulario</a>, solo cuesta dos minutos.
                     </p>
                 </form>
             </div>
@@ -39,4 +36,4 @@
     </div>
 </section>
 
-<?php var_dump($data);
+<?php var_dump($_SESSION);

@@ -15,9 +15,9 @@ class BaseController
         template('home', ['page' => 'home']);
     }
 
-    function signin()
+    function signup()
     {
-        $data ['page'] = 'signin';
+        $data ['page'] = 'signup';
         if (isset($_POST['username']) && $_POST['username'] != '' &&
             isset($_POST['email']) && $_POST['email'] != '' &&
             isset($_POST['passwd']) && $_POST['passwd'] != '' &&
@@ -26,20 +26,24 @@ class BaseController
             $email = trim(htmlspecialchars($_POST['email']));
             $passwd = trim(htmlspecialchars($_POST['passwd']));
             $passwd_repeat = trim(htmlspecialchars($_POST['passwd_repeat']));
-            if ($passwd === $passwd_repeat) {
-                model('Users')->new_user($username, $email, $passwd);
+            if (model('Users')->get_user($username) === 0) {
+                if ($passwd === $passwd_repeat) {
+                    if (model('Users')->new_user($username, $email, $passwd)) {
+                        $data ['signup_success'] = 'El formulario se envió con éxito.';
+                    }
+                } else {
+                    $data ['session_error'] = 'Las contraseñas no coinciden.';
+                }
             } else {
-                $data ['session_error'] = 'Las contraseñas no coinciden';
+                $data['session_error'] = '¡Ups! Escoge otro nombre de usuario, ya está en uso.';
             }
-        } else {
-            $data['session_error'] = 'No se completaron todos los campos';
         }
-        template('signin', $data);
+        template('session/signup', $data);
     }
 
-    function login()
+    function signin()
     {
-        $data ['page'] = 'login';
+        $data ['page'] = 'signin';
         if (isset($_POST['username']) && isset($_POST['passwd'])) {
             $username = trim(htmlspecialchars($_POST['username']));
             $passwd = trim(htmlspecialchars($_POST['passwd']));
@@ -52,7 +56,7 @@ class BaseController
         } else {
             $data['session_error'] = 'No se completaron todos los campos';
         }
-        template('login', $data);
+        template('session/signin', $data);
     }
 
 }

@@ -11,49 +11,49 @@
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="signin_form" method="post" action="?signin">
-                    <?php if (isset($data['session_error'])) {
-                        echo '<p class="card-subtitle text-danger">' . $data['session_error'] . '</p>';
-                    } ?>
+                <form id="signin_form" method="post" action="?signup">
+                    <p class="card-subtitle text-danger" id="session_error">
+                        <?php if (isset($data['session_error'])) echo $data['session_error']; ?>
+                    </p>
+                    <p>
+                        <?php if (isset($data['signup_success'])) echo $data['signup_success']; ?>
+                    </p>
                     <!-- Username input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="username" type="text" name="username"
-                               placeholder="Escribe tu nombre completo..." data-sb-validations="required"/>
-                        <label for="username">Nombre completo</label>
-                        <div class="invalid-feedback" data-sb-feedback="username:required">A name is required.</div>
+                               placeholder="Escribe tu nombre completo..."/>
+                        <label for="username">Crea un nombre de usuario</label>
                     </div>
                     <!-- Email address input-->
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="email" type="email" placeholder="name@example.com" name="email"
-                               data-sb-validations="required,email"/>
-                        <label for="email">Email address</label>
-                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        <input class="form-control" id="email" type="email" placeholder="name@example.com"
+                               name="email"/>
+                        <label for="email">Correo electrónico</label>
+                        <div class="invalid-feedback" id="email_error"></div>
                     </div>
                     <!-- Password input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="passwd" type="password" name="passwd"
-                               placeholder="Write your password..." data-sb-validations="required"/>
+                               placeholder="Write your password..."/>
                         <label for="passwd">Password</label>
-                        <div class="invalid-feedback" data-sb-feedback="passwd:required">Password is required.
+                        <div class="invalid-feedback" id="passwd_error">La contraseña debe tener al menos 8 dígitos
                         </div>
                     </div>
                     <!-- Repeat password input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="passwd_repeat" type="password" name="passwd_repeat"
-                               placeholder="Repeat your password..." data-sb-validations="required"/>
+                               placeholder="Repeat your password..."/>
                         <label for="passwd_repeat">Repeat password</label>
-                        <div class="invalid-feedback" data-sb-feedback="passwd_repeat:required">Repeating password is
-                            required.
-                        </div>
+                        <div class="invalid-feedback" id="passwd_repeat_error">Las contraseñas deben coincidir.</div>
                     </div>
                     <!-- Submit Button-->
-                    <button class="btn btn-primary btn-xl my-3" id="submitButton" type="submit">Send</button>
+                    <button disabled class="btn btn-primary btn-xl my-3" id="signup_btn" type="submit">Send</button>
                     <p class="card-subtitle">
-                        ¿Ya tienes cuenta? Entra <a href="?login">aqui</a>.
+                        ¿Ya tienes cuenta? Entra <a href="?signin">aqui</a>.
                     </p>
                 </form>
             </div>
         </div>
     </div>
 </section>
+<script src="<?= baseurl ?>js/session_signup.js"></script>

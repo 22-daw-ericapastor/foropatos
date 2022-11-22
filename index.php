@@ -14,9 +14,9 @@ session_start();
 $route = array_keys($_GET)[0] ?? 'home';
 // session check
 if (!isset($_SESSION['user'])) {
-    if ($route != 'signin' && $route != 'login') $route = 'login';
+    if ($route != 'signin' && $route != 'signup') $route = 'signin';
 } else {
-    if ($route == 'login') $route = 'home';
+    if ($route == 'signin' || $route == 'signup') $route = 'home';
 }
 
 // go to route
