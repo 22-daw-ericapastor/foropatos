@@ -71,10 +71,30 @@ class BaseController
         $this->home();
     }
 
+    function recetas()
+    {
+        // get all recipes from db to fill in recipes grid in body
+        // must return a json
+    }
+
     function comment()
     {
         if (isset($_SESSION['__user'])) {
-            if (model('Comments')->publish_comment($_GET['comment'])) {
+            if (model('Comments')->publish_comment(/*$_GET parameters here*/)) {
+                echo '<p class="text-success">¡Comentario enviado con éxito!<br/>Recarga la página para poder verlo.</p>';
+            } else {
+                echo '<p class="text-danger">Ha habido un problema al enviar tu comentario...<br/>No vuelvas a intentarlo.</p>';
+            }
+        } else {
+            echo '<p class="text-danger">Tienes que loggearte para poder publicar comentarios.</p>';
+        }
+    }
+
+    function message()
+    {
+        // send a message into db
+        if (isset($_SESSION['__user'])) {
+            if (model('Messages')->send_message(/*$_GET parameters here*/)) {
                 echo '<p class="text-success">¡Comentario enviado con éxito!<br/>Recarga la página para poder verlo.</p>';
             } else {
                 echo '<p class="text-danger">Ha habido un problema al enviar tu comentario...<br/>No vuelvas a intentarlo.</p>';
