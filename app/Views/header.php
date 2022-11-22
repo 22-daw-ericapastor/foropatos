@@ -31,24 +31,22 @@
         <?php if (isset($data) && $data['page'] != 'signup' && $data['page'] != 'signin'): ?>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">LINK
-                            1</a>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#"></a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">LINK
-                            2</a>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Contact</a>
                     </li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
-                                                         href="#contact">Contact</a></li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signout">Sign out</a></li>
                 </ul>
             </div>
         <?php else: ?>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?session_login">LOGIN</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signin">SIGN IN</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?session_signin">SIGN IN</a>
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signup">SIGN UP</a>
                     </li>
                 </ul>
             </div>
@@ -57,20 +55,16 @@
 </nav>
 <!-- Masthead-->
 <header class="masthead bg-primary text-light text-center">
-    <?php if (isset($data) && $data['page'] != 'signup' && $data['page'] != 'signin'): ?>
     <div class="container d-flex align-items-center flex-column">
         <!-- Masthead Avatar Image-->
-        <img class="masthead-avatar mb-5" src="<?= baseurl ?>assets/imgs/cake.png" alt="..."/>
-        <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0">Foro de recetas</h1>
+        <img class="masthead-avatar" src="<?= baseurl ?>assets/imgs/cake.png" alt="..."/>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0">Descripcion de la pagina - Comentario adicional</p>
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Foro de recetas</h1>
     </div>
-    <?php endif; ?>
 </header>

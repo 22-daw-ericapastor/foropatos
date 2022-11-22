@@ -30,6 +30,8 @@ class BaseController
                 if ($passwd === $passwd_repeat) {
                     if (model('Users')->new_user($username, $email, $passwd)) {
                         $data ['signup_success'] = 'El formulario se envió con éxito.';
+                    }else{
+                        $data ['session_error'] = 'El formulario no pudo enviarse, disculpe las molestias.';
                     }
                 } else {
                     $data ['session_error'] = 'Las contraseñas no coinciden.';
@@ -47,16 +49,24 @@ class BaseController
         if (isset($_POST['username']) && isset($_POST['passwd'])) {
             $username = trim(htmlspecialchars($_POST['username']));
             $passwd = trim(htmlspecialchars($_POST['passwd']));
-            if ($user = model('Users')->get_user($username, $passwd)) {
-                $_SESSION['user'] = $user;
-                $data['user'] = $user;
-                template('home', $data);
+            $model = model('Users');
+            if ($model->get_user($username)) {
+                $_SESSION['user'] = $model->get_user($username, $passwd);
+                $this->home();
                 return;
+            } else {
+                $data['session_error'] = 'El usuario o contraseña no es correcto.';
             }
-        } else {
-            $data['session_error'] = 'No se completaron todos los campos';
         }
         template('session/signin', $data);
+    }
+
+    function signout()
+    {
+        session_unset();
+        session_destroy();
+        session_start();
+        $this->signin();
     }
 
 }

@@ -10,11 +10,12 @@ class Users extends model
 
     private string $table = 'usuarios';
 
-    function new_user($username, $email, $passwd, $permissions = null)
+    function new_user($username, $email, $passwd, $permissions = null): bool
     {
         if (!isset($permissions)) $permissions = 0;
-        $query = "INSERT INTO $this->table (username, email, passwd, permisos) VALUES (?, ?, ?, ?);";
+        $query = "INSERT INTO $this->table (username, email, passwd, permissions) VALUES (?, ?, ?, ?);";
         try {
+            $passwd = password_hash($passwd, PASSWORD_DEFAULT);
             $stmt = $this->conn->prepare($query);
             $stmt->bind_param('sssi', $username, $email, $passwd, $permissions);
             if ($stmt->execute()) {
@@ -28,29 +29,28 @@ class Users extends model
 
     function get_user($username, $passwd = null)
     {
-        if (!isset($passwd)) {
-            $query = "SELECT * FROM $this->table WHERE username=?;";
-            try {
-                $stmt = $this->conn->prepare($query);
-                $stmt->bind_param('s', $username);
-                $stmt->execute();
-                return $stmt->get_result()->num_rows;
-            } catch (mysqli_sql_exception $e) {
-                echo $e->getMessage();
-            }
-        } else {
-            $query = "SELECT * FROM $this->table WHERE username=? AND passwd=?;";
-            try {
-                $stmt = $this->conn->prepare($query);
-                $stmt->bind_param('ss', $username, $passwd);
-                $stmt->execute();
-                $res = $stmt->get_result()->num_rows;
+        $query = "SELECT * FROM $this->table WHERE username=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            if (!isset($passwd)) {
+                return $res->num_rows;
+            } else {
                 if ($res->num_rows === 1) {
-                    return $res->fetch_assoc();
+                    $result = $res->fetch_assoc();
+                    if (password_verify($passwd, $result['passwd'])) {
+                        return [
+                            'username' => $result['username'],
+                            'email' => $result['email'],
+                            'permissions' => $result['permissions']
+                        ];
+                    }
                 }
-            } catch (mysqli_sql_exception $e) {
-                echo $e->getMessage();
             }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
         }
         return false;
     }

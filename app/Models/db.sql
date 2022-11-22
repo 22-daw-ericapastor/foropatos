@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
   username VARCHAR(20),
   email VARCHAR(50),
   passwd VARCHAR(100),
-  permisos TINYINT(1),
+  permissions TINYINT(1) DEFAULT 0,
   PRIMARY KEY(username)
 );
 

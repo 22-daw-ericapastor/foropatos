@@ -21,5 +21,3 @@ if (!isset($_SESSION['user'])) {
 
 // go to route
 new go($route);
-
-var_dump($_SESSION);
