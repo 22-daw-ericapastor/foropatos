@@ -1,8 +1,12 @@
 document.addEventListener('DOMContentLoaded', async function () {
 
         const recipes_container = document.getElementById('recipes-grid'),
-            modal_open_container = document.getElementById('open-modal'),
-            url_base = window.location.href;
+            modal_open_container = document.getElementById('open-modal');
+
+        let url_base = window.location.href;
+        if (url_base.match(/\?/)) {
+            url_base = url_base.substring(0, url_base.indexOf('?'));
+        }
 
         let recipes_container_content = '',
             open_modal_content = '';
@@ -86,17 +90,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             comment_btn[i].addEventListener('click', async function () {
                 await fetch('?comment&comment_text=' + comment_text)
                     .then(response => response.text())
-                    .then(data => {
-                        console.log(data)
-                        if (data['response'] === true) {
-                            comment_response[i].classList.remove('text-danger');
-                            comment_response[i].classList.toggle('text-success');
-                            comment_response[i].innerHTML = '¡Comentario enviado con éxito!';
-                        } else {
-                            comment_response[i].classList.remove('text-success');
-                            comment_response[i].classList.toggle('text-danger');
-                            comment_response[i].innerHTML = 'Ha habido un problema enviando tu comentario...<br/>No lo intentes de nuevo.';
-                        }
+                    .then(text => {
+                        console.log(text)
+                        comment_response[i].innerHTML = text;
                         setTimeout(function () {
                             comment_response[i].innerHTML = '';
                         }, 3000);

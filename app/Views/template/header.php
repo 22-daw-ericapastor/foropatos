@@ -38,6 +38,22 @@
                 </li>
             </ul>
         </div>
+        <div class="user-options collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <?php if (!isset($_SESSION['__user'])): ?>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signin">Sign in</a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signup">Sign up</a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signout">Sign out</a>
+                    </li>
+                <?php endif; ?>
+            </ul>
+        </div>
     </div>
 </nav>
 <!-- para añadir aparte -->

@@ -12,7 +12,9 @@ class BaseController
 
     function home()
     {
-        template('pages/home', ['page' => 'home']);
+        $data['page'] = 'home';
+        // add here db request to get recipes to fill page and pass it to $data
+        template('pages/home', $data);
     }
 
     function signup()
@@ -66,15 +68,19 @@ class BaseController
         session_unset();
         session_destroy();
         session_start();
-        $this->signin();
+        $this->home();
     }
 
     function comment()
     {
-        if (model('Comments')->publish_comment($_GET['comment'])) {
-            echo json_encode(['response' => true]);
+        if (isset($_SESSION['__user'])) {
+            if (model('Comments')->publish_comment($_GET['comment'])) {
+                echo '<p class="text-success">¡Comentario enviado con éxito!<br/>Recarga la página para poder verlo.</p>';
+            } else {
+                echo '<p class="text-danger">Ha habido un problema al enviar tu comentario...<br/>No vuelvas a intentarlo.</p>';
+            }
         } else {
-            echo json_encode(['response' => false]);
+            echo '<p class="text-danger">Tienes que loggearte para poder publicar comentarios.</p>';
         }
     }
 
