@@ -1,32 +1,29 @@
-
 <!-- Footer-->
 <footer class="footer text-center">
     <div class="container">
         <div class="row">
             <!-- Footer Location-->
             <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Location</h4>
-                <p class="lead mb-0">
-                    2215 John Daniel Drive
-                    <br />
-                    Clark, MO 65243
-                </p>
+                <h4 class="text-uppercase mb-4">Localización</h4>
+                <p class="lead mb-0">Zaragüazas<br/>Camino de la Magia Salvaje, 21</p>
             </div>
             <!-- Footer Social Icons-->
+            <!-- Uncomment this line to add social nets
             <div class="col-lg-4 mb-5 mb-lg-0">
-                <h4 class="text-uppercase mb-4">Around the Web</h4>
+                <h4 class="text-uppercase mb-4">Nuestras redes</h4>
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
                 <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
             </div>
+            -->
             <!-- Footer About Text-->
-            <div class="col-lg-4">
-                <h4 class="text-uppercase mb-4">About Freelancer</h4>
+            <div class="col-lg-8">
+                <h4 class="text-uppercase mb-4">Sobre Foroplatos</h4>
                 <p class="lead mb-0">
-                    Freelance is a free to use, MIT licensed Bootstrap theme created by
-                    <a href="http://startbootstrap.com">Start Bootstrap</a>
-                    .
+                    Foroplatos es de uso gratuito, creado por los alumnos de DAW de segundo año.
+                    <br/>Cualquier atribución contacten con <a href="#!">Guillermo</a>, según me han dicho,
+                    <br/>best master de rol de Españita.
                 </p>
             </div>
         </div>
