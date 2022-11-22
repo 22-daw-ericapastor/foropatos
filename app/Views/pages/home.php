@@ -62,6 +62,5 @@
         </div>
     </div>
 </section>
-<section id="open-modal">
-    <section>
-        <script src="<?= baseurl ?>js/recipes_modal.js"></script>
+<section id="open-modal"></section>
+<script src="<?= baseurl ?>js/recipes_modal.js"></script>

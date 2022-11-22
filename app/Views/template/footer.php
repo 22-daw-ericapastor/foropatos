@@ -19,7 +19,7 @@
             -->
             <!-- Footer About Text-->
             <div class="col-lg-8">
-                <h4 class="text-uppercase mb-4">Sobre Foroplatos</h4>
+                <h4 class="text-uppercase mb-4">Sobre Foropatos</h4>
                 <p class="lead mb-0">
                     Foroplatos es de uso gratuito, creado por los alumnos de DAW de segundo año.
                     <br/>Cualquier atribución contacten con <a href="#!">Guillermo</a>, según me han dicho,

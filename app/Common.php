@@ -11,7 +11,7 @@ function view($page, array $data = null)
 {
     $file = viewdir . $page . '.php';
     if (is_file($file)) {
-        include viewdir . $page . '.php';
+        include $file;
     }
 }
 
