@@ -1,19 +1,3 @@
-<?php
-
-if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwd']) && isset($_POST['passwd_repeat'])) {
-
-    $username = trim(htmlspecialchars($_POST['username']));
-
-    $email = trim(htmlspecialchars($_POST['email']));
-
-    $passwd = trim(htmlspecialchars($_POST['passwd']));
-
-    $passwd_repeat = trim(htmlspecialchars($_POST['passwd_repeat']));
-
-}
-
-?>
-
 <section class="page-section" id="contact">
     <div class="container">
         <!-- Contact Section Heading-->
@@ -27,7 +11,10 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwd'
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="signin_form">
+                <form id="signin_form" method="post" action="?signin">
+                    <?php if (isset($data['session_error'])) {
+                        echo '<p class="card-subtitle text-danger">' . $data['session_error'] . '</p>';
+                    } ?>
                     <!-- Username input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="username" type="text" name="username"
@@ -61,9 +48,9 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwd'
                         </div>
                     </div>
                     <!-- Submit Button-->
-                    <button class="btn btn-primary btn-xl my-3" id="submitButton" type="button">Send</button>
+                    <button class="btn btn-primary btn-xl my-3" id="submitButton" type="submit">Send</button>
                     <p class="card-subtitle">
-                        ¿Ya tienes cuenta? Entra <a href="?session_login">aqui</a>.
+                        ¿Ya tienes cuenta? Entra <a href="?login">aqui</a>.
                     </p>
                 </form>
             </div>

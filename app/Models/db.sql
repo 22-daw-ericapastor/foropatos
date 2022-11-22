@@ -5,12 +5,11 @@ CREATE DATABASE web_recetas;
 USE web_recetas;
 
 CREATE TABLE IF NOT EXISTS usuarios (
-  id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(20),
   email VARCHAR(50),
-  pwd VARCHAR(100),
+  passwd VARCHAR(100),
   permisos TINYINT(1),
-  PRIMARY KEY(id)
+  PRIMARY KEY(username)
 );
 
 CREATE TABLE IF NOT EXISTS recetas (
