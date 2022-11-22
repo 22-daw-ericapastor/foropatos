@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-    <title>Freelancer - Start Bootstrap Theme</title>
+    <title>Foropatos</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href=""/>
+    <link rel="icon" type="image/x-icon" href="<?= baseurl ?>assets/imgs/cake.png"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -28,31 +28,32 @@
             Menu
             <i class="fas fa-bars"></i>
         </button>
-        <?php if (isset($data) && $data['page'] != 'signup' && $data['page'] != 'signin'): ?>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#"></a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signout">Sign out</a></li>
-                </ul>
-            </div>
-        <?php else: ?>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signin">SIGN IN</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signup">SIGN UP</a>
-                    </li>
-                </ul>
-            </div>
-        <?php endif; ?>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#recetas">Recetas</a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+<!-- para añadir aparte -->
+<!--
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signin">Sign in</a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1">
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signup">Sign up</a>
+                </li>
+                <?php if (isset($_SESSION['__user'])): ?>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signout">Sign out</a>
+                    </li>
+                <?php endif; ?>
+-->
 <!-- Masthead-->
 <header class="masthead bg-primary text-light text-center">
     <div class="container d-flex align-items-center flex-column">
@@ -61,7 +62,7 @@
             <img class="masthead-avatar" src="<?= baseurl ?>assets/imgs/cake.png" alt="..."/>
         <?php endif; ?>
         <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0 mt-5 text-light">Foroplatos</h1>
+        <h1 class="masthead-heading text-uppercase mb-0 mt-5 text-light">Foropatos</h1>
         <!-- Icon Divider-->
         <div class="divider-custom divider-light">
             <div class="divider-custom-line"></div>

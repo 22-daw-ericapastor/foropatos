@@ -12,7 +12,7 @@ class BaseController
 
     function home()
     {
-        template('home', ['page' => 'home']);
+        template('pages/home', ['page' => 'home']);
     }
 
     function signup()
@@ -51,7 +51,7 @@ class BaseController
             $passwd = trim(htmlspecialchars($_POST['passwd']));
             $model = model('Users');
             if ($model->get_user($username)) {
-                $_SESSION['user'] = $model->get_user($username, $passwd);
+                $_SESSION['__user'] = $model->get_user($username, $passwd);
                 $this->home();
                 return;
             } else {
