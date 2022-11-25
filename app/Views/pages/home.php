@@ -10,7 +10,14 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Portfolio Grid Items-->
-        <div class="row justify-content-center" id="recipes-grid"></div>
+        <div class="position-relative">
+            <div class="row justify-content-center" id="recipes-grid"></div>
+            <?php if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1): ?>
+                <button type="button" class="btn btn-primary position-absolute top-0 start-0" id="manage-recipes">
+                    <a class="text-decoration-none text-light" href="?manage_recipes">Gestionar</a>
+                </button>
+            <?php endif; ?>
+        </div>
     </div>
 </section>
 <!-- Contact Section-->
@@ -56,7 +63,9 @@
                         </div>
                     </div>
                     <!-- Submit Button-->
-                    <button class="btn btn-primary btn-xl disabled" id="submit_issue" type="submit">Enviar</button>
+                    <button value="<?php if (isset($_SESSION['__user'])) echo $_SESSION['__user']['username'] ?>"
+                            class="btn btn-primary btn-xl disabled" id="submit_issue" type="submit">Enviar
+                    </button>
                 </form>
             </div>
         </div>

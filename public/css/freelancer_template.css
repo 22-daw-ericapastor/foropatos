@@ -12078,6 +12078,10 @@ html {
     border-width: 1px;
 }
 
+.form-floating textarea.form-control.comment-text {
+    font-size: 1rem;
+}
+
 .form-floating input.form-control:focus,
 .form-floating textarea.form-control:focus {
     box-shadow: none;
@@ -12216,4 +12220,49 @@ form a {
 
 #signin, #signup {
     padding: 3rem 0 6rem;
+}
+
+.comment-form {
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    align-items: center;
+    justify-items: end;
+}
+
+.comment-list {
+    margin: 0;
+    padding: 2rem;
+    list-style: none;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.comment-list p {
+    margin: 0;
+    padding: 0.25rem 0.5rem;
+}
+
+.comment-item {
+    display: grid;
+    grid-template-columns: 4fr 8fr;
+    justify-items: start;
+    align-items: start;
+    align-content: center;
+    justify-content: start;
+    padding: 0.25rem;
+    font-size: 0.825rem;
+}
+
+.comment-user_time em {
+    font-size: 0.625rem;
+}
+
+.comments-db {
+    background: rgba(var(--bs-primary-rgb), 0.25);
+    border-radius: 5px;
+    min-height: 27px;
+}
+
+#recipes-grid {
+    padding-top: 4rem;
 }
