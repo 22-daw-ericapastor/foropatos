@@ -2,9 +2,9 @@
 
 function template($page, array $data = null)
 {
-    view('template/header', $data);
+    view('templates/header', $data);
     view($page, $data);
-    view('template/footer', $data);
+    view('templates/footer', $data);
 }
 
 function view($page, array $data = null)
@@ -17,8 +17,13 @@ function view($page, array $data = null)
 
 function model($modelname)
 {
-    if (is_file(appdir.'Models/' . $modelname . '.php')) {
+    if (is_file(appdir . 'Models/' . $modelname . '.php')) {
         $class = '\\Models\\' . $modelname;
         return new $class();
     }
+}
+
+function validate(string $str): string
+{
+    return trim(htmlspecialchars($str));
 }
