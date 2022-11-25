@@ -27,16 +27,18 @@ CREATE TABLE IF NOT EXISTS recipes(
 CREATE TABLE IF NOT EXISTS comments(
   id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(50),
-  comentario VARCHAR(200),
-  date_time DATETIME,
+  recipe_slug VARCHAR(20),
+  comment_text VARCHAR(200),
+  date_time DATETIME DEFAULT NOW(),
   PRIMARY KEY(id),
-  FOREIGN KEY(username) REFERENCES users(username)
+  FOREIGN KEY(username) REFERENCES users(username),
+  FOREIGN KEY(recipe_slug) REFERENCES recipes(slug)
 );
 
-CREATE TABLE IF NOT EXISTS mensajes(
+CREATE TABLE IF NOT EXISTS messages(
   id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(50),
-  mensaje VARCHAR(500),
+  msg_text VARCHAR(500),
   date_time DATETIME,
   PRIMARY KEY(id),
   FOREIGN KEY(username) REFERENCES users(username)
@@ -55,3 +57,5 @@ VALUES
   ('cupcakes', 'public/assets/imgs/recipes/cupcake.png', 'Cupcakes', ''),
   ('comida-mascotas', 'public/assets/imgs/recipes/petfood.png', 'Comida casera para mascotas', 'Aprende a cocinar para tu mejor amigo de manera segura'),
   ('recetas-con-atun', 'public/assets/imgs/recipes/tuna.png', 'Recetas con atún en lata', 'Todo lo que puedes hacer con una lata de atún y... ¿más?');
+  
+  INSERT INTO comments (username, recipe_slug, comment_text) VALUES ('effyelle', 'cupcakes', 'comentario');

@@ -29,7 +29,7 @@ class Users extends model
 
     function get_user($username, $passwd = null)
     {
-        $query = "SELECT * FROM $this->table WHERE username=?;";
+        $query = "SELECT * FROM $this->table where username=?";
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->bind_param('s', $username);

@@ -26,11 +26,11 @@ class Recipes extends model
                 $json = [];
                 while ($row = $res->fetch_assoc()) {
                     $json[] = [
-                        'slug' => utf8_encode($row['slug']),
-                        'src' => utf8_encode($row['src']),
-                        'title' => utf8_encode($row['title']),
-                        'short_description' => utf8_encode($row['short_description']),
-                        'description' => utf8_encode($row['description']),
+                        'slug' => $row['slug'],
+                        'src' => $row['src'],
+                        'title' => $row['title'],
+                        'short_description' => $row['short_description'],
+                        'description' => $row['description'],
                     ];
                 }
                 return $json;

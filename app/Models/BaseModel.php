@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use mysqli_sql_exception;
+
 class BaseModel
 {
 
@@ -15,7 +17,7 @@ class BaseModel
     {
         try {
             $this->conn = mysqli_connect($this->host, $this->user, $this->passwd, $this->db);
-        } catch (\mysqli_sql_exception $e) {
+        } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
     }
