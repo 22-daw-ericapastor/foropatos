@@ -36,52 +36,33 @@
                 <li class="nav-item mx-0 mx-lg-1">
                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contacto</a>
                 </li>
-                <?php if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1): ?>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?">Gestionar recetas</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?">Gestionar usuarios</a>
-                    </li>
-                <?php endif; ?>
-            </ul>
-        </div>
-        <div class="user-options collapse navbar-collapse">
-            <!-- A button with a user icon should go here-->
-            <ul class="navbar-nav ms-auto">
-                <?php if (!isset($_SESSION['__user'])): ?>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signin">Sign in</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signup">Sign up</a>
-                    </li>
-                <?php else: ?>
+                <?php if (isset($_SESSION['__user'])): ?>
+                    <?php if ($_SESSION['__user']['permissions'] === 1): ?>
+                        <li class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?">Gestionar recetas</a>
+                        </li>
+                        <li class="nav-item mx-0 mx-lg-1">
+                            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?">Gestionar usuarios</a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?account">Tu Cuenta</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signout">Sign out</a>
                     </li>
+                <?php else: ?>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signin">Sign in</a>
+                    </li>
+                    <li class="nav-item mx-0 mx-lg-1">
+                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signup">Sign up</a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>
     </div>
 </nav>
-<!-- para añadir aparte -->
-<!--
-                <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signin">Sign in</a>
-                </li>
-                <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signup">Sign up</a>
-                </li>
-                <?php if (isset($_SESSION['__user'])): ?>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?signout">Sign out</a>
-                    </li>
-                <?php endif; ?>
--->
 <!-- Masthead-->
 <header class="masthead bg-primary text-light text-center">
     <div class="container d-flex align-items-center flex-column">
