@@ -5,7 +5,7 @@
             <div class="col-lg-8 col-xl-7">
                 <form id="login_form" method="post" action="?signin">
                     <p class="card-subtitle text-danger" id="session_error">
-                        <?php if (isset($data['session_error'])) echo $data['session_error']; ?>
+                        <?php if (isset($data['session_error'])) echo $data['session_error'] ?>
                     </p>
                     <!-- Name input-->
                     <div class="form-floating mb-3">

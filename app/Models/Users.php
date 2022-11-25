@@ -50,7 +50,7 @@ class Users extends model
                 }
             }
         } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+            return $e->getMessage();
         }
         return false;
     }

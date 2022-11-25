@@ -39,6 +39,8 @@ class BaseController
                     $data ['session_error'] = 'Las contraseñas no coinciden.';
                 }
             } else {
+                $num = model('Users')->get_user($username);
+                $data['usernum'] = $num;
                 $data['session_error'] = '¡Ups! Escoge otro nombre de usuario, ya está en uso.';
             }
         }
@@ -71,10 +73,9 @@ class BaseController
         $this->home();
     }
 
-    function recetas()
+    function recipes()
     {
-        // get all recipes from db to fill in recipes grid in body
-        // must return a json
+        echo json_encode(model('Recipes')->get_recipes());
     }
 
     function comment()

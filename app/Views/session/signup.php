@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
                 <form id="signin_form" method="post" action="?signup">
-                    <p class="h6 text-danger" id="session_error"><?php if (isset($data['session_error'])) echo $data['session_error']; ?></p>
+                    <p class="h6 text-danger" id="session_error"><?php if (isset($data['session_error'])) echo $data['session_error']; var_dump($data['usernum']); ?></p>
                     <p class="h6 text-success"><?php if (isset($data['signup_success'])) echo $data['signup_success']; ?></p>
                     <!-- Username input-->
                     <div class="form-floating mb-3">

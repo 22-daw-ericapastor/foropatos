@@ -11,13 +11,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         let recipes_container_content = '',
             open_modal_content = '';
 
-        await fetch('public/assets/data/recipes.json')
-            .then(response => response.json())
+        await fetch('?recipes')
+            .then(response => response.text())
             .then(data => {
-                for (let i in data) {
-                    recipes_container_content = recipes_container_content + format_content(data[i], i);
-                    open_modal_content = open_modal_content + format_open_modal(data[i], i);
-                }
+                console.log(utf8_decode(data));
+                //for (let i in data) {
+                    //recipes_container_content = recipes_container_content + format_content(data[i], i);
+                    //open_modal_content = open_modal_content + format_open_modal(data[i], i);
+                //}
             });
 
         recipes_container.innerHTML = recipes_container_content;
@@ -39,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         function format_open_modal(content, index) {
             return '<div class="portfolio-modal modal fade" id="modal' + index + '" tabindex="-1" aria-labelledby="modal"' +
                 '     aria-hidden="true">' +
-                '     <div class="modal-dialog modal-xl">' +
+                '     <div class="modal-dialog">' +
                 '         <div class="modal-content">' +
                 '           <div class="modal-header border-0">' +
                 '             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>' +
