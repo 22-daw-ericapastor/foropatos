@@ -97,6 +97,11 @@ class BaseController
         echo json_encode(model('Recipes')->get_recipes());
     }
 
+    function account()
+    {
+        template('pages/account');
+    }
+
     function comment()
     {
         if (isset($_SESSION['__user']) && isset($_GET['comment']) && isset($_GET['slug'])) {
@@ -138,6 +143,24 @@ class BaseController
             }
         } else {
             echo '<p class="text-danger">Tienes que loggearte para poder publicar comentarios.</p>';
+        }
+    }
+
+    function add_recipe()
+    {
+        if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
+            $params = [
+                'slug' => validate($_GET['slug']),
+                'src' => $_GET['src'],
+                'title' => validate($_GET['title']),
+                'short_description' => validate($_GET['short_description']),
+                'description' => validate('description')
+            ];
+            if (model('Recipes')->add_recipe($params)) {
+                echo json_encode(['response' => true]);
+            } else {
+                echo json_encode(['response' => false]);
+            }
         }
     }
 
