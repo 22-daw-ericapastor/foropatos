@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS recipes(
   id INT UNSIGNED AUTO_INCREMENT,
   slug VARCHAR(20),
   src VARCHAR(100),
-  title VARCHAR(20),
+  title VARCHAR(30),
   short_description VARCHAR(100),
-  description TEXT DEFAULT 'Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.',
+  description TEXT DEFAULT 'Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.<br/>1. Cat - 3kg<br/>2. ipsum - 0.5g<br/>3. Twitch - <em>Aged like a fine egg</em><br/> Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.<br/> Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.',
   PRIMARY KEY(id),
   KEY(slug)
 );
