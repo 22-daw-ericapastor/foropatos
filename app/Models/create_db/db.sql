@@ -53,8 +53,8 @@ INSERT INTO recipes (slug, src, title, short_description)
 VALUES
   ('la-pikaburger', 'public/assets/imgs/recipes/burger.png', 'La Pikaburger', 'La Pikaburg...<br/>Pika... pikaaa... ¡achú!'),
   ('mediterranean-salad', 'public/assets/imgs/recipes/salad.png', 'Ensalada mediterránea', 'La verdadera ensalada mediterránea... ¿Con cebolla o sin cebolla?'),
-  ('ramen', 'public/assets/imgs/recipes/ramen.png', 'Ramen', 'Fideos de esos... japoneses'),
-  ('cupcakes', 'public/assets/imgs/recipes/cupcake.png', 'Cupcakes', ''),
+  ('ramen', 'public/assets/imgs/recipes/ramen.png', 'Ramen', 'Fideos de esos... japoneses.'),
+  ('cupcakes', 'public/assets/imgs/recipes/cupcake.png', 'Cupcakes', '<i>Capqueiqs</i> de todos los sabores y colores.'),
   ('comida-mascotas', 'public/assets/imgs/recipes/petfood.png', 'Comida casera para mascotas', 'Aprende a cocinar para tu mejor amigo de manera segura'),
   ('recetas-con-atun', 'public/assets/imgs/recipes/tuna.png', 'Recetas con atún en lata', 'Todo lo que puedes hacer con una lata de atún y... ¿más?');
   
