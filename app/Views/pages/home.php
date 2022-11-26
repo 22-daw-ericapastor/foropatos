@@ -1,3 +1,25 @@
+<!-- Masthead-->
+<header class="masthead bg-primary text-light text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <?php if (isset($data) && $data['page'] != 'signup' && $data['page'] != 'signin'): ?>
+            <!-- Masthead Avatar Image-->
+            <img class="masthead-avatar" src="<?= baseurl ?>assets/imgs/cake.png" alt="..."/>
+        <?php endif; ?>
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0 mt-5 text-light">Foropatos</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <?php if (isset($data) && $data['page'] === 'signup'): ?>
+            <h2 class="page-section-heading text-center text-uppercase text-light mb-0">Registrarse</h2>
+        <?php elseif (isset($data) && $data['page'] === 'signin'): ?>
+            <h2 class="page-section-heading text-center text-uppercase text-light mb-0">Entrar</h2>
+        <?php endif; ?>
+    </div>
+</header>
 <!-- Portfolio Section-->
 <section class="page-section portfolio" id="recetas">
     <div class="container">
@@ -10,14 +32,7 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Portfolio Grid Items-->
-        <div class="position-relative">
-            <div class="row justify-content-center" id="recipes-grid"></div>
-            <?php if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1): ?>
-                <button type="button" class="btn btn-primary position-absolute top-0 start-0" id="manage-recipes">
-                    <a class="text-decoration-none text-light" href="?manage_recipes">Gestionar</a>
-                </button>
-            <?php endif; ?>
-        </div>
+        <div class="row justify-content-center" id="recipes-grid"></div>
     </div>
 </section>
 <!-- Contact Section-->
