@@ -39,4 +39,20 @@ class Recipes extends model
             echo $e->getMessage();
         }
     }
+
+    function add_recipe(array $params): bool
+    {
+        $query = "INSERT INTO $this->table (slug, src, title, short_description, description) VALUES (?, ?, ?, ?, ?)";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('sssss', $param['slug'], $param['src'], $param['title'], $param['short_decription'], $param['description']);
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
 }
