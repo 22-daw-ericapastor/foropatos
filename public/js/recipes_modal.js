@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             '                     <div class="divider-custom-line"></div>' +
             '                   </div>' +
             '                   <!-- Modal - Text-->' +
-            '                   <p class="mb-4">' +
+            '                   <p class="mb-4 text-start">' +
             '                     ' + content['description'] +
             '                   </p>' +
             '                   <form class="mt-4 comment-form">' +
@@ -234,18 +234,21 @@ document.addEventListener('DOMContentLoaded', async function () {
         .then(response => response.json())
         .then(data => {
             for (let i = 0; i < comment_btn.length; i++) {
-                comment_btn[i].disabled = !data['response'];
                 comment_btn[i].addEventListener('click', async function () {
-                    await fetch('?comment=' + comment_text[i].value + '&slug=' + this.value)
-                        .then(response => response.text())
-                        .then(data => {
-                            comment_response[i].innerHTML = data;
-                            setTimeout(function () {
-                                comment_response[i].innerHTML = '';
-                                comment_text[i].value = '';
-                                fill_comments();
-                            }, 2000);
-                        });
+                    if (!data['response']) {
+                        window.location.assign(url_base + '?signin');
+                    } else {
+                        await fetch('?comment=' + comment_text[i].value + '&slug=' + this.value)
+                            .then(response => response.text())
+                            .then(data => {
+                                comment_response[i].innerHTML = data;
+                                setTimeout(function () {
+                                    comment_response[i].innerHTML = '';
+                                    comment_text[i].value = '';
+                                    fill_comments();
+                                }, 3000);
+                            });
+                    }
                 });
             }
         });
