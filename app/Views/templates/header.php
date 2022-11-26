@@ -37,14 +37,6 @@
                     <a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">Contacto</a>
                 </li>
                 <?php if (isset($_SESSION['__user'])): ?>
-                    <?php if (isset($_SESSION['__user']['permissions']) && $_SESSION['__user']['permissions'] === 1): ?>
-                        <li class="nav-item mx-0 mx-lg-1">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?">Gestionar recetas</a>
-                        </li>
-                        <li class="nav-item mx-0 mx-lg-1">
-                            <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?">Gestionar usuarios</a>
-                        </li>
-                    <?php endif; ?>
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?account">Tu Cuenta</a>
                     </li>
@@ -63,25 +55,3 @@
         </div>
     </div>
 </nav>
-<!-- Masthead-->
-<header class="masthead bg-primary text-light text-center">
-    <div class="container d-flex align-items-center flex-column">
-        <?php if (isset($data) && $data['page'] != 'signup' && $data['page'] != 'signin'): ?>
-            <!-- Masthead Avatar Image-->
-            <img class="masthead-avatar" src="<?= baseurl ?>assets/imgs/cake.png" alt="..."/>
-        <?php endif; ?>
-        <!-- Masthead Heading-->
-        <h1 class="masthead-heading text-uppercase mb-0 mt-5 text-light">Foropatos</h1>
-        <!-- Icon Divider-->
-        <div class="divider-custom divider-light">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <?php if (isset($data) && $data['page'] === 'signup'): ?>
-            <h2 class="page-section-heading text-center text-uppercase text-light mb-0">Registrarse</h2>
-        <?php elseif (isset($data) && $data['page'] === 'signin'): ?>
-            <h2 class="page-section-heading text-center text-uppercase text-light mb-0">Entrar</h2>
-        <?php endif; ?>
-    </div>
-</header>
