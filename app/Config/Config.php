@@ -1,9 +1,30 @@
 <?php
 
+// Require common functions file
 require_once appdir . 'Common.php';
-require_once appdir . 'Controllers/BaseController.php';
-require_once appdir . 'Models/BaseModel.php';
-require_once appdir . 'Models/Users.php';
-require_once appdir . 'Models/Recipes.php';
-require_once appdir . 'Models/Comments.php';
-require_once appdir . 'Models/Messages.php';
+
+/**
+ * Files in Controllers folder
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+$controllers = scandir(appdir . 'Controllers');
+
+// Require each controller
+foreach ($controllers as $controller) {
+    if ($controller !== '.' && $controller !== '..') {
+        require_once appdir . 'Controllers/' . $controller;
+    }
+}
+
+/**
+ * Files in the Models folder
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+$models = scandir(appdir . 'Models');
+
+// Require each model
+foreach ($models as $model) {
+    if ($model !== '.' && $model !== '..') {
+        require_once appdir . 'Models/' . $model;
+    }
+}
