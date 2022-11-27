@@ -12,15 +12,6 @@ class Recipes extends controller
         echo json_encode(model('Recipes')->get_recipes());
     }
 
-    function account()
-    {
-        if (isset($_SESSION['__user'])) {
-            template('pages/account');
-        } else {
-            template('pages/home');
-        }
-    }
-
     function add_recipe()
     {
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {

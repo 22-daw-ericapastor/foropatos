@@ -1,17 +1,34 @@
 <?php
 
+/**
+ * Base url constant
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
 const baseurl = 'http://localhost/web_recetas/public/';
+
+/**
+ * View directory
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
 const viewdir = __DIR__ . '/app/Views/';
+
+/**
+ * App directory
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
 const appdir = __DIR__ . '/app/';
 
+// Require Config file
 require_once appdir . 'Config/Config.php';
 
-use \Controllers\BaseController as go;
-
+// Start session
 session_start();
 
-// declare route
+// Use main controller
+use \Controllers\BaseController as go;
+
+// Declare route
 $route = array_keys($_GET)[0] ?? 'home';
 
-// go to route
+// Go to route
 new go($route);
