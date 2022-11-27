@@ -12,17 +12,17 @@ class Messages extends model
 
     function get_messages($username): ?array
     {
-        $query = "SELECT * FROM $this->table WHERE username=?;";
+        $query = "SELECT * FROM $this->table WHERE remitter=? OR receiver=?;";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('s', $username);
+            $stmt->bind_param('ss', $username, $username);
             $stmt->execute();
             $res = $stmt->get_result();
             $json = [];
             while ($row = $res->fetch_assoc()) {
                 $json[] = [
-                    'remitter'=>utf8_encode($row['remitter']),
-                    'receiver'=>utf8_encode($row['receiver']),
+                    'remitter' => utf8_encode($row['remitter']),
+                    'receiver' => utf8_encode($row['receiver']),
                     'msg_text' => utf8_encode($row['msg_text']),
                     'datetime' => utf8_encode($row['date_time'])
                 ];
@@ -32,6 +32,11 @@ class Messages extends model
             echo $e->getMessage();
         }
         return null;
+    }
+
+    function message($username, $issue, $text)
+    {
+
     }
 
 }

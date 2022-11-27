@@ -41,4 +41,4 @@
         </div>
     </div>
 </section>
-<script src="<?= baseurl ?>js/session_signup.js"></script>
+<script src="<?= baseurl ?>js/session.signup.js"></script>

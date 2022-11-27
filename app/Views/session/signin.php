@@ -30,4 +30,4 @@
         </div>
     </div>
 </section>
-<script src="<?= baseurl ?>js/session_signin.js"></script>
+<script src="<?= baseurl ?>js/session.signin.js"></script>

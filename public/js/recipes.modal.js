@@ -108,6 +108,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             '                   <p class="mb-4 text-start">' +
             '                     ' + content['description'] +
             '                   </p>' +
+            '                   <h5 class="text-primary mt-5">Comentarios</h5>' +
+            '                   <ul class="comment-list text-left"></ul>' +
             '                   <form class="mt-4 comment-form">' +
             '                     <div class="form-floating mb-3 d-inline-block">' +
             '                       <textarea class="form-control comment-text" id="comment" type="text" ' +
@@ -117,7 +119,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             '                     </div>' +
             '                     <div><button value="' + content['slug'] + '" type="button" class="btn btn-primary comment-btn">Comment</button></div>' +
             '                   </form>' +
-            '                   <ul class="comment-list text-left"></ul>' +
             '                 </div>' +
             '               </div>' +
             '             </div>' +
@@ -214,7 +215,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             await fetch('?comments_list&slug=' + comment_btn[i].value)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     if (data['null']) {
                         comment_list[i].innerHTML = data['null'];
                     } else {
@@ -233,11 +233,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     await fetch('?is_logged')
         .then(response => response.json())
         .then(data => {
-            for (let i = 0; i < comment_btn.length; i++) {
-                comment_btn[i].addEventListener('click', async function () {
-                    if (!data['response']) {
-                        window.location.assign(url_base + '?signin');
-                    } else {
+            if (!data['response']) {
+                for (let i = 0; i < comment_text.length; i++) {
+                    comment_text[i].disabled = true;
+                    comment_btn[i].disabled = true;
+                    comment_response[i].innerHTML = '<p class="text-danger">Tienes que loggearte para poder comentar.</p>';
+                }
+            } else {
+                for (let i = 0; i < comment_btn.length; i++) {
+                    comment_btn[i].addEventListener('click', async function () {
                         await fetch('?comment=' + comment_text[i].value + '&slug=' + this.value)
                             .then(response => response.text())
                             .then(data => {
@@ -248,8 +252,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                                     comment_response[i].innerHTML = '';
                                 }, 2000);
                             });
-                    }
-                });
+
+                    });
+                }
             }
         });
 

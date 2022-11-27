@@ -50,20 +50,20 @@
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="contactForm">
+                <form id="contact-form">
                     <!-- Issue title -->
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="issue_title" type="text" placeholder="Enter the issue title..."
+                        <input class="form-control contact" id="issue-title" type="text"
+                               placeholder="Enter the issue title..."
                                data-sb-validations="required" name="issue_title"/>
-                        <label for="issue_title">Titulo del mensaje</label>
+                        <label for="issue-title">Titulo del mensaje</label>
                         <div class="invalid-feedback" data-sb-feedback="message:required"></div>
                     </div>
                     <!-- Message input-->
                     <div class="form-floating mb-3">
-                        <textarea class="form-control" id="issue_msg" type="text"
-                                  placeholder="Enter your message here..."
-                                  style="height: 10rem" data-sb-validations="required" name="issue_msg"></textarea>
-                        <label for="issue_msg">Message</label>
+                        <textarea class="form-control contact" id="issue-msg" type="text" name="issue_msg"
+                                  placeholder="Enter your message here..." data-sb-validations="required"></textarea>
+                        <label for="issue-msg">Message</label>
                         <div class="invalid-feedback" data-sb-feedback="message:required"></div>
                     </div>
                     <!-- Submit success message-->
@@ -72,19 +72,16 @@
                             <div class="fw-bolder">¡Increíble! Un administrador te responderá lo antes posible.</div>
                         </div>
                     </div>
-                    <div class="d-none" id="submitErrorMessage">
-                        <div class="text-center text-danger mb-3">Ha habido un error interno en el sistema. Vuelve a
-                            intentarlo en cinco o seis años.
-                        </div>
+                    <div class="text-center text-danger mb-3 d-none" id="submitErrorMessage">
+                        Ha habido un error interno en el sistema. Vuelve a intentarlo en cinco o seis años.
                     </div>
                     <!-- Submit Button-->
-                    <button value="<?php if (isset($_SESSION['__user'])) echo $_SESSION['__user']['username'] ?>"
-                            class="btn btn-primary btn-xl disabled" id="submit_issue" type="submit">Enviar
-                    </button>
+                    <button class="btn btn-primary btn-xl disabled" id="issue-btn" type="button">Enviar</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
 <section id="open-modal"></section>
-<script src="<?= baseurl ?>js/recipes_modal.js"></script>
+<script src="<?= baseurl ?>js/recipes.modal.js"></script>
+<script src="<?= baseurl ?>js/home.messages.js"></script>

@@ -92,6 +92,20 @@
                                                 </li>
                                             </ul>
                                         </li>
+                                        <li class="comment-item">
+                                            <p class="comment-user_time cursor-pointer fs-6">
+                                                <b>username</b>
+                                                <em>last date time</em>
+                                            </p>
+                                            <ul class="ps-3 msg-list collapse">
+                                                <li class="column">
+                                                    <span class="comment-user_time">usuario<em>datetime</em></span><span>Mensaje</span>
+                                                </li>
+                                                <li class="column">
+                                                    <span class="comment-user_time">usuario<em>datetime</em></span><span>Mensaje</span>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                     <form class="collapse mt-4 comment-form">
                                         <div class="form-floating mb-3 d-inline-block">
