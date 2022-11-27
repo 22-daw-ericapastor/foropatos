@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             '                   <form class="mt-4 comment-form">' +
             '                     <div class="form-floating mb-3 d-inline-block">' +
             '                       <textarea class="form-control comment-text" id="comment" type="text" ' +
-            '                         placeholder="Enter your comment here..."></textarea>' +
+            '                         placeholder="Enter your comment here..." maxlength="200"></textarea>' +
             '                         <label for="comment">Commentary</label>' +
             '                         <p class="comment_response"></p>' +
             '                     </div>' +
@@ -203,6 +203,8 @@ document.addEventListener('DOMContentLoaded', async function () {
     function format_comment_list(content) {
         return '<li class="comment-item">' +
             '     <p class="comment-user_time">' +
+            '       <span class="comment-user-logo" style="background: url(' + url_base + 'public/assets/imgs/guest-user.png' + ')">' +
+            '       </span>' +
             '       <b>' + content['username'] + '</b>' +
             '       <em>' + content['datetime'] + '</em> ' +
             '     </p>' +

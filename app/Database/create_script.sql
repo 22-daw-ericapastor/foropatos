@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS messages(
   id INT UNSIGNED AUTO_INCREMENT,
   remitter VARCHAR(50),
   receiver VARCHAR(50),
+  issue VARCHAR(20),
   msg_text VARCHAR(500),
   date_time DATETIME,
   PRIMARY KEY(id),
@@ -48,7 +49,7 @@ CREATE TABLE IF NOT EXISTS messages(
 
 -- Set default admin
 INSERT INTO users (username, email, passwd, permissions)
-VALUES ('effyelle', 'effy@mail.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU1pKUSQaHbIqWTMJTp1ckO', 1);
+VALUES ('effy', 'effy@mail.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU1pKUSQaHbIqWTMJTp1ckO', 1);
 
 -- Set default images
 INSERT INTO recipes (slug, src, title, short_description)
@@ -59,5 +60,3 @@ VALUES
   ('cupcakes', 'public/assets/imgs/recipes/cupcake.png', 'Cupcakes', '<i>Capqueiqs</i> de todos los sabores y colores.'),
   ('comida-mascotas', 'public/assets/imgs/recipes/petfood.png', 'Comida casera para mascotas', 'Aprende a cocinar para tu mejor amigo de manera segura'),
   ('recetas-con-atun', 'public/assets/imgs/recipes/tuna.png', 'Recetas con atún en lata', 'Todo lo que puedes hacer con una lata de atún y... ¿más?');
-  
-  INSERT INTO comments (username, recipe_slug, comment_text) VALUES ('effyelle', 'cupcakes', 'comentario');

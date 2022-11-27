@@ -2672,6 +2672,7 @@ textarea.form-control-lg {
     filter: none;
     opacity: 0.65;
 }
+
 .form-range {
     width: 100%;
     height: 1.5rem;
@@ -3748,14 +3749,7 @@ textarea.form-control-lg {
 }
 
 .collapse:not(.show) {
-    height: 0;
-    overflow: hidden;
-    transition: all 0.35s ease;
-}
-
-.collapse {
-    height: auto;
-    transition: all 0.35s ease;
+    display: none;
 }
 
 .collapsing {
@@ -12273,6 +12267,16 @@ form a {
     font-size: 0.825rem;
     text-align: start;
     width: 100%;
+}
+
+.comment-user-logo {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    background-size: contain !important;
 }
 
 .comment-user_time {
