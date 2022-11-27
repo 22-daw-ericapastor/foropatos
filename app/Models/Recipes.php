@@ -38,6 +38,7 @@ class Recipes extends model
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
+        return false;
     }
 
     function add_recipe(array $params): bool

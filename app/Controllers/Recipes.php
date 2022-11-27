@@ -7,12 +7,18 @@ use \Controllers\BaseController as controller;
 class Recipes extends controller
 {
 
+    /**
+     * Retrieve all recipes stored in Database to fill the main page.
+     */
     function get_recipes(): void
     {
         echo json_encode(model('Recipes')->get_recipes());
     }
 
-    function add_recipe()
+    /**
+     * @return void
+     */
+    function add_recipe(): void
     {
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
             $params = [

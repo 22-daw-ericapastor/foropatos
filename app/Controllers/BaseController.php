@@ -14,14 +14,16 @@ class BaseController
      * It launches the method received as string parameter.
      * If the method doesn't exist, it launches the {@link home()} method.
      *
-     * @param $route string
+     * @param $route string|null
      */
-    function __construct(string $route)
+    function __construct(string $route = null)
     {
-        try {
-            $this->$route();
-        } catch (Exception|Error $e) {
-            $this->home();
+        if (isset($route)) {
+            try {
+                $this->$route();
+            } catch (Exception|Error $e) {
+                $this->home();
+            }
         }
     }
 
@@ -165,7 +167,7 @@ class BaseController
     /**
      * Get recipes
      * =================================================================================================================
-     * Redirect to this named method in the Recipes controller.
+     * Redirect to the same named method in the Recipes controller.
      *
      * @return void
      */
@@ -177,7 +179,7 @@ class BaseController
     /**
      * Get recipes
      * =================================================================================================================
-     * Redirect to this named method in the Recipes controller.
+     * Redirect to the same named method in the Recipes controller.
      *
      * @return void
      */
@@ -187,21 +189,9 @@ class BaseController
     }
 
     /**
-     * Get recipes
+     * Get comments list
      * =================================================================================================================
-     * Redirect to this named method in the Comments controller.
-     *
-     * @return void
-     */
-    function comment()
-    {
-        controller('Comments')->comment();
-    }
-
-    /**
-     * Get recipes
-     * =================================================================================================================
-     * Redirect to this named method in the Comments controller.
+     * Redirect to the same named method in the Comments controller.
      *
      * @return void
      */
@@ -211,9 +201,21 @@ class BaseController
     }
 
     /**
-     * Get recipes
+     * Publish a comment
      * =================================================================================================================
-     * Redirect to this named method in the Messages controller.
+     * Redirect to the same named method in the Comments controller.
+     *
+     * @return void
+     */
+    function comment(): void
+    {
+        controller('Comments')->comment();
+    }
+
+    /**
+     * Send message
+     * =================================================================================================================
+     * Redirect to the same named method in the Messages controller.
      *
      * @return void
      */

@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             await fetch('?comments_list&slug=' + comment_btn[i].value)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data.length)
+                    console.log(data)
                     if (data['null']) {
                         comment_list[i].innerHTML = data['null'];
                     } else {

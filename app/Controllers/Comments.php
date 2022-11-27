@@ -7,7 +7,13 @@ use \Controllers\BaseController as controller;
 class Comments extends controller
 {
 
-    function comment()
+    /**
+     * Publish comment
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @return string
+     */
+    function comment(): void
     {
         if (isset($_SESSION['__user']) && isset($_GET['comment']) && isset($_GET['slug'])) {
             $username = $_SESSION['__user']['username'];
@@ -27,6 +33,13 @@ class Comments extends controller
         }
     }
 
+    /**
+     * Get comments list
+     * -----------------------------------------------------------------------------------------------------------------
+     * Retrieve all the comments stored in Database
+     *
+     * @return void
+     */
     function comments_list()
     {
         $model = model('Comments');
