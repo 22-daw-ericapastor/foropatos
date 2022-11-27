@@ -39,5 +39,3 @@
 <script src="<?= baseurl ?>js/freelancer_template.js"></script>
 </body>
 </html>
-
-<?php echo time();

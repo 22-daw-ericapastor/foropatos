@@ -15,12 +15,22 @@ function view($page, array $data = null)
     }
 }
 
-function model($modelname)
+function model($class)
 {
-    if (is_file(appdir . 'Models/' . $modelname . '.php')) {
-        $class = '\\Models\\' . $modelname;
-        return new $class();
+    if (is_file(appdir . 'Models/' . $class . '.php')) {
+        $model = '\\Models\\' . $class;
+        return new $model();
     }
+    return false;
+}
+
+function controller($class)
+{
+    if (is_file(appdir . 'Controllers/' . $class . '.php')) {
+        $controller = '\\Controllers\\' . $class;
+        return new $controller();
+    }
+    return false;
 }
 
 function validate(string $str): string

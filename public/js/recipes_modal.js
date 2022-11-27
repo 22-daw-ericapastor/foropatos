@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     /*
      * Fetch recipes from Database and fill the content variables for the recipes list and modal dialog content.
      */
-    await fetch('?recipes')
+    await fetch('?get_recipes')
         .then(response => response.json())
         .then(data => {
             for (let i in data) {

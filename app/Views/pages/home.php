@@ -20,10 +20,10 @@
         <?php endif; ?>
     </div>
 </header>
-<!-- Portfolio Section-->
+<!-- Recipes Section-->
 <section class="page-section portfolio" id="recetas">
     <div class="container">
-        <!-- Portfolio Section Heading-->
+        <!-- Recipes Section Heading-->
         <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Recetas destacadas</h2>
         <!-- Icon Divider-->
         <div class="divider-custom">
@@ -31,7 +31,7 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <!-- Portfolio Grid Items-->
+        <!-- Recipes Grid Items-->
         <div class="row justify-content-center" id="recipes-grid"></div>
     </div>
 </section>

@@ -178,6 +178,7 @@ address {
 ol,
 ul {
     padding-left: 2rem;
+    list-style: none;
 }
 
 ol,
@@ -748,6 +749,11 @@ progress {
 .row-cols-6 > * {
     flex: 0 0 auto;
     width: 16.6666666667%;
+}
+
+.column {
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .col-auto {
@@ -7947,6 +7953,10 @@ textarea.form-control-lg {
     margin-top: 3rem !important;
 }
 
+.mt-6 {
+    margin-top: 6rem !important;
+}
+
 .mt-auto {
     margin-top: auto !important;
 }
@@ -12265,4 +12275,13 @@ form a {
 
 #recipes-grid {
     padding-top: 4rem;
+}
+
+.account-list, .account-list a {
+    text-decoration: none;
+    color: var(--bs-primary);
+}
+
+.account-list a:hover{
+    color: var(--bs-secondary);
 }
