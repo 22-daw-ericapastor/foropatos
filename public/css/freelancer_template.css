@@ -14,7 +14,7 @@
     --bs-blue: #99CCFF;
     --bs-pink: #FFCCFF;
     --bs-yellow: #CC9933;
-    --bs-green: #198754;
+    --bs-darkblue: #2c3e50;
     --bs-teal: #ffc107;
     --bs-cyan: #0dcaf0;
     --bs-white: #fff;
@@ -6041,7 +6041,6 @@ textarea.form-control-lg {
 
 .modal-dialog-scrollable .modal-content {
     max-height: 100%;
-    overflow: hidden;
 }
 
 .modal-dialog-scrollable .modal-body {
@@ -11979,7 +11978,7 @@ html {
 }
 
 .divider-custom .divider-custom-icon {
-    color: #2c3e50;
+    color: var(-bs--darkblue);
     font-size: 2rem;
 }
 
@@ -12241,10 +12240,10 @@ form a {
 
 .comment-list {
     margin: 0;
-    padding: 2rem;
+    padding: 1rem;
     list-style: none;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
+    border-radius: 10px;
+    background: rgba(var(--bs-primary-rgb), 0.15);
 }
 
 .comment-list p {
@@ -12253,14 +12252,21 @@ form a {
 }
 
 .comment-item {
-    display: grid;
-    grid-template-columns: 4fr 8fr;
-    justify-items: start;
-    align-items: start;
     align-content: center;
-    justify-content: start;
+    align-items: center;
+    margin-bottom: 0.5rem;
     padding: 0.25rem;
     font-size: 0.825rem;
+    text-align: start;
+    width: 100%;
+}
+
+.comment-user_time {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    column-gap: 0.45rem;
 }
 
 .comment-user_time em {
@@ -12268,7 +12274,7 @@ form a {
 }
 
 .comments-db {
-    background: rgba(var(--bs-primary-rgb), 0.25);
+    width: 100%;
     border-radius: 5px;
     min-height: 27px;
 }
@@ -12282,6 +12288,34 @@ form a {
     color: var(--bs-primary);
 }
 
-.account-list a:hover{
+.account-list a:hover {
     color: var(--bs-secondary);
+}
+
+.plus-sign {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0 1rem;
+    cursor: pointer;
+    font-style: normal;
+    height: 1.5rem;
+    width: 1.5rem;
+    background: var(--bs-darkblue);
+    border-radius: 15px;
+}
+
+.cursor-pointer, .account-options {
+    cursor: pointer;
+    transition: all 0.4s ease
+}
+
+.cursor-pointer:hover, .account-options:hover {
+    opacity: 0.75;
+    transition: all 0.25s ease;
+}
+
+.msg-list > colmun {
+    column-gap: 1rem;
 }

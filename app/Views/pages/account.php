@@ -15,9 +15,13 @@
             <?php endif; ?>
             <!-- Account Flex Items-->
             <div class="column justify-content-start mt-5 text-dark fw-bold">
-                <div class="fs-5">Ver mensajes</div>
+                <div class="fs-5 account-options" data-bs-toggle="modal" data-bs-target="#msg-modal">
+                    Ver mensajes<i class="plus-sign text-light">&#43;</i>
+                </div>
                 <hr style="width: 50%;"/>
-                <div class="fs-5">Ver comentarios</div>
+                <div class="fs-5 account-options" data-bs-toggle="modal" data-bs-target="comment-modal">
+                    Ver comentarios<i class="plus-sign text-light">&#43;</i>
+                </div>
                 <hr style="width: 50%;"/>
                 <?php if ($_SESSION['__user']['permissions'] === 1): ?>
                     <div class="fs-5">Gestionar Recetas</div>
@@ -50,8 +54,8 @@
             </div>
         </div>
     </section>
-    <section id="recipes-modal">
-        <div class="portfolio-modal modal fade" id="modal  index  " tabindex="-1" aria-labelledby="modal"
+    <section id="open-msgs-modal">
+        <div class="portfolio-modal modal fade" id="msg-modal" tabindex="-1" aria-labelledby="modal"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -63,33 +67,43 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">
-                                        content[title] </h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tus
+                                        Mensajes</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    <!-- Modal - Text-->
-                                    <p class="mb-4 text-start">
-                                        content[description]
-                                    </p>
-                                    <form class="mt-4 comment-form">
+                                    <!-- Modal Text-->
+                                    <h6 class="mb-4 text-primary" id="msgs-info"></h6>
+                                    <ul class="comment-list text-left">
+                                        <li class="comment-item">
+                                            <p class="comment-user_time cursor-pointer fs-6">
+                                                <b>username</b>
+                                                <em>last date time</em>
+                                            </p>
+                                            <ul class="ps-3 msg-list collapse">
+                                                <li class="column">
+                                                    <span class="comment-user_time">usuario<em>datetime</em></span><span>Mensaje</span>
+                                                </li>
+                                                <li class="column">
+                                                    <span class="comment-user_time">usuario<em>datetime</em></span><span>Mensaje</span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <form class="collapse mt-4 comment-form">
                                         <div class="form-floating mb-3 d-inline-block">
-                                                           <textarea class="form-control comment-text" id="comment"
-                                                                     type="text"
-                                                                     placeholder="Enter your comment here..."></textarea>
-                                            <label for="comment">Commentary</label>
-                                            <p class="comment_response"></p>
+                                            <textarea class="form-control comment-text" id="msg" type="text"
+                                                      placeholder="Enter your message here..."></textarea>
+                                            <label for="msg">Message</label>
+                                            <p class="msg-response"></p>
                                         </div>
                                         <div>
-                                            <button value="  content[slug]  " type="button"
-                                                    class="btn btn-primary comment-btn">Comment
-                                            </button>
+                                            <button type="button" class="btn btn-primary comment-btn">Enviar</button>
                                         </div>
                                     </form>
-                                    <ul class="comment-list text-left"></ul>
                                 </div>
                             </div>
                         </div>
@@ -98,6 +112,7 @@
             </div>
         </div>
     </section>
+    <section id="open-comments-modal"></section>
     <section id="open-recipes-modal"></section>
     <section id="open-users-modal"></section>
 
@@ -119,4 +134,4 @@
 
 <?php endif; ?>
 
-<script src="<?=baseurl?>js/account.js"></script>
+<script src="<?= baseurl ?>js/account.js"></script>

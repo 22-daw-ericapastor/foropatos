@@ -10,7 +10,7 @@ class Recipes extends model
 
     private string $table = 'recipes';
 
-    function get_recipes($slug = null)
+    function get_recipes($slug = null): ?array
     {
         try {
             if (isset($slug)) {
@@ -38,7 +38,7 @@ class Recipes extends model
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
-        return false;
+        return null;
     }
 
     function add_recipe(array $params): bool

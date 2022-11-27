@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         return '<li class="comment-item">' +
             '     <p class="comment-user_time">' +
             '       <b>' + content['username'] + '</b>' +
-            '       <em>' + content['datetime'] + '</em>: ' +
+            '       <em>' + content['datetime'] + '</em> ' +
             '     </p>' +
             '     <p class="comments-db">' + content['comment'] + '</p>' +
             '   </li>';
@@ -242,11 +242,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                             .then(response => response.text())
                             .then(data => {
                                 comment_response[i].innerHTML = data;
+                                comment_text[i].value = '';
+                                fill_comments();
                                 setTimeout(function () {
                                     comment_response[i].innerHTML = '';
-                                    comment_text[i].value = '';
-                                    fill_comments();
-                                }, 3000);
+                                }, 2000);
                             });
                     }
                 });

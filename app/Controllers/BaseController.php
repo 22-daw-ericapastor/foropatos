@@ -212,6 +212,10 @@ class BaseController
         controller('Comments')->comment();
     }
 
+    function get_messages(){
+        controller('Messages')->get_messages();
+    }
+
     /**
      * Send message
      * =================================================================================================================

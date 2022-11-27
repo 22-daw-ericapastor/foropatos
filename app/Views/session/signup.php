@@ -1,4 +1,4 @@
-<section class="page-section" id="signup">
+<section class="page-section mt-6" id="signup">
     <div class="container">
         <!-- Contact Section Form-->
         <div class="row justify-content-center">

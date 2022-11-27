@@ -7,6 +7,19 @@ use \Controllers\BaseController as controller;
 class Messages extends controller
 {
 
+    function get_messages()
+    {
+        if (isset($_SESSION['__user'])) {
+            if (!model('Messages')->get_messages($_SESSION['__user']['username'])) {
+                echo json_encode(['null' => 'No tienes mensajes']);
+            } else {
+                echo json_encode(model('Messages')->get_messages());
+            }
+        } else {
+            echo json_encode(['null' => 'No estás loggeado.']);
+        }
+    }
+
     function message()
     {
         // send a message into db
