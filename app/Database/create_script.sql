@@ -37,11 +37,13 @@ CREATE TABLE IF NOT EXISTS comments(
 
 CREATE TABLE IF NOT EXISTS messages(
   id INT UNSIGNED AUTO_INCREMENT,
-  username VARCHAR(50),
+  remitter VARCHAR(50),
+  receiver VARCHAR(50),
   msg_text VARCHAR(500),
   date_time DATETIME,
   PRIMARY KEY(id),
-  FOREIGN KEY(username) REFERENCES users(username)
+  FOREIGN KEY(remitter) REFERENCES users(username),
+  FOREIGN KEY(receiver) REFERENCES users(username)
 );
 
 -- Set default admin
