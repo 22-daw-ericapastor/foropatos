@@ -21,6 +21,8 @@ class Messages extends model
             $json = [];
             while ($row = $res->fetch_assoc()) {
                 $json[] = [
+                    'remitter'=>utf8_encode($row['remitter']),
+                    'receiver'=>utf8_encode($row['receiver']),
                     'msg_text' => utf8_encode($row['msg_text']),
                     'datetime' => utf8_encode($row['date_time'])
                 ];
