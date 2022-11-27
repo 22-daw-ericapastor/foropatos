@@ -1,6 +1,6 @@
 <?php if (isset($_SESSION['__user'])): ?>
     <!-- Recipes Section-->
-    <section class="page-section portfolio mt-6" id="recetas">
+    <section class="page-section portfolio mt-6" id="account">
         <div class="container">
             <!-- Account Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Tu cuenta</h2>
@@ -98,11 +98,12 @@
             </div>
         </div>
     </section>
-    <section id="users-modal"></section>
+    <section id="open-recipes-modal"></section>
+    <section id="open-users-modal"></section>
 
 <?php else: ?>
 
-    <section class="page-section portfolio mt-6" id="recetas">
+    <section class="page-section portfolio mt-6" id="account">
         <div class="container">
             <!-- Account Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Oops</h2>
@@ -117,3 +118,5 @@
     </section>
 
 <?php endif; ?>
+
+<script src="<?=baseurl?>js/account.js"></script>
