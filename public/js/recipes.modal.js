@@ -254,12 +254,17 @@ document.addEventListener('DOMContentLoaded', async function () {
      * @returns {string}
      */
     function format_comment_list(content) {
+        let stars = '';
+        for (let i = 0; i < content['rating']; i++) {
+            stars = stars + '<img alt="..." height="12px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
+        }
         return '<li class="comment-item">' +
             '     <p class="comment-user_time">' +
             '       <span class="comment-user-logo" style="background: url(' + url_base + 'public/assets/imgs/guest-user.png' + ')">' +
             '       </span>' +
             '       <b>' + content['username'] + '</b>' +
             '       <em>' + content['datetime'] + '</em> ' +
+            '       <span class="d-flex align-items-start ms-auto px-1"><em class="px-2">Rating</em>' + stars + '</span>' +
             '     </p>' +
             '     <hr/>' +
             '     <p class="comments-db">' + content['comment'] + '</p>' +
@@ -342,11 +347,13 @@ document.addEventListener('DOMContentLoaded', async function () {
                     .then(response => response.text())
                     .then(data => {
                         comment_response[i].innerHTML = data;
-                        comment_text[i].value = '';
+                        if (data.match(/^!/)) {
+                            comment_text[i].value = '';
+                        }
                         fill_comments();
-                        setTimeout(function () {
+                        /*setTimeout(function () {
                             comment_response[i].innerHTML = '';
-                        }, 2000);
+                        }, 2000);*/
                     });
 
             });

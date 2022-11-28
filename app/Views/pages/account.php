@@ -13,6 +13,8 @@
             <?php if ($_SESSION['__user']['permissions'] === 1): ?>
                 <h5 class="masthead-subheading text-center text-uppercase text-primary">Administrador</h5>
             <?php endif; ?>
+            <!-- Username-->
+            <!-- Password-->
             <!-- Account Flex Items-->
             <div class="column justify-content-start mt-5 text-dark fw-bold">
                 <div class="fs-5 account-options" data-bs-toggle="modal" data-bs-target="#msg-modal">
@@ -52,6 +54,7 @@
                     </ul>
                 <?php endif; ?>
             </div>
+            <!-- Deactivate account-->
         </div>
     </section>
     <section id="open-msgs-modal">

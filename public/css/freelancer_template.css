@@ -33,7 +33,7 @@
     --bs-secondary: #990000;
     --bs-success: #198754;
     --bs-info: #5598ad;
-    --bs-warning: #ffc107;
+    --bs-warning: #de8400;
     --bs-danger: #dc3545;
     --bs-light: #F0F0F0;
     --bs-dark: #212529;
@@ -42,7 +42,7 @@
     --bs-secondary-rgb: 153, 0, 0;
     --bs-success-rgb: 25, 135, 84;
     --bs-info-rgb: 85, 152, 173;
-    --bs-warning-rgb: 255, 193, 7;
+    --bs-warning-rgb: 222, 132, 0;
     --bs-danger-rgb: 220, 53, 69;
     --bs-light-rgb: 248, 249, 250;
     --bs-dark-rgb: 33, 37, 41;
@@ -7733,6 +7733,9 @@ textarea.form-control-lg {
 .justify-content-evenly {
     justify-content: space-evenly !important;
 }
+.justify-self-end {
+    justify-self: flex-end !important;
+}
 
 .align-items-start {
     align-items: flex-start !important;
@@ -12325,19 +12328,19 @@ form a {
 }
 
 .comment-user_time ~ hr {
-    width: 50%;
     margin: 0.35rem;
     background-color: rgba(var(--bs-primary-rgb), 0.5);
 }
 
 .comment-user_time em {
-    font-size: 0.625rem;
+    font-size: 0.6rem;
 }
 
 .comments-db {
     width: 100%;
     border-radius: 5px;
     min-height: 27px;
+    overflow: hidden;
 }
 
 #recipes-grid {

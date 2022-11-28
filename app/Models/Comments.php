@@ -10,12 +10,12 @@ class Comments extends model
 
     private string $table = 'comments';
 
-    public function publish_comment($username, $slug, $comment): bool
+    public function comment($username, $slug, $rating, $comment): bool
     {
-        $query = "INSERT INTO $this->table (username, recipe_slug, comment_text) VALUES (?, ?, ?)";
+        $query = "INSERT INTO $this->table (username, recipe_slug, recipe_rating, comment_text) VALUES (?, ?, ?, ?)";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('sss', $username, $slug, $comment);
+            $stmt->bind_param('ssss', $username, $slug, $rating, $comment);
             if ($stmt->execute()) {
                 return true;
             }
@@ -37,6 +37,7 @@ class Comments extends model
             while ($row = $res->fetch_assoc()) {
                 $results[] = [
                     'username' => utf8_encode($row['username']),
+                    'rating' => $row['recipe_rating'],
                     'comment' => utf8_encode($row['comment_text']),
                     'datetime' => utf8_encode($row['date_time'])
                 ];

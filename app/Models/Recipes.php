@@ -32,8 +32,8 @@ class Recipes extends model
                         'description' => $row['description'],
                         'admixtures' => $row['admixtures'],
                         'making' => $row['making'],
-                        'ratings' => $row['ratings'],
-                        'points' => $row['points'],
+                        'ratings' => $row['ratings'] ?? 0,
+                        'points' => $row['points'] ?? 0,
                         'difficulty' => $row['difficulty']
                     ];
                 }
@@ -43,6 +43,32 @@ class Recipes extends model
             echo $e->getMessage();
         }
         return null;
+    }
+
+    function rating($slug, $rating): bool
+    {
+        echo $rating;
+        $recipe = $this->get_recipes($slug);
+        $ratings = $recipe[0]['ratings'] ?? 0;
+        if (isset($recipe[0]['points'])) $old_points = $recipe[0]['ratings'] * $ratings;
+        else $old_points = 0;
+        $ratings++;
+        echo "$ratings<br>";
+        $new_points = $old_points + $rating;
+        echo "$new_points<br>";
+        $new_points = $new_points / $ratings;
+        echo "$new_points<br>";
+        $query = "UPDATE $this->table SET ratings=?, points=? WHERE slug=?";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('dds', $ratings, $new_points, $slug);
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
     }
 
     function add_recipe(array $params): bool
