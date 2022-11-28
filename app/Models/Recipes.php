@@ -45,23 +45,26 @@ class Recipes extends model
         return null;
     }
 
-    function rating($slug, $rating): bool
+    function rating($slug, $comment_rating): bool
     {
-        echo $rating;
+        // get the recipe from database
         $recipe = $this->get_recipes($slug);
-        $ratings = $recipe[0]['ratings'] ?? 0;
-        if (isset($recipe[0]['points'])) $old_points = $recipe[0]['ratings'] * $ratings;
-        else $old_points = 0;
-        $ratings++;
-        echo "$ratings<br>";
-        $new_points = $old_points + $rating;
-        echo "$new_points<br>";
-        $new_points = $new_points / $ratings;
-        echo "$new_points<br>";
+        // get the number of ratings that the recipe has already
+        $num_ratings = $recipe[0]['ratings'] ?? 0;
+        // get the points that it has, this is a media of points / ratings
+        $points_media = $recipe[0]['points'] ?? 0;
+        // the old points
+        $old_points = $points_media * $num_ratings;
+        // summ 1 to the ratings that the recipe has
+        $num_ratings++;
+        // calculate the new points
+        $new_points = $old_points + $comment_rating;
+        // calculate the new media of points / ratings
+        $points_media = $new_points / $num_ratings;
         $query = "UPDATE $this->table SET ratings=?, points=? WHERE slug=?";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('dds', $ratings, $new_points, $slug);
+            $stmt->bind_param('dds', $num_ratings, $points_media, $slug);
             if ($stmt->execute()) {
                 return true;
             }

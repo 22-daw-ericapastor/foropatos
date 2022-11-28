@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     /**
      * Format recipes list container
      * -----------------------------------------------------------------------------------------------------------------
-     * HTML code for a recipe in the recipes list. This is a templates.
+     * HTML code for a recipe in the recipes list. This is a template.
      *
      * @param content
      * @param index
@@ -76,30 +76,39 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     /**
+     * Rating of a recipe
+     * -----------------------------------------------------------------------------------------------------------------
+     * @param points
+     * @returns {string}
+     */
+    function rating_stars(points) {
+        let stars = '';
+        if (!points) stars = '<em class="fs-6"><small>Este producto todavía no tiene valoraciones.</small></em>';
+        else {
+            if (points % 1 !== 0) {
+                for (let i = 0; i < points - 1; i++) {
+                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
+                }
+                stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/half-star.png">';
+            } else {
+                for (let i = 0; i < points; i++) {
+                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
+                }
+            }
+        }
+        return stars;
+    }
+
+    /**
      * Format recipes list container
      * -----------------------------------------------------------------------------------------------------------------
-     * HTML code for a modal dialog. This is a templates.
+     * HTML code for a modal dialog. This is a template.
      *
      * @param content
      * @param index
      * @returns {string}
      */
     function format_modal_dialogs(content, index) {
-        const rating = content['points'];
-        let stars = '';
-        if (!rating) stars = '<em class="fs-6"><small>Este producto todavía no tiene valoraciones.</small></em>';
-        else {
-            if (rating % 1 !== 0) {
-                for (let i = 0; i < rating - 1; i++) {
-                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
-                }
-                stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/half-star.png">';
-            } else {
-                for (let i = 0; i < rating; i++) {
-                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
-                }
-            }
-        }
         const admixtures = content['admixtures'].split(',');
         let mixtures = '';
         for (let i = 0; i < admixtures.length; i++) {
@@ -143,7 +152,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             '                   </p>' +
             '                   <div class="rating">' +
             '                     <h5 class="text-primary m-0">Valoraciones</h5>' +
-            '                     <div class="rating-stars text-info px-4">' + stars + '</div>' +
+            '                     <div class="rating-stars text-info px-4">' + rating_stars(content['points']) + '</div>' +
             '                   </div>' +
             '                   <div class="comment-wrapper mt-3">' +
             '                     <ul class="comment-list text-left"></ul>' +
@@ -173,8 +182,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             '     </div>';
     }
 
-    /*
-     * Fetch recipes from Database and fill the content variables for the recipes list and modal dialog content.
+    /**
+     * Fill all recipes containers
+     * -----------------------------------------------------------------------------------------------------------------
+     * @returns {Promise<void>}
      */
     await fetch('?get_recipes')
         .then(response => response.json())
@@ -184,6 +195,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 open_modal_content = open_modal_content + format_modal_dialogs(data[i], i);
             }
         });
+
     /*
      * Fill the recipes content and the modal dialog according to the variable content.
      */
@@ -248,7 +260,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     /**
      * Format comment list content
      * -----------------------------------------------------------------------------------------------------------------
-     * HTML code for a comment in the comments list. This is a templates.
+     * HTML code for a comment in the comments list. This is a template.
      *
      * @param content
      * @returns {string}
@@ -322,6 +334,15 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
+    function unselect_stars() {
+        for (let i = 0; i < rating_form.length; i++) {
+            let stars = rating_form[i].children;
+            for (let j = 0; j < stars.length; j++) {
+                stars[j].checked = false;
+            }
+        }
+    }
+
     /**
      * Insert comment into Database
      * -----------------------------------------------------------------------------------------------------------------
@@ -346,14 +367,16 @@ document.addEventListener('DOMContentLoaded', async function () {
                 await fetch('?comment=' + comment_text[i].value + '&slug=' + this.value + "&rating=" + rate_num)
                     .then(response => response.text())
                     .then(data => {
+                        console.log(data)
                         comment_response[i].innerHTML = data;
-                        if (data.match(/^!/)) {
+                        if (data.match(/enviado/)) {
                             comment_text[i].value = '';
+                            unselect_stars();
+                            fill_comments();
                         }
-                        fill_comments();
-                        /*setTimeout(function () {
+                        setTimeout(function () {
                             comment_response[i].innerHTML = '';
-                        }, 2000);*/
+                        }, 2000);
                     });
 
             });
