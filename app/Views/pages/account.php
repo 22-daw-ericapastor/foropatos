@@ -13,19 +13,62 @@
             <?php if ($_SESSION['__user']['permissions'] === 1): ?>
                 <h5 class="masthead-subheading text-center text-uppercase text-primary">Administrador</h5>
             <?php endif; ?>
-            <!-- Username-->
-            <!-- Password-->
             <!-- Account Flex Items-->
-            <div class="column justify-content-start mt-5 text-dark fw-bold">
-                <div class="fs-5 account-options" data-bs-toggle="modal" data-bs-target="#msg-modal">
-                    Ver mensajes<i class="plus-sign text-light">&#43;</i>
+            <div class="column justify-content-start mt-5 text-dark fw-boldn align-items-center">
+                <!-- Username-->
+                <div class="account-option-wrapper">
+                    <div class="account-option fs-6 m-auto">
+                        <b>Username</b>
+                        <span>
+                        <em class="px-3 text-info"><?= $_SESSION['__user']['username'] ?></em>
+                        <button class="btn btn-primary d-inline-flex justify-content-center account-edit-btn">
+                            <img alt="..." src="<?= baseurl ?>assets/imgs/icons/edit.png" height="16px"
+                                 class="cursor-pointer invert-color"/>
+                        </button>
+                    </span>
+                    </div>
+                    <form action="?new_username" method="post" class="account-edit-form form-floating">
+                        <input type="text" id="username" name="username" data-sb-validations="required"
+                               placeholder="New username"/>
+                        <button type="submit" class="btn btn-secondary">Cambiar</button>
+                        <span class="close close-form">&#215;</span>
+                    </form>
                 </div>
-                <hr style="width: 50%;"/>
-                <div class="fs-5 account-options" data-bs-toggle="modal" data-bs-target="comment-modal">
-                    Ver comentarios<i class="plus-sign text-light">&#43;</i>
+                <hr/>
+                <!-- Password-->
+                <div class="account-option-wrapper">
+                    <div class="account-option fs-6 m-auto">
+                        <b>Contraseña</b>
+                        <span>
+                            <em class="px-3 text-info">******</em>
+                            <button class="btn btn-primary d-inline-flex justify-content-center account-edit-btn">
+                                <img alt="..." src="<?= baseurl ?>assets/imgs/icons/edit.png" height="16px"
+                                     class="cursor-pointer invert-color"/>
+                            </button>
+                        </span>
+                    </div>
+                    <form action="?new_password" method="post" class="account-edit-form form-floating">
+                        <input type="text" id="passwd-old" name="passwd-old" data-sb-validations="required"
+                               placeholder="Old password"/>
+                        <input type="text" id="passwd" name="passwd" data-sb-validations="required"
+                               placeholder="New password"/>
+                        <input type="text" id="passwd-repeat" name="passwd-repeat" data-sb-validations="required"
+                               placeholder="Repeat password"/>
+                        <button type="submit" class="btn btn-secondary">Cambiar</button>
+                        <span class="close close-form">&#215;</span>
+                    </form>
                 </div>
-                <hr style="width: 50%;"/>
+                <hr/>
                 <?php if ($_SESSION['__user']['permissions'] === 1): ?>
+                    <div class="account-option-wrapper">
+                        <div class="account-option fs-6 m-auto">
+                            <b>Ver mensajes</b>
+                            <span><i class="plus-sign text-light">&#43;</i></span>
+                        </div>
+                    </div>
+                    <hr/>
+
+                <!-- old starts here-->
                     <div class="fs-5">Gestionar Recetas</div>
                     <hr style="width: 50%;"/>
                     <ul class="account-list fs-6">

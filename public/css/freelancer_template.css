@@ -7733,6 +7733,7 @@ textarea.form-control-lg {
 .justify-content-evenly {
     justify-content: space-evenly !important;
 }
+
 .justify-self-end {
     justify-self: flex-end !important;
 }
@@ -12370,12 +12371,12 @@ form a {
     border-radius: 15px;
 }
 
-.cursor-pointer, .account-options {
+.cursor-pointer {
     cursor: pointer;
     transition: all 0.4s ease
 }
 
-.cursor-pointer:hover, .account-options:hover {
+.cursor-pointer:hover {
     opacity: 0.75;
     transition: all 0.25s ease;
 }
@@ -12401,4 +12402,74 @@ form a {
     flex-flow: row;
     align-items: center;
     align-content: center;
+}
+
+.invert-color {
+    filter: invert(1);
+}
+
+.account-option-wrapper {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+}
+
+.account-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    column-gap: 5px;
+}
+
+.account-option, .account-option-wrapper ~ hr {
+    width: 75%;
+}
+
+.account-edit-form {
+    width: 75%;
+    margin: auto;
+}
+
+.account-edit-form:not(.show) {
+    height: 0;
+    overflow: hidden;
+}
+
+.account-edit-form > input {
+    width: 50%;
+    height: 2.5rem;
+    padding: 1rem !important;
+    font-size: 1rem;
+    outline: none;
+    border: 0;
+    border-radius: 20px;
+    background: rgba(var(--bs-primary-rgb), 0.2);
+}
+
+.account-edit-form > input:focus, .account-edit-form > input:active {
+    border: 0;
+}
+
+.close {
+    height: 1.2rem;
+    width: 1.2rem;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    border: 1px solid var(--bs-dark);
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--bs-light);
+    background: rgba(var(--bs-dark-rgb), 0.6);
+}
+
+.close:active {
+    color: var(--bs-light);
+    background: rgba(var(--bs-dark-rgb), 0.8);
 }

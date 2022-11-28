@@ -228,4 +228,9 @@ class BaseController
         controller('Messages')->message();
     }
 
+    function change_username()
+    {
+        controller('Users')->change_username();
+    }
+
 }
