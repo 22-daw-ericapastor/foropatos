@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                             } else if (k < j) {
                                 stars[k].checked = true;
                             } else {
-                                if (stars[k + 1].checked) {
+                                if (stars[k + 1] && stars[k + 1].checked) {
                                     stars[k].checked = true;
                                 }
                             }
