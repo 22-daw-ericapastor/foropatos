@@ -29,8 +29,12 @@ class Recipes extends model
                         'slug' => $row['slug'],
                         'src' => $row['src'],
                         'title' => $row['title'],
-                        'short_description' => $row['short_description'],
                         'description' => $row['description'],
+                        'admixtures' => $row['admixtures'],
+                        'making' => $row['making'],
+                        'ratings' => $row['ratings'],
+                        'points' => $row['points'],
+                        'difficulty' => $row['difficulty']
                     ];
                 }
                 return $json;

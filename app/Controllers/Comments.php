@@ -46,7 +46,7 @@ class Comments extends controller
         if ($results = $model->get_comments($_GET['slug'])) {
             echo json_encode($results);
         } else {
-            echo json_encode(['null' => '<p class="text-center text-primary">Todavia no hay comentarios, ¡sé el primero!</p>']);
+            echo json_encode(['null' => '<p class="text-primary text-start pb-3">Todavia no hay comentarios, ¡sé el primero!</p>']);
         }
     }
 

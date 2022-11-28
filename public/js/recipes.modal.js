@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         return '   <div class="col-md-6 col-lg-4 mb-5">' +
             '        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#modal' + index + '">' +
             '            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">' +
-            '                <div class="portfolio-item-caption-content text-center text-white p-3">' + content['short_description'] +
+            '                <div class="portfolio-item-caption-content text-center text-white p-3">' + content['description'] +
             '                    <br/><i class="fas fa-plus fa-3x"></i>' +
             '                </div>' +
             '            </div>' +
@@ -85,6 +85,30 @@ document.addEventListener('DOMContentLoaded', async function () {
      * @returns {string}
      */
     function format_modal_dialogs(content, index) {
+        const rating = content['points'];
+        let stars = '';
+        if (!rating) stars = '<em class="fs-6"><small>Este producto todavía no tiene valoraciones.</small></em>';
+        else {
+            if (rating % 1 !== 0) {
+                for (let i = 0; i < rating - 1; i++) {
+                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
+                }
+                stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/half-star.png">';
+            } else {
+                for (let i = 0; i < rating; i++) {
+                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
+                }
+            }
+        }
+        const admixtures = content['admixtures'].split(',');
+        let mixtures = '';
+        for (let i = 0; i < admixtures.length; i++) {
+            mixtures = mixtures + (i + 1) + '. ' + admixtures[i] + '<br/>';
+        }
+        let level = content['difficulty'];
+        if (level === 1) level = 'Fácil.';
+        else if (level === 2) level = 'Normal.';
+        else if (level === 3) level = 'Difícil.';
         return '<div class="portfolio-modal modal fade" id="modal' + index + '" tabindex="-1" aria-labelledby="modal"' +
             '     aria-hidden="true">' +
             '     <div class="modal-dialog">' +
@@ -92,33 +116,54 @@ document.addEventListener('DOMContentLoaded', async function () {
             '           <div class="modal-header border-0">' +
             '             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>' +
             '           </div>' +
-            '           <div class="modal-body text-center pb-5">' +
+            '           <div class="modal-body text-start pb-5">' +
             '             <div class="container">' +
             '               <div class="row justify-content-center">' +
             '                 <div class="col-lg-8">' +
             '                   <!-- Modal - Title-->' +
-            '                   <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">' + content['title'] + '</h2>' +
+            '                   <h2 class="portfolio-modal-title text-center text-secondary text-uppercase mb-0">' + content['title'] + '</h2>' +
             '                   <!-- Icon Divider-->' +
             '                   <div class="divider-custom">' +
             '                     <div class="divider-custom-line"></div>' +
             '                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>' +
             '                     <div class="divider-custom-line"></div>' +
             '                   </div>' +
-            '                   <!-- Modal - Text-->' +
+            '                   <!-- Recipes - Admixtures-->' +
+            '                   <h5 class="text-primary">Ingredientes</h5>' +
             '                   <p class="mb-4 text-start">' +
-            '                     ' + content['description'] +
+            '                     ' + mixtures +
             '                   </p>' +
-            '                   <h5 class="text-primary mt-5">Comentarios</h5>' +
-            '                   <ul class="comment-list text-left"></ul>' +
+            '                   <!-- Recipes - Difficulty-->' +
+            '                   <h5 class="text-primary">Dificultad</h5>' +
+            '                   <p class="mb-4 text-start">' + level + '</p>' +
+            '                   <!-- Recipes - Making-->' +
+            '                   <h5 class="text-primary">Elaboración</h5>' +
+            '                   <p class="mb-4 text-start">' +
+            '                     ' + content['making'] +
+            '                   </p>' +
+            '                   <div class="rating">' +
+            '                     <h5 class="text-primary m-0">Valoraciones</h5>' +
+            '                     <div class="rating-stars text-info px-4">' + stars + '</div>' +
+            '                   </div>' +
+            '                   <div class="comment-wrapper mt-3">' +
+            '                     <ul class="comment-list text-left"></ul>' +
+            '                   </div>' +
             '                   <form class="mt-4 comment-form">' +
+            '                     <div class="rating-form">' +
+            '                       <input type="checkbox" class="rating-checkbox"/>' +
+            '                       <input type="checkbox" class="rating-checkbox"/>' +
+            '                       <input type="checkbox" class="rating-checkbox"/>' +
+            '                       <input type="checkbox" class="rating-checkbox"/>' +
+            '                       <input type="checkbox" class="rating-checkbox"/>' +
+            '                     </div>' +
             '                     <div class="form-floating mb-3 d-inline-block">' +
             '                       <textarea class="form-control comment-text" id="comment" type="text" ' +
             '                         placeholder="Enter your comment here..." maxlength="200"></textarea>' +
             '                         <label for="comment">Commentary</label>' +
-            '                         <p class="comment_response"></p>' +
             '                     </div>' +
             '                     <div><button value="' + content['slug'] + '" type="button" class="btn btn-primary comment-btn">Comment</button></div>' +
             '                   </form>' +
+            '                   <p class="comment_response"></p>' +
             '                 </div>' +
             '               </div>' +
             '             </div>' +
@@ -193,6 +238,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     let comment_list_content = '';
 
     /**
+     * Rating stars container
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @type {HTMLCollectionOf<Element>}
+     */
+    const rating_form = document.getElementsByClassName('rating-form');
+
+    /**
      * Format comment list content
      * -----------------------------------------------------------------------------------------------------------------
      * HTML code for a comment in the comments list. This is a templates.
@@ -208,10 +261,16 @@ document.addEventListener('DOMContentLoaded', async function () {
             '       <b>' + content['username'] + '</b>' +
             '       <em>' + content['datetime'] + '</em> ' +
             '     </p>' +
+            '     <hr/>' +
             '     <p class="comments-db">' + content['comment'] + '</p>' +
             '   </li>';
     }
 
+    /**
+     * Fill comments
+     * -----------------------------------------------------------------------------------------------------------------
+     * Fill the comment list getting data from Database.
+     */
     async function fill_comments() {
         for (let i = 0; i < comment_list.length; i++) {
             await fetch('?comments_list&slug=' + comment_btn[i].value)
@@ -230,33 +289,87 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     }
 
-    await fill_comments();
+    /**
+     * Select stars in comments rating
+     * -----------------------------------------------------------------------------------------------------------------
+     * Check the stars checkbox depeding on which one is clicked.
+     */
+    function select_star() {
+        for (let i = 0; i < rating_form.length; i++) {
+            rating_form[i].addEventListener('click', function (evt) {
+                let stars = rating_form[i].children;
+                for (let j = 0; j < stars.length; j++) {
+                    if (evt.target === stars[j]) {
+                        for (let k = 0; k < stars.length; k++) {
+                            if (k > j) {
+                                stars[k].checked = false;
+                            } else if (k < j) {
+                                stars[k].checked = true;
+                            } else {
+                                if (stars[k + 1].checked) {
+                                    stars[k].checked = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * Insert comment into Database
+     * -----------------------------------------------------------------------------------------------------------------
+     * Insert the necessary data through GET parameters.
+     */
+
+    function get_stars(form) {
+        let rating = 0;
+        let stars = form.children;
+        for (let i = 0; i < stars.length; i++) {
+            if (stars[i].checked) {
+                rating++;
+            }
+        }
+        return rating;
+    }
+
+    function submit_comments() {
+        for (let i = 0; i < comment_btn.length; i++) {
+            comment_btn[i].addEventListener('click', async function () {
+                let rate_num = get_stars(rating_form[i]);
+                await fetch('?comment=' + comment_text[i].value + '&slug=' + this.value + "&rating=" + rate_num)
+                    .then(response => response.text())
+                    .then(data => {
+                        comment_response[i].innerHTML = data;
+                        comment_text[i].value = '';
+                        fill_comments();
+                        setTimeout(function () {
+                            comment_response[i].innerHTML = '';
+                        }, 2000);
+                    });
+
+            });
+        }
+    }
+
+    // Check if user is logged.
+    // False -> Make comments section unavailable and show an error message.
+    // True -> Activate the previous functions
 
     await fetch('?is_logged')
         .then(response => response.json())
         .then(data => {
             if (!data['response']) {
-                for (let i = 0; i < comment_text.length; i++) {
-                    comment_text[i].disabled = true;
-                    comment_btn[i].disabled = true;
-                    comment_response[i].innerHTML = '<p class="text-danger">Tienes que loggearte para poder comentar.</p>';
+                const comment_form = document.getElementsByClassName('comment-form');
+                for (let i = 0; i < comment_form.length; i++) {
+                    comment_form[i].style.display = 'none';
+                    comment_response[i].innerHTML = '<p class="text-danger">Tienes que loggearte para poder comentar o ver comentarios.</p>';
                 }
             } else {
-                for (let i = 0; i < comment_btn.length; i++) {
-                    comment_btn[i].addEventListener('click', async function () {
-                        await fetch('?comment=' + comment_text[i].value + '&slug=' + this.value)
-                            .then(response => response.text())
-                            .then(data => {
-                                comment_response[i].innerHTML = data;
-                                comment_text[i].value = '';
-                                fill_comments();
-                                setTimeout(function () {
-                                    comment_response[i].innerHTML = '';
-                                }, 2000);
-                            });
-
-                    });
-                }
+                fill_comments();
+                select_star();
+                submit_comments();
             }
         });
 

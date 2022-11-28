@@ -32,7 +32,7 @@
     --bs-primary: #CC6699;
     --bs-secondary: #990000;
     --bs-success: #198754;
-    --bs-info: #0dcaf0;
+    --bs-info: #5598ad;
     --bs-warning: #ffc107;
     --bs-danger: #dc3545;
     --bs-light: #F0F0F0;
@@ -41,7 +41,7 @@
     --bs-primary-rgb: 204, 102, 153;
     --bs-secondary-rgb: 153, 0, 0;
     --bs-success-rgb: 25, 135, 84;
-    --bs-info-rgb: 13, 202, 240;
+    --bs-info-rgb: 85, 152, 173;
     --bs-warning-rgb: 255, 193, 7;
     --bs-danger-rgb: 220, 53, 69;
     --bs-light-rgb: 248, 249, 250;
@@ -12241,17 +12241,55 @@ form a {
 
 .comment-form {
     display: grid;
-    grid-template-columns: 8fr 2fr;
     align-items: center;
-    justify-items: end;
+    justify-items: center;
+    justify-content: center;
+    grid-template-columns: 2fr 2fr 2fr 2fr;
+    gap: 5px;
+}
+
+.rating-form {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    gap: 5px;
+}
+
+.rating-checkbox {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    content: url('../assets/imgs/icons/empty-star.png');
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+}
+
+.rating-checkbox:checked {
+    content: url('../assets/imgs/icons/full-star.png');
+}
+
+.comment-form div:first-child {
+    grid-column: 1 / 5;
+}
+
+.comment-form div:nth-child(2) {
+    grid-column: 1 / 4;
+}
+
+.comment-form div:last-child {
+    grid-column: 4 / 5;
+}
+
+.comment-wrapper {
+    padding: 0.25rem;
 }
 
 .comment-list {
     margin: 0;
-    padding: 1rem;
+    padding: 0;
     list-style: none;
     border-radius: 10px;
-    background: rgba(var(--bs-primary-rgb), 0.15);
 }
 
 .comment-list p {
@@ -12263,7 +12301,6 @@ form a {
     align-content: center;
     align-items: center;
     margin-bottom: 0.5rem;
-    padding: 0.25rem;
     font-size: 0.825rem;
     text-align: start;
     width: 100%;
@@ -12274,8 +12311,8 @@ form a {
     justify-content: center;
     align-content: center;
     border-radius: 10px;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     background-size: contain !important;
 }
 
@@ -12285,6 +12322,12 @@ form a {
     align-items: flex-start;
     align-content: flex-start;
     column-gap: 0.45rem;
+}
+
+.comment-user_time ~ hr {
+    width: 50%;
+    margin: 0.35rem;
+    background-color: rgba(var(--bs-primary-rgb), 0.5);
 }
 
 .comment-user_time em {
@@ -12340,4 +12383,19 @@ form a {
 
 #issue-msg {
     height: 10rem;
+}
+
+.rating {
+    display: flex;
+    flex-flow: row;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start
+}
+
+.rating-stars {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    align-content: center;
 }

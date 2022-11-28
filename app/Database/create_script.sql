@@ -18,8 +18,11 @@ CREATE TABLE IF NOT EXISTS recipes(
   slug VARCHAR(20),
   src VARCHAR(100),
   title VARCHAR(30),
-  short_description VARCHAR(100),
-  description TEXT DEFAULT 'Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.<br/>1. Cat - 3kg<br/>2. ipsum - 0.5g<br/>3. Twitch - <em>Aged like a fine egg</em><br/> Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.<br/> Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.',
+  description VARCHAR(100),
+  admixtures VARCHAR(200) DEFAULT '["Cat": "3kg", "ipsum": "0.5g", "Twitch": "<em>Aged like a fine egg</em>"]',
+  making TEXT DEFAULT 'Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.<br/> Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.',
+  rating FLOAT DEFAULT 0.0,
+  difficulty TINYINT,
   PRIMARY KEY(id),
   KEY(slug)
 );
@@ -52,11 +55,11 @@ INSERT INTO users (username, email, passwd, permissions)
 VALUES ('effy', 'effy@mail.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU1pKUSQaHbIqWTMJTp1ckO', 1);
 
 -- Set default images
-INSERT INTO recipes (slug, src, title, short_description)
+INSERT INTO recipes (slug, src, title, short_description, difficulty)
 VALUES
-  ('la-pikaburger', 'public/assets/imgs/recipes/burger.png', 'La Pikaburger', 'La Pikaburg...<br/>Pika... pikaaa... ¡achú!'),
-  ('mediterranean-salad', 'public/assets/imgs/recipes/salad.png', 'Ensalada mediterránea', 'La verdadera ensalada mediterránea... ¿Con cebolla o sin cebolla?'),
-  ('ramen', 'public/assets/imgs/recipes/ramen.png', 'Ramen', 'Fideos de esos... japoneses.'),
-  ('cupcakes', 'public/assets/imgs/recipes/cupcake.png', 'Cupcakes', '<i>Capqueiqs</i> de todos los sabores y colores.'),
-  ('comida-mascotas', 'public/assets/imgs/recipes/petfood.png', 'Comida casera para mascotas', 'Aprende a cocinar para tu mejor amigo de manera segura'),
-  ('recetas-con-atun', 'public/assets/imgs/recipes/tuna.png', 'Recetas con atún en lata', 'Todo lo que puedes hacer con una lata de atún y... ¿más?');
+  ('la-pikaburger', 'public/assets/imgs/recipes/burger.png', 'La Pikaburger', 'La Pikaburg...<br/>Pika... pikaaa... ¡achú!', 2),
+  ('mediterranean-salad', 'public/assets/imgs/recipes/salad.png', 'Ensalada mediterránea', 'La verdadera ensalada mediterránea... ¿Con cebolla o sin cebolla?', 1),
+  ('ramen', 'public/assets/imgs/recipes/ramen.png', 'Ramen', 'Fideos de esos... japoneses.', 2),
+  ('cupcakes', 'public/assets/imgs/recipes/cupcake.png', 'Cupcakes', '<i>Capqueiqs</i> de todos los sabores y colores.', 3),
+  ('comida-mascotas', 'public/assets/imgs/recipes/petfood.png', 'Comida casera para mascotas', 'Aprende a cocinar para tu mejor amigo de manera segura', 3),
+  ('recetas-con-atun', 'public/assets/imgs/recipes/tuna.png', 'Recetas con atún en lata', 'Todo lo que puedes hacer con una lata de atún y... ¿más?', 1);
