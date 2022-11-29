@@ -10,6 +10,8 @@
     <link rel="icon" type="image/x-icon" href="<?= baseurl ?>assets/imgs/cake.png"/>
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Datatables CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
@@ -31,10 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?home#recipes-grid">Recetas</a>
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?home#recipes">Recetas</a>
                 </li>
                 <li class="nav-item mx-0 mx-lg-1">
-                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?home#contact-form">Contacto</a>
+                    <a class="nav-link py-3 px-0 px-lg-3 rounded" href="?home#contact">Contacto</a>
                 </li>
                 <?php if (isset($_SESSION['__user'])): ?>
                     <li class="nav-item mx-0 mx-lg-1">

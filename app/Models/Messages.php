@@ -10,7 +10,7 @@ class Messages extends model
 
     private string $table = 'messages';
 
-    function get_messages($username): ?array
+    function get_messages($username)
     {
         $query = "SELECT * FROM $this->table WHERE username=?;";
         try {
@@ -30,7 +30,7 @@ class Messages extends model
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
-        return null;
+        return false;
     }
 
     function message($username, $issue, $text)

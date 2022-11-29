@@ -22,15 +22,17 @@ class Messages extends controller
 
     function message()
     {
+        $data['page'] = 'home';
         // send a message into db
         if (isset($_SESSION['__user'])) {
-            if (model('Messages')->send_message(/*$_GET parameters here*/)) {
-                echo '<p class="text-success">¡Comentario enviado con éxito!<br/>Recarga la página para poder verlo.</p>';
+            //if (model('Messages')->send_message(/*$_GET parameters here*/)) {
+            /*    echo '<p class="text-success">¡Comentario enviado con éxito!<br/>Recarga la página para poder verlo.</p>';
             } else {
                 echo '<p class="text-danger">Ha habido un problema al enviar tu comentario...<br/>No vuelvas a intentarlo.</p>';
             }
-        } else {
-            echo '<p class="text-danger">Tienes que loggearte para poder publicar comentarios.</p>';
+            */
+            $data['response'] = '<p class="h6 mt-3 text-success text-center">Wiiiii</p>';
+            template('pages/home', $data);
         }
     }
 

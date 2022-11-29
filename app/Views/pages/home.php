@@ -21,7 +21,7 @@
     </div>
 </header>
 <!-- Recipes Section-->
-<section class="page-section portfolio" id="recetas">
+<section class="page-section portfolio" id="recipes">
     <div class="container text-center">
         <!-- Recipes Section Heading-->
         <h2 class="page-section-heading text-uppercase text-secondary mb-0">Nuestras recetas</h2>
@@ -47,42 +47,39 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <h6 class="text-center text-primary mb-5">¿Tienes dudas? ¿Sugerenecias? No dudes en escribirnos.</h6>
+        <h6 class="text-center text-primary mb-5" id="contact-response-msg"></h6>
+        <?php if (isset($data['response'])) echo $data['response']; ?>
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="contact-form">
+                <form>
                     <!-- Issue title -->
                     <div class="form-floating mb-3">
                         <input class="form-control contact" id="issue-title" type="text"
-                               placeholder="Enter the issue title..."
-                               data-sb-validations="required" name="issue_title"/>
+                               placeholder="Enter the issue title..." data-sb-validations="required"/>
                         <label for="issue-title">Titulo del mensaje</label>
                         <div class="invalid-feedback" data-sb-feedback="message:required"></div>
                     </div>
                     <!-- Message input-->
                     <div class="form-floating mb-3">
-                        <textarea class="form-control contact" id="issue-msg" type="text" name="issue_msg"
+                        <textarea class="form-control contact" id="issue-msg" type="text"
                                   placeholder="Enter your message here..." data-sb-validations="required"></textarea>
                         <label for="issue-msg">Message</label>
                         <div class="invalid-feedback" data-sb-feedback="message:required"></div>
                     </div>
-                    <!-- Submit success message-->
-                    <div class="d-none" id="submitSuccessMessage">
-                        <div class="text-center mb-3">
-                            <div class="fw-bolder">¡Increíble! Un administrador te responderá lo antes posible.</div>
-                        </div>
-                    </div>
-                    <div class="text-center text-danger mb-3 d-none" id="submitErrorMessage">
-                        Ha habido un error interno en el sistema. Vuelve a intentarlo en cinco o seis años.
-                    </div>
                     <!-- Submit Button-->
-                    <button class="btn btn-primary btn-xl disabled" id="issue-btn" type="button">Enviar</button>
+                    <button class="btn btn-primary btn-xl" id="contact-btn" type="button">Enviar</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
 <section id="open-modal"></section>
+<script>
+    let url = window.location.href;
+    if (url.match(/\?$/) || url.match(/\/$/)) {
+        window.location.assign('http://localhost/web_recetas/?home');
+    }
+</script>
 <script src="<?= baseurl ?>js/recipes.modal.js"></script>
-<script src="<?= baseurl ?>js/home.messages.js"></script>
+<script src="<?= baseurl ?>js/home.message.js"></script>

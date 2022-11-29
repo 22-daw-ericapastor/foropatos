@@ -116,7 +116,7 @@
             <!-- Deactivate account-->
         </div>
     </section>
-    <section id="open-msgs-modal">
+    <section class="container">
         <div class="portfolio-modal modal fade" id="msg-modal" tabindex="-1" aria-labelledby="modal"
              aria-hidden="true">
             <div class="modal-dialog">
@@ -129,8 +129,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
                                     <!-- Modal - Title-->
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tus
-                                        Mensajes</h2>
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Mensajes</h2>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -138,48 +137,8 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Modal Text-->
-                                    <h6 class="mb-4 text-primary" id="msgs-info"></h6>
-                                    <ul class="comment-list text-left">
-                                        <li class="comment-item">
-                                            <p class="comment-user_time cursor-pointer fs-6">
-                                                <b>username</b>
-                                                <em>last date time</em>
-                                            </p>
-                                            <ul class="ps-3 msg-list collapse">
-                                                <li class="column">
-                                                    <span class="comment-user_time">usuario<em>datetime</em></span><span>Mensaje</span>
-                                                </li>
-                                                <li class="column">
-                                                    <span class="comment-user_time">usuario<em>datetime</em></span><span>Mensaje</span>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="comment-item">
-                                            <p class="comment-user_time cursor-pointer fs-6">
-                                                <b>username</b>
-                                                <em>last date time</em>
-                                            </p>
-                                            <ul class="ps-3 msg-list collapse">
-                                                <li class="column">
-                                                    <span class="comment-user_time">usuario<em>datetime</em></span><span>Mensaje</span>
-                                                </li>
-                                                <li class="column">
-                                                    <span class="comment-user_time">usuario<em>datetime</em></span><span>Mensaje</span>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <form class="collapse mt-4 comment-form">
-                                        <div class="form-floating mb-3 d-inline-block">
-                                            <textarea class="form-control comment-text" id="msg" type="text"
-                                                      placeholder="Enter your message here..."></textarea>
-                                            <label for="msg">Message</label>
-                                            <p class="msg-response"></p>
-                                        </div>
-                                        <div>
-                                            <button type="button" class="btn btn-primary comment-btn">Enviar</button>
-                                        </div>
-                                    </form>
+                                    <h6 class="mb-4 text-primary" id="msg-info"></h6>
+                                    <table id="msg-table" class="msg-table"></table>
                                 </div>
                             </div>
                         </div>
@@ -210,4 +169,9 @@
 
 <?php endif; ?>
 
+<!-- JQuery script-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- Datatables script-->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+<!-- My script-->
 <script src="<?= baseurl ?>js/account.js"></script>

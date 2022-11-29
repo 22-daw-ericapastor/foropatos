@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async function () {
      *
      * @type {string}
      */
+
     let url_base = window.location.href;
     // Check if there are any GET parameters and take them out -->
     if (url_base.match(/[?#]/)) {
