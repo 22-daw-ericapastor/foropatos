@@ -24,14 +24,14 @@
 <section class="page-section portfolio" id="recetas">
     <div class="container text-center">
         <!-- Recipes Section Heading-->
-        <h2 class="page-section-heading text-uppercase text-secondary mb-0">Recetas destacadas</h2>
+        <h2 class="page-section-heading text-uppercase text-secondary mb-0">Nuestras recetas</h2>
         <!-- Icon Divider-->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <h6 class="fw-bold text-primary">¡Fíjate en las estrellas de dificultad de cada receta!</h6>
+        <h6 class="fw-bold text-primary">¡Click para leer, leer para saber!</h6>
         <!-- Recipes Grid Items-->
         <div class="row justify-content-center" id="recipes-grid"></div>
     </div>

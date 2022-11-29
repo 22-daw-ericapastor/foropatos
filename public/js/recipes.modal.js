@@ -76,12 +76,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     /**
-     * Rating of a recipe
+     * Format recipes list container
      * -----------------------------------------------------------------------------------------------------------------
-     * @param points
+     * HTML code for a modal dialog. This is a template.
+     *
+     * @param content
+     * @param index
      * @returns {string}
      */
-    function rating_stars(points) {
+    function format_modal_dialogs(content, index) {
+        const points = content['points'];
         let stars = '';
         if (!points) stars = '<em class="fs-6"><small>Este producto todavía no tiene valoraciones.</small></em>';
         else {
@@ -96,19 +100,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             }
         }
-        return stars;
-    }
-
-    /**
-     * Format recipes list container
-     * -----------------------------------------------------------------------------------------------------------------
-     * HTML code for a modal dialog. This is a template.
-     *
-     * @param content
-     * @param index
-     * @returns {string}
-     */
-    function format_modal_dialogs(content, index) {
         const admixtures = content['admixtures'].split(',');
         let mixtures = '';
         for (let i = 0; i < admixtures.length; i++) {
@@ -152,7 +143,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             '                   </p>' +
             '                   <div class="rating">' +
             '                     <h5 class="text-primary m-0">Valoraciones</h5>' +
-            '                     <div class="rating-stars text-info px-4">' + rating_stars(content['points']) + '</div>' +
+            '                     <div class="rating-stars text-info px-4">' + stars + '</div>' +
             '                   </div>' +
             '                   <div class="comment-wrapper mt-3">' +
             '                     <ul class="comment-list text-left"></ul>' +

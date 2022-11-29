@@ -20,8 +20,8 @@
                     <div class="account-option fs-6 m-auto">
                         <b>Username</b>
                         <span>
-                        <em class="px-3 text-info"><?= $_SESSION['__user']['username'] ?></em>
-                        <button class="btn btn-primary d-inline-flex justify-content-center account-edit-btn">
+                        <em class="px-3 text-info fs-5"><?= $_SESSION['__user']['username'] ?></em>
+                        <button class="btn btn-primary account-edit-btn">
                             <img alt="..." src="<?= baseurl ?>assets/imgs/icons/edit.png" height="16px"
                                  class="cursor-pointer invert-color"/>
                         </button>
@@ -31,7 +31,7 @@
                         <input type="text" id="username" name="username" data-sb-validations="required"
                                placeholder="New username"/>
                         <button type="submit" class="btn btn-secondary">Cambiar</button>
-                        <span class="close close-form">&#215;</span>
+                        <button type="button" class="btn btn-secondary close close-form">&#215;</button>
                     </form>
                 </div>
                 <hr/>
@@ -40,22 +40,22 @@
                     <div class="account-option fs-6 m-auto">
                         <b>Contraseña</b>
                         <span>
-                            <em class="px-3 text-info">******</em>
-                            <button class="btn btn-primary d-inline-flex justify-content-center account-edit-btn">
+                            <em class="px-3 text-info fs-5">******</em>
+                            <button class="btn btn-primary account-edit-btn">
                                 <img alt="..." src="<?= baseurl ?>assets/imgs/icons/edit.png" height="16px"
                                      class="cursor-pointer invert-color"/>
                             </button>
                         </span>
                     </div>
                     <form action="?new_password" method="post" class="account-edit-form form-floating">
-                        <input type="text" id="passwd-old" name="passwd-old" data-sb-validations="required"
+                        <input type="password" id="passwd-old" name="passwd-old" data-sb-validations="required"
                                placeholder="Old password"/>
-                        <input type="text" id="passwd" name="passwd" data-sb-validations="required"
+                        <input type="password" id="passwd" name="passwd" data-sb-validations="required"
                                placeholder="New password"/>
-                        <input type="text" id="passwd-repeat" name="passwd-repeat" data-sb-validations="required"
+                        <input type="password" id="passwd-repeat" name="passwd-repeat" data-sb-validations="required"
                                placeholder="Repeat password"/>
                         <button type="submit" class="btn btn-secondary">Cambiar</button>
-                        <span class="close close-form">&#215;</span>
+                        <button type="button" class="btn btn-secondary close close-form">&#215;</button>
                     </form>
                 </div>
                 <hr/>
@@ -63,38 +63,44 @@
                     <div class="account-option-wrapper">
                         <div class="account-option fs-6 m-auto">
                             <b>Ver mensajes</b>
-                            <span><i class="plus-sign text-light">&#43;</i></span>
+                            <button type="button" class="btn btn-primary plus-sign">&#43;</button>
                         </div>
                     </div>
                     <hr/>
-
-                <!-- old starts here-->
-                    <div class="fs-5">Gestionar Recetas</div>
-                    <hr style="width: 50%;"/>
-                    <ul class="account-list fs-6">
-                        <li>
-                            <a href="?add_recipe">Añadir receta</a>
-                        </li>
-                        <li>
-                            <a href="?modify_recipe">Modificar receta</a>
-                        </li>
-                        <li>
-                            <a href="?delete_recipe">Borrar receta</a>
-                        </li>
-                    </ul>
-                    <div class="fs-5">Gestionar usuarios</div>
-                    <hr style="width: 50%;"/>
-                    <ul class="account-list fs-6">
-                        <li>
-                            <a href="?add_admin">Añadir usuario administrador</a>
-                        </li>
-                        <li>
-                            <a href="?activate_user">Reactivar usuario</a>
-                        </li>
-                        <li>
-                            <a href="?delete_user">Borrar usuario</a>
-                        </li>
-                    </ul>
+                    <div class="account-option-wrapper">
+                        <div class="account-option fs-6 m-auto">
+                            <b>Gestionar Recetas</b>
+                            <ul class="account-list fs-6">
+                                <li>
+                                    <a class="btn btn-primary text-white" href="?add_recipe">Añadir receta</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary text-white" href="?modify_recipe">Modificar receta</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary text-white" href="?delete_recipe">Borrar receta</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="account-option-wrapper">
+                        <div class="account-option fs-6 m-auto">
+                            <b>Gestionar Recetas</b>
+                            <ul class="account-list fs-6">
+                                <li>
+                                    <a class="btn btn-primary text-white" href="?add_admin">Añadir administrador</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary text-white" href="?activate_user">Reactivar usuario</a>
+                                </li>
+                                <li>
+                                    <a class="btn btn-primary text-white" href="?delete_user">Borrar usuario</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr/>
                 <?php endif; ?>
             </div>
             <!-- Deactivate account-->
