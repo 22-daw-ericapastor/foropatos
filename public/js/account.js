@@ -20,20 +20,29 @@ document.addEventListener('DOMContentLoaded', function () {
     let table = new DataTable('#msg-table', {
         processing: true, // fill with ajax request
         ajax: {
-            url: '?getRequests', dataSrc: '',
+            url: '?get_messages', dataSrc: 'data',
         },
         columns: [
-            {title: "Token", data: "token", class: "col-1 js-token px-1"},
-            {title: "Fecha solicitud", data: "date", class: "col-2 px-1"},
-            {title: "Solicitante", data: "fname", class: "px-1"},
-            {title: "Poblacion", data: "poblacion", class: "px-1"},
-            {title: "Geolocalizacion", data: "btn_map", class: "col-1 px-1"},
-            {title: "Envio", data: "send_value", class: "text-left px-1"},
-            {title: "Cobertura", data: "coverage", class: "col-3 px-1"},
+            {title: "User", data: "username", class: ""},
+            {title: "Mensaje", data: "msg", class: ""},
+            {title: "Fecha y hora", data: "datetime", class: ""},
+            {title: "Leido", data: "is_read", class: ""}
         ],
         pageLength: rows_in_datatable,
         columnsDefs: [],
-        responsive: true, order: [[1, 'desc']],// position 2 -> from more recent to less recent by request date
+        responsive: true, order: [[3, 'desc']],// position 3 -> from more recent to less recent by request date
+    });
+
+    table.on('draw.dt', function () {
+        const title = document.getElementsByClassName('toggle-msg');
+        const msg = document.getElementsByClassName('table-msg_text');
+        for (let i = 0; i < title.length; i++) {
+            title[i].addEventListener('click', function () {
+                msg[i].classList.toggle('show');
+            });
+        }
+        const is_read=document.getElementsByClassName('toggle-is_read');
+        // event listener for tick is read not read
     });
 
 });

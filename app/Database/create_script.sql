@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS web_recetas;
+DROP DATABASE IF EXISTS foropatos;
 
-CREATE DATABASE web_recetas;
+CREATE DATABASE foropatos;
 
-USE web_recetas;
+USE foropatos;
 
 CREATE TABLE IF NOT EXISTS users(
   username VARCHAR(20),
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS messages(
   username VARCHAR(50),
   issue VARCHAR(20),
   msg_text VARCHAR(500),
-  date_time DATETIME,
+  date_time DATETIME DEFAULT NOW(),
   is_read TINYINT(1) DEFAULT 0,
   PRIMARY KEY(id),
   FOREIGN KEY(username) REFERENCES users(username)

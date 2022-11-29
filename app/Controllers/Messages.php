@@ -9,30 +9,31 @@ class Messages extends controller
 
     function get_messages()
     {
-        if (isset($_SESSION['__user'])) {
-            if (!model('Messages')->get_messages($_SESSION['__user']['username'])) {
-                echo json_encode(['null' => 'No tienes mensajes']);
-            } else {
-                echo json_encode(model('Messages')->get_messages());
-            }
-        } else {
-            echo json_encode(['null' => 'No estás loggeado.']);
+        if (isset($_SESSION['__user']['username'])) {
+            $username = $_SESSION['__user']['username'];
+            echo json_encode(['data' => model('Messages')->get_messages($username)]);
         }
     }
 
     function message()
     {
-        $data['page'] = 'home';
         // send a message into db
-        if (isset($_SESSION['__user'])) {
-            //if (model('Messages')->send_message(/*$_GET parameters here*/)) {
-            /*    echo '<p class="text-success">¡Comentario enviado con éxito!<br/>Recarga la página para poder verlo.</p>';
-            } else {
-                echo '<p class="text-danger">Ha habido un problema al enviar tu comentario...<br/>No vuelvas a intentarlo.</p>';
+        if (isset($_SESSION['__user']) && isset($_SESSION['__user']['username'])) {
+            if (isset($_GET['title']) && isset($_GET['message'])
+                && $_GET['title'] !== '' && $_GET['message'] !== '') {
+                $username = $_SESSION['__user']['username'];
+                $title = validate($_GET['title']);
+                $msg = validate($_GET['message']);
+                if (model('Messages')->send_message($username, $title, $msg)) {
+                    echo '<h6 class="text-success text-center">¡Mensaje enviado con éxito!
+                        <br/>Lo tendremos muy, muy, muy, muy, ¡muy en cuenta! (No.)</h6>';
+                } else {
+                    echo '<h6 class="text-danger text-center">Ha habido un problema al enviar tu comentario...
+                        <br/>No vuelvas a intentarlo.</h6>';
+                }
             }
-            */
-            $data['response'] = '<p class="h6 mt-3 text-success text-center">Wiiiii</p>';
-            template('pages/home', $data);
+        } else {
+            echo '<h6 class="text-danger text-center">Rellena todos los campos.</h6>';
         }
     }
 

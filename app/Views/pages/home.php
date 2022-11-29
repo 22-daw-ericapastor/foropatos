@@ -47,8 +47,8 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <h6 class="text-center text-primary mb-5" id="contact-response-msg"></h6>
-        <?php if (isset($data['response'])) echo $data['response']; ?>
+        <h6 class="text-center text-primary mb-5" id="contact-logged-info"></h6>
+        <div class="mb-5" id="contact-response-msg"></div>
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">

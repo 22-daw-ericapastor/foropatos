@@ -11,7 +11,7 @@ class BaseModel
     private string $host = '127.0.0.1';
     private string $user = 'root';
     private string $passwd = '';
-    private string $db = 'web_recetas';
+    private string $db = 'foropatos';
 
     function __construct()
     {

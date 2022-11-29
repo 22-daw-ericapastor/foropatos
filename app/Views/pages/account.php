@@ -138,7 +138,7 @@
                                     </div>
                                     <!-- Modal Text-->
                                     <h6 class="mb-4 text-primary" id="msg-info"></h6>
-                                    <table id="msg-table" class="msg-table"></table>
+                                    <table id="msg-table" style="width: 100%;" class="msg-table table hover order-column compact table-responsive"></table>
                                 </div>
                             </div>
                         </div>
