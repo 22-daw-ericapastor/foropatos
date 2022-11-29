@@ -55,4 +55,35 @@ class Users extends model
         return false;
     }
 
+    function change_username($old_username, $new_username)
+    {
+        $query = "UPDATE $this->table SET username=? WHERE username=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('ss', $new_username, $old_username);
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            return $e->getMessage();
+        }
+        return false;
+    }
+
+    function change_passwd($username, $passwd)
+    {
+        $query = "UPDATE $this->table SET passwd=? WHERE username=?;";
+        try {
+            $passwd = password_hash($passwd, PASSWORD_DEFAULT);
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('ss', $passwd, $username);
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            return $e->getMessage();
+        }
+        return false;
+    }
+
 }

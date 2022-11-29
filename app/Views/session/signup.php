@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
                 <form id="signin_form" method="post" action="?signup">
-                    <p class="h6 text-danger" id="session_error"><?php if (isset($data['session_error'])) echo $data['session_error']; ?></p>
+                    <p class="h6 text-danger"><?php if (isset($data['response'])) echo $data['response']; ?></p>
                     <!-- Username input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="username" type="text" name="username"
@@ -22,7 +22,8 @@
                         <input class="form-control" id="passwd" type="password" name="passwd"
                                placeholder="Write your password..."/>
                         <label for="passwd">Password</label>
-                        <div class="invalid-feedback" id="passwd_error">La contraseña debe tener al menos 6 dígitos.</div>
+                        <div class="invalid-feedback" id="passwd_error">La contraseña debe tener al menos 6 dígitos.
+                        </div>
                     </div>
                     <!-- Repeat password input-->
                     <div class="form-floating mb-3">

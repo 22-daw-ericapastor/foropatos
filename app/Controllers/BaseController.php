@@ -53,6 +53,7 @@ class BaseController
     {
         if (!isset($_SESSION['__user'])) {
             $data ['page'] = 'signup';
+            $model = model('Users');
             if (isset($_POST['username']) && $_POST['username'] != '' &&
                 isset($_POST['email']) && $_POST['email'] != '' &&
                 isset($_POST['passwd']) && $_POST['passwd'] != '' &&
@@ -61,22 +62,20 @@ class BaseController
                 $email = trim(htmlspecialchars($_POST['email']));
                 $passwd = trim(htmlspecialchars($_POST['passwd']));
                 $passwd_repeat = trim(htmlspecialchars($_POST['passwd_repeat']));
-                if (model('Users')->get_user($username) === 0) {
+                if (!$model->get_user($username)) {
                     if ($passwd === $passwd_repeat) {
-                        if (model('Users')->new_user($username, $email, $passwd)) {
+                        if ($model->new_user($username, $email, $passwd)) {
                             $data ['signup_success'] = 'El formulario se envió con éxito.';
                             template('session/successful.signup', $data);
                             return;
                         } else {
-                            $data ['session_error'] = 'El formulario no pudo enviarse, disculpe las molestias.';
+                            $data ['response'] = 'El formulario no pudo enviarse, disculpe las molestias.';
                         }
                     } else {
-                        $data ['session_error'] = 'Las contraseñas no coinciden.';
+                        $data ['response'] = 'Las contraseñas no coinciden.';
                     }
                 } else {
-                    $num = model('Users')->get_user($username);
-                    $data['usernum'] = $num;
-                    $data['session_error'] = '¡Ups! Escoge otro nombre de usuario, ya está en uso.';
+                    $data['response'] = '¡Ups! Escoge otro nombre de usuario, ya está en uso.';
                 }
             }
             template('session/signup', $data);
@@ -103,11 +102,15 @@ class BaseController
                 $passwd = trim(htmlspecialchars($_POST['passwd']));
                 $model = model('Users');
                 if ($model->get_user($username)) {
-                    $_SESSION['__user'] = $model->get_user($username, $passwd);
-                    $this->home();
-                    return;
+                    if ($model->get_user($username, $passwd)) {
+                        $_SESSION['__user'] = $model->get_user($username, $passwd);
+                        $this->home();
+                        return;
+                    } else {
+                        $data['response'] = 'La contraseña no es correcta.';
+                    }
                 } else {
-                    $data['session_error'] = 'El usuario o contraseña no es correcto.';
+                    $data['response'] = 'El usuario no es correcto.';
                 }
             }
             template('session/signin', $data);
@@ -125,10 +128,15 @@ class BaseController
      */
     function signout()
     {
+        $this->reset_session();
+        $this->signin();
+    }
+
+    function reset_session()
+    {
         session_unset();
         session_destroy();
         session_start();
-        $this->home();
     }
 
     /**
@@ -212,7 +220,8 @@ class BaseController
         controller('Comments')->comment();
     }
 
-    function get_messages(){
+    function get_messages()
+    {
         controller('Messages')->get_messages();
     }
 
@@ -228,9 +237,27 @@ class BaseController
         controller('Messages')->message();
     }
 
+    /**
+     * Change username
+     * =================================================================================================================
+     * Redirect to the same named method in the Users controller.
+     *
+     * @return void
+     */
     function change_username()
     {
         controller('Users')->change_username();
+    }
+
+    /**
+     * Change password
+     * =================================================================================================================
+     * Redirect to the same named method in the Users controller.
+     *
+     * @return void
+     */
+    function change_passwd(){
+        controller('Users')->change_passwd();
     }
 
 }

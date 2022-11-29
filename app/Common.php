@@ -2,6 +2,9 @@
 
 function template($page, array $data = null)
 {
+    if (!is_file(viewdir . $page . '.php')) {
+        $page = 'pages/home';
+    }
     view('templates/header', $data);
     view($page, $data);
     view('templates/footer', $data);
