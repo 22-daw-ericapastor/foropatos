@@ -12550,3 +12550,7 @@ form a {
     width: 30px;
     height: 30px;
 }
+
+.user-table-option {
+    gap: 10px;
+}

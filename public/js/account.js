@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    const rows_in_datatable = 10;
+
     const btn = document.querySelectorAll('.account-edit-btn');
 
     const form = document.querySelectorAll('.account-edit-form');
@@ -14,8 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
             form[i].classList.remove('show');
         }
     }
-
-    let rows_in_datatable = 10;
 
     // create table
     let table = new DataTable('#msg-table', {

@@ -288,4 +288,19 @@ class BaseController
         controller('Users')->acc_deactivate();
     }
 
+    function get_users()
+    {
+        controller('Users')->get_users();
+    }
+
+    function toggle_active()
+    {
+        controller('Users')->toggle_active();
+    }
+
+    function toggle_permissions()
+    {
+        controller('Users')->toggle_permissions();
+    }
+
 }

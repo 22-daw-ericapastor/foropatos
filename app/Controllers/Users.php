@@ -97,4 +97,36 @@ class Users extends controller
         }
     }
 
+    function get_users()
+    {
+        $model = model('Users');
+        echo json_encode(['data' => $model->get_users()]);
+    }
+
+    function toggle_active()
+    {
+        if (isset($_REQUEST['toggle_active']) && isset($_REQUEST['user'])) {
+            $is_active = $_REQUEST['toggle_active'] == 1 ? 0 : 1;
+            $user = $_REQUEST['user'];
+            if (model('Users')->toggle_active($is_active, $user)) {
+                echo json_encode(['response' => true]);
+            } else {
+                echo json_encode(['response' => false]);
+            }
+        }
+    }
+
+    function toggle_permissions()
+    {
+        if (isset($_REQUEST['permissions']) && isset($_REQUEST['user'])) {
+            $permissions = $_REQUEST['permissions'] == 1 ? 0 : 1;
+            $user = $_REQUEST['user'];
+            if (model('Users')->toggle_permissions($permissions, $user)) {
+                echo json_encode(['response' => true]);
+            } else {
+                echo json_encode(['response' => false]);
+            }
+        }
+
+    }
 }
