@@ -92,24 +92,15 @@
                     <div class="account-option-wrapper">
                         <div class="account-option fs-6 m-auto">
                             <b>Gestionar Usuarios</b>
-                            <ul class="account-list fs-6">
-                                <li>
-                                    <a class="btn btn-light" href="?add_admin">Añadir administrador</a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-light" href="?activate_user">Reactivar usuario</a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-light" href="?delete_user">Borrar usuario</a>
-                                </li>
-                            </ul>
+                            <a href="?user_manage" class="go btn btn-primary">&#x2192;</a>
                         </div>
                     </div>
                     <hr/>
                 <?php endif; ?>
                 <div class="account-option-wrapper mt-4">
-                    <div class="fs-6 m-auto">
-                        <button class="btn btn-danger account-deactivate">Desactivar cuenta</button>
+                    <div class="fs-6 m-auto column align-items-center justify-content-center">
+                        <h6 class="text-center text-primary fw-bold py-3" id="account_deactivate-response"></h6>
+                        <button class="btn btn-danger account_deactivate-btn">Desactivar cuenta</button>
                     </div>
                 </div>
             </div>

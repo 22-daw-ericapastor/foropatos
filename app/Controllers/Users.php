@@ -89,8 +89,11 @@ class Users extends controller
     function acc_deactivate()
     {
         if (isset($_SESSION['__user'])) {
-            $model=model('Users');
-            $model->acc_deactivate();
+            if (model('Users')->acc_deactivate($_SESSION['__user']['username'])) {
+                echo json_encode(['response' => true]);
+            } else {
+                echo json_encode(['response' => 'Ha habido un problema desactivando tu cuenta. Vuelve a intentarlo más tarde.']);
+            }
         }
     }
 

@@ -34,6 +34,9 @@ class BaseController
      */
     function home()
     {
+        if (isset($_SESSION['__user']) && $_SESSION['__user']['is_active'] === 0) {
+            session_re_start();
+        }
         $data['page'] = 'home';
         // add here db request to get recipes to fill page and pass it to $data
         template('pages/home', $data);
@@ -58,10 +61,10 @@ class BaseController
                 isset($_POST['email']) && $_POST['email'] != '' &&
                 isset($_POST['passwd']) && $_POST['passwd'] != '' &&
                 isset($_POST['passwd_repeat']) && $_POST['passwd_repeat'] != '') {
-                $username = trim(htmlspecialchars($_POST['username']));
-                $email = trim(htmlspecialchars($_POST['email']));
-                $passwd = trim(htmlspecialchars($_POST['passwd']));
-                $passwd_repeat = trim(htmlspecialchars($_POST['passwd_repeat']));
+                $username = validate($_POST['username']);
+                $email = validate($_POST['email']);
+                $passwd = validate($_POST['passwd']);
+                $passwd_repeat = validate($_POST['passwd_repeat']);
                 if (!$model->get_user($username)) {
                     if ($passwd === $passwd_repeat) {
                         if ($model->new_user($username, $email, $passwd)) {
@@ -98,16 +101,16 @@ class BaseController
         if (!isset($_SESSION['__user'])) {
             $data ['page'] = 'signin';
             if (isset($_POST['username']) && isset($_POST['passwd'])) {
-                $username = trim(htmlspecialchars($_POST['username']));
-                $passwd = trim(htmlspecialchars($_POST['passwd']));
+                $username = validate($_POST['username']);
+                $passwd = validate($_POST['passwd']);
                 $model = model('Users');
                 if ($model->get_user($username)) {
-                    if ($model->get_user($username, $passwd)) {
+                    if ($model->get_user($username, $passwd) && $model->get_user($username, $passwd)['is_active'] === 1) {
                         $_SESSION['__user'] = $model->get_user($username, $passwd);
                         $this->home();
                         return;
                     } else {
-                        $data['response'] = 'La contraseña no es correcta.';
+                        $data['response'] = 'La contraseña no es correcta o tu cuenta fue desactivada.';
                     }
                 } else {
                     $data['response'] = 'El usuario no es correcto.';
@@ -130,6 +133,20 @@ class BaseController
     {
         session_re_start();
         $this->signin();
+    }
+
+    /**
+     * Manage users page redirection
+     * =================================================================================================================
+     * @return void
+     */
+    function user_manage()
+    {
+        if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
+            template('pages/user.manage', ['page' => 'user_manage']);
+        } else {
+            $this->home();
+        }
     }
 
     /**
@@ -158,7 +175,7 @@ class BaseController
      */
     function account()
     {
-        if (isset($_SESSION['__user'])) {
+        if (isset($_SESSION['__user']) && $_SESSION['__user']['is_active'] === 1) {
             template('pages/account', ['page' => 'my_account']);
         } else {
             $this->home();

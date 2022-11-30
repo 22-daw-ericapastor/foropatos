@@ -12538,7 +12538,15 @@ form a {
 
 .btn-close#close-msg {
     position: absolute;
-    right:0;
-    top:0;
+    right: 0;
+    top: 0;
     font-size: 1rem;
+}
+
+.go {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
 }

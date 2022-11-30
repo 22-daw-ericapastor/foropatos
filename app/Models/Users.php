@@ -44,6 +44,7 @@ class Users extends model
                         return [
                             'username' => $result['username'],
                             'email' => $result['email'],
+                            'is_active'=> $result['is_active'],
                             'permissions' => $result['permissions']
                         ];
                     }

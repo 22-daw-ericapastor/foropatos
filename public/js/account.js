@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let rows_in_datatable = 10;
 
+    // create table
     let table = new DataTable('#msg-table', {
         processing: true, // fill with ajax request
         ajax: {
@@ -29,10 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
             {title: "Leido", data: "toggle_read", class: "pe-3 text-center"}
         ],
         pageLength: rows_in_datatable,
-        columnsDefs: [],
-        responsive: true, order: [[2, 'desc']],// position 3 -> from more recent to less recent by request date
+        responsive: true,
+        order: [[2, 'desc']],// position 3 -> from more recent to less recent by request date
+        ordering: false,
     });
 
+    // event on draw
     table.on('draw.dt', function () {
         const title = document.getElementsByClassName('toggle-msg');
         const msg_panel = document.getElementById('panel-msg_text');
@@ -89,9 +92,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    document.querySelector('.account-deactivate').onclick = function () {
-        fetch('?acc_deactivate').then(r => r.text()).then(data => {
-            console.log(data);
+    document.querySelector('.account_deactivate-btn').onclick = function () {
+        const response = document.querySelector('#account_deactivate-response');
+        console.log(response)
+        fetch('?acc_deactivate').then(r => r.json()).then(data => {
+            if (data['response'] === true) {
+                response.innerHTML = '¡Tu cuenta se ha descativado con éxito!<br/>' +
+                    'En unos segundos se te sacará de la aplicación.';
+                setTimeout(function () {
+                    window.location.assign('?signout');
+                }, 4000);
+            } else {
+                response.innerHTML = data['response'];
+            }
         });
     }
 
