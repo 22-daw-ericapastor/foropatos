@@ -359,7 +359,6 @@ document.addEventListener('DOMContentLoaded', async function () {
                 await fetch('?comment=' + comment_text[i].value + '&slug=' + this.value + "&rating=" + rate_num)
                     .then(response => response.text())
                     .then(data => {
-                        console.log(data)
                         comment_response[i].innerHTML = data;
                         if (data.match(/enviado/)) {
                             comment_text[i].value = '';

@@ -51,7 +51,7 @@ class Users extends controller
                 if ($model->get_user($username, $passwd_old)) {
                     $passwd = validate($_POST['passwd']);
                     $passwd_repeat = validate($_POST['passwd-repeat']);
-                    if ($passwd_old!==$passwd){
+                    if ($passwd_old !== $passwd) {
                         if (strlen($passwd) >= 6 && strlen($passwd_repeat) >= 6 && $passwd === $passwd_repeat) {
                             if ($model->change_passwd($username, $passwd)) {
                                 $data = [
@@ -59,7 +59,7 @@ class Users extends controller
                                     Tu contraseña cambió. Vuelve a loggearte para continuar.</p>',
                                     'page' => 'signin'
                                 ];
-                                $this->reset_session();
+                                session_re_start();
                                 template('session/signin', $data);
                             } else {
                                 $data['response'] = '<p class="h6 mt-3 text-danger text-center">Ha habido algún fallo interno,
@@ -69,7 +69,7 @@ class Users extends controller
                             $data['response'] = '<p class="h6 mt-3 text-danger text-center">La contraseña debe tener seis 
                             dígitos o más y ser idénticas.</p>';
                         }
-                    }else{
+                    } else {
                         $data['response'] = '<p class="h6 mt-3 text-danger text-center">La contraseña nueva no puede ser 
                             igual que la antigua.</p>';
                     }
@@ -83,7 +83,6 @@ class Users extends controller
             $this->signin();
             return;
         }
-
         template('pages/account', $data);
     }
 

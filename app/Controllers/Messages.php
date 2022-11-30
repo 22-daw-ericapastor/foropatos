@@ -3,15 +3,28 @@
 namespace Controllers;
 
 use \Controllers\BaseController as controller;
+use Exception;
 
 class Messages extends controller
 {
 
-    function get_messages()
+    function msg_is_read()
     {
-        if (isset($_SESSION['__user']['username'])) {
-            $username = $_SESSION['__user']['username'];
-            echo json_encode(['data' => model('Messages')->get_messages($username)]);
+        if (isset($_GET['msg_is_read']) && isset($_GET['user']) && isset($_GET['slug'])) {
+            $is_read = intval($_GET['msg_is_read']);
+            $user = $_GET['user'];
+            $slug = $_GET['slug'];
+            if (model('Users')->get_user($user) === 1) {
+                if (model('Messages')->msg_is_read($is_read, $user, $slug)) {
+                    echo json_encode(['response' => true, 'slug' => $slug]);
+                } else {
+                    echo json_encode(['response' => 'No se pudo actualizar la información.']);
+                }
+            } else {
+                echo json_encode(['response' => 'El usuario no existe.']);
+            }
+        }else{
+            echo json_encode(['response' => 'Falta información.']);
         }
     }
 
@@ -31,10 +44,18 @@ class Messages extends controller
                     echo '<h6 class="text-danger text-center">Ha habido un problema al enviar tu comentario...
                         <br/>No vuelvas a intentarlo.</h6>';
                 }
+            } else {
+                echo '<h6 class="text-danger text-center">Ha habido un problema al enviar tu comentario...
+                        <br/>No vuelvas a intentarlo.</h6>';
             }
         } else {
             echo '<h6 class="text-danger text-center">Rellena todos los campos.</h6>';
         }
     }
 
+    function get_messages()
+    {
+        echo json_encode(['data' => model('Messages')->get_messages()]);
+    }
 }
+

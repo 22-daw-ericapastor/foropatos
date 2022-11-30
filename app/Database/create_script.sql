@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS recipes(
 CREATE TABLE IF NOT EXISTS comments(
   id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(50),
-  recipe_slug VARCHAR(20),
+  recipe_slug VARCHAR(25),
   recipe_rating INT,
   comment_text VARCHAR(200),
   date_time DATETIME DEFAULT NOW(),
@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS messages(
   id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(50),
   issue VARCHAR(20),
+  issue_slug VARCHAR(20),
   msg_text VARCHAR(500),
   date_time DATETIME DEFAULT NOW(),
   is_read TINYINT(1) DEFAULT 0,

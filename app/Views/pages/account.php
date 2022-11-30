@@ -127,7 +127,7 @@
                     <div class="modal-body text-center pb-5">
                         <div class="container">
                             <div class="row justify-content-center">
-                                <div class="col-lg-8">
+                                <div class="col-lg-11">
                                     <!-- Modal - Title-->
                                     <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Mensajes</h2>
                                     <!-- Icon Divider-->
@@ -138,7 +138,14 @@
                                     </div>
                                     <!-- Modal Text-->
                                     <h6 class="mb-4 text-primary" id="msg-info"></h6>
-                                    <table id="msg-table" style="width: 100%;" class="msg-table table hover order-column compact table-responsive"></table>
+                                    <table id="msg-table" style="width: 100%;"
+                                           class="msg-table table hover order-column compact table-responsive"></table>
+                                    <div class="panel-container mt-4">
+                                        <div class="panel p-6 collapse" id="panel-msg_text">
+                                            <div class="text-center" id="msg-body"></div>
+                                            <button class="btn-close" id="close-msg" type="button"></button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

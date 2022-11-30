@@ -40,3 +40,13 @@ function validate(string $str): string
 {
     return trim(htmlspecialchars($str));
 }
+
+function session_re_start()
+{
+    if (isset($_SESSION)) {
+        session_unset();
+        session_destroy();
+    }
+    ini_set('session.gc_maxlifetime', timeout);
+    session_start();
+}

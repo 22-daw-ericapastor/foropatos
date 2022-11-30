@@ -2010,12 +2010,12 @@ progress {
 .table {
     --bs-table-bg: transparent;
     --bs-table-accent-bg: transparent;
-    --bs-table-striped-color: #212529;
-    --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
-    --bs-table-active-color: #212529;
-    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
-    --bs-table-hover-color: #212529;
-    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    --bs-table-striped-color: var(--bs-primary);
+    --bs-table-striped-bg: rgba(var(--bs-primary-rgb), 0.05);
+    --bs-table-active-color: var(--bs-primary);
+    --bs-table-active-bg: rgba(var(--bs-primary-rgb), 0.1);
+    --bs-table-hover-color: var(--bs-primary);
+    --bs-table-hover-bg: rgba(var(--bs-primary-rgb), 0.075);
     width: 100%;
     margin-bottom: 1rem;
     color: #212529;
@@ -8077,6 +8077,10 @@ textarea.form-control-lg {
     padding: 3rem !important;
 }
 
+.p-6 {
+    padding: 4rem !important;
+}
+
 .px-0 {
     padding-right: 0 !important;
     padding-left: 0 !important;
@@ -12486,8 +12490,19 @@ form a {
     width: 98%;
 }
 
-.msg-table tr {
-    text-align: center !important;
+.msg-container {
+    width: 100%;
+    min-height: 60px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+}
+
+.table-message-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
 }
 
 .toggle-msg {
@@ -12502,4 +12517,28 @@ form a {
     color: var(--bs-light);
     height: 30px;
     width: 30px;
+}
+
+.panel-container {
+    min-height: 210px;
+}
+
+.panel {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 210px;
+    border: 1px solid rgba(var(--bs-pink-rgb), 0.5);
+    border-radius: 15px;
+    box-shadow: 0 0 5px 1px rgba(var(--bs-primary-rgb), 0.5);
+}
+
+.btn-close#close-msg {
+    position: absolute;
+    right:0;
+    top:0;
+    font-size: 1rem;
 }

@@ -128,15 +128,8 @@ class BaseController
      */
     function signout()
     {
-        $this->reset_session();
+        session_re_start();
         $this->signin();
-    }
-
-    function reset_session()
-    {
-        session_unset();
-        session_destroy();
-        session_start();
     }
 
     /**
@@ -237,6 +230,11 @@ class BaseController
         controller('Messages')->message();
     }
 
+    function msg_is_read()
+    {
+        controller('Messages')->msg_is_read();
+    }
+
     /**
      * Change username
      * =================================================================================================================
@@ -256,7 +254,8 @@ class BaseController
      *
      * @return void
      */
-    function change_passwd(){
+    function change_passwd()
+    {
         controller('Users')->change_passwd();
     }
 

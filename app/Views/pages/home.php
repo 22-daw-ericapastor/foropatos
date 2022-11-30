@@ -31,7 +31,7 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <h6 class="fw-bold text-primary">¡Click para leer, leer para saber!</h6>
+        <h5 class="fw-bold text-primary">¡Click para leer, leer para saber!</h5>
         <!-- Recipes Grid Items-->
         <div class="row justify-content-center" id="recipes-grid"></div>
     </div>
@@ -47,7 +47,7 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <h6 class="text-center text-primary mb-5" id="contact-logged-info"></h6>
+        <h5 class="fw-bold text-center text-primary mb-5" id="contact-logged-info"></h5>
         <div class="mb-5" id="contact-response-msg"></div>
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
@@ -55,14 +55,14 @@
                 <form>
                     <!-- Issue title -->
                     <div class="form-floating mb-3">
-                        <input class="form-control contact" id="issue-title" type="text"
+                        <input class="form-control contact" id="issue-title" type="text" minlength="3" maxlength="20"
                                placeholder="Enter the issue title..." data-sb-validations="required"/>
                         <label for="issue-title">Titulo del mensaje</label>
                         <div class="invalid-feedback" data-sb-feedback="message:required"></div>
                     </div>
                     <!-- Message input-->
                     <div class="form-floating mb-3">
-                        <textarea class="form-control contact" id="issue-msg" type="text"
+                        <textarea class="form-control contact" id="issue-msg" type="text" minlength="9" maxlength="500"
                                   placeholder="Enter your message here..." data-sb-validations="required"></textarea>
                         <label for="issue-msg">Message</label>
                         <div class="invalid-feedback" data-sb-feedback="message:required"></div>
@@ -78,7 +78,7 @@
 <script>
     let url = window.location.href;
     if (url.match(/\?$/) || url.match(/\/$/)) {
-        window.location.assign('http://localhost/web_recetas/?home');
+        window.location.assign('http://localhost/foropatos/?home');
     }
 </script>
 <script src="<?= baseurl ?>js/recipes.modal.js"></script>

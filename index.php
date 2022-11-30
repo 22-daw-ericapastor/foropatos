@@ -4,7 +4,7 @@
  * Base url constant
  * ---------------------------------------------------------------------------------------------------------------------
  */
-const baseurl = 'http://localhost/web_recetas/public/';
+const baseurl = 'http://localhost/foropatos/public/';
 
 /**
  * View directory
@@ -18,11 +18,17 @@ const viewdir = __DIR__ . '/app/Views/';
  */
 const appdir = __DIR__ . '/app/';
 
+/**
+ * Time out for session
+ * ---------------------------------------------------------------------------------------------------------------------
+ */
+const timeout = 300; // time is in seconds
+
 // Require Config file
 require_once appdir . 'Config/Config.php';
 
 // Start session
-session_start();
+session_re_start();
 
 // Use main controller
 use \Controllers\BaseController as go;
@@ -32,3 +38,5 @@ $route = array_keys($_GET)[0] ?? 'home';
 
 // Go to route
 new go($route);
+
+//phpinfo();

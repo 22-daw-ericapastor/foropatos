@@ -314,7 +314,7 @@ table.dataTable.stripe > tbody > tr.odd.selected > *, table.dataTable.display > 
     box-shadow: inset 0 0 0 9999px #990000;
 }
 table.dataTable.hover > tbody > tr:hover > *, table.dataTable.display > tbody > tr:hover > * {
-    box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.035);
+    box-shadow: inset 0 0 0 9999px rgba(204, 102, 153, 0.15);
 }
 table.dataTable.hover > tbody > tr.selected:hover > *, table.dataTable.display > tbody > tr.selected:hover > * {
     box-shadow: inset 0 0 0 9999px #990000;
@@ -370,7 +370,7 @@ table.dataTable.display > tbody > tr.even.selected > .sorting_3, table.dataTable
     box-shadow: inset 0 0 0 9999px #990000;
 }
 table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
-    box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.082);
+    box-shadow: inset 0 0 0 9999px rgba(204, 102, 153, 0.2);
 }
 table.dataTable.display tbody tr:hover > .sorting_2, table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
     box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.074);
