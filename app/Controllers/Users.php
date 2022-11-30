@@ -105,10 +105,10 @@ class Users extends controller
 
     function toggle_active()
     {
-        if (isset($_REQUEST['toggle_active']) && isset($_REQUEST['user'])) {
-            $is_active = $_REQUEST['toggle_active'] == 1 ? 0 : 1;
-            $user = $_REQUEST['user'];
-            if (model('Users')->toggle_active($is_active, $user)) {
+        if (isset($_GET['toggle_active']) && isset($_GET['user'])) {
+            $is_active = intval($_GET['toggle_active']) == 1 ? 0 : 1;
+            $user = $_GET['user'];
+            if (model('Users')->toggle_active($is_active, $user) !== false) {
                 echo json_encode(['response' => true]);
             } else {
                 echo json_encode(['response' => false]);
@@ -118,10 +118,11 @@ class Users extends controller
 
     function toggle_permissions()
     {
-        if (isset($_REQUEST['permissions']) && isset($_REQUEST['user'])) {
-            $permissions = $_REQUEST['permissions'] == 1 ? 0 : 1;
-            $user = $_REQUEST['user'];
-            if (model('Users')->toggle_permissions($permissions, $user)) {
+        var_dump($_GET);
+        if (isset($_GET['permissions']) && isset($_GET['user'])) {
+            $permissions = intval($_GET['permissions']) == 1 ? 0 : 1;
+            $user = $_GET['user'];
+            if (model('Users')->toggle_permissions($permissions, $user) !== false) {
                 echo json_encode(['response' => true]);
             } else {
                 echo json_encode(['response' => false]);
