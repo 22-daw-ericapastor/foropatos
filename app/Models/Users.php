@@ -86,4 +86,20 @@ class Users extends model
         return false;
     }
 
+    function acc_deactivate($username): bool
+    {
+        $query = "UPDATE $this->table SET is_active=? WHERE username=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('is', $is_active, $username);
+            $is_active = 0;
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            return $e->getMessage();
+        }
+        return false;
+    }
+
 }

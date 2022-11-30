@@ -86,4 +86,12 @@ class Users extends controller
         template('pages/account', $data);
     }
 
+    function acc_deactivate()
+    {
+        if (isset($_SESSION['__user'])) {
+            $model=model('Users');
+            $model->acc_deactivate();
+        }
+    }
+
 }

@@ -259,4 +259,16 @@ class BaseController
         controller('Users')->change_passwd();
     }
 
+    /**
+     * Deactivate account
+     * =================================================================================================================
+     * Redirect to the same named method in the Users controller.
+     *
+     * @return void
+     */
+    function acc_deactivate()
+    {
+        controller('Users')->acc_deactivate();
+    }
+
 }

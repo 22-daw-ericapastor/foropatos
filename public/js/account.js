@@ -54,24 +54,25 @@ document.addEventListener('DOMContentLoaded', function () {
         const btn_read = document.getElementsByClassName('toggle-is_read');
         for (let i = 0; i < btn_read.length; i++) {
             let is_read = table.data()[i]['is_read'];
-            let slug = table.data()[i]['slug'];
-            console.log(slug)
             format_is_read_btn(btn_read[i], is_read);
             let user = document.getElementsByClassName('remitter')[i].innerHTML;
+            console.log(user)
+            let slug = table.data()[i]['slug'];
+            console.log(slug)
             btn_read[i].addEventListener('click', function () {
                 if (is_read === 1) {
                     is_read = 0;
                 } else if (is_read === 0) {
                     is_read = 1;
                 }
-                fetch('?msg_is_read=' + is_read + '&user=' + user + 'slug=' + slug)
-                    .then(response => response.text())
+                fetch('?msg_is_read=' + is_read + '&user=' + user + '&slug=' + slug)
+                    .then(response => response.json())
                     .then(data => {
-                    console.log(data)
-                    if (data['response'] === true) {
-                        format_is_read_btn(btn_read[i], is_read);
-                    }
-                });
+                        console.log(data)
+                        if (data['response'] === true) {
+                            format_is_read_btn(btn_read[i], is_read);
+                        }
+                    });
             });
         }
     });
@@ -87,4 +88,11 @@ document.addEventListener('DOMContentLoaded', function () {
             btn.classList.remove('btn-success');
         }
     }
+
+    document.querySelector('.account-deactivate').onclick = function () {
+        fetch('?acc_deactivate').then(r => r.text()).then(data => {
+            console.log(data);
+        });
+    }
+
 });

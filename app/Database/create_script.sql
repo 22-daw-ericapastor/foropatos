@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users(
   username VARCHAR(20),
   email VARCHAR(50),
   passwd VARCHAR(100),
-  activo TINYINT(1) DEFAULT 1,
+  is_active TINYINT(1) DEFAULT 1,
   permissions TINYINT(1) DEFAULT 0,
   PRIMARY KEY(username)
 );

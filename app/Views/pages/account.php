@@ -108,8 +108,8 @@
                     <hr/>
                 <?php endif; ?>
                 <div class="account-option-wrapper mt-4">
-                    <div class="account-option-deactivate fs-6 m-auto">
-                        <button class="btn btn-danger">Desactivar cuenta</button>
+                    <div class="fs-6 m-auto">
+                        <button class="btn btn-danger account-deactivate">Desactivar cuenta</button>
                     </div>
                 </div>
             </div>

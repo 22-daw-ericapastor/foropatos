@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch('?is_logged').then(response => response.json()).then(data => {
         issue_title.disabled = !data['response'];
         issue_text.disabled = !data['response'];
+        issue_btn.disabled = true;
         if (!data['response']) {
             logged_info.innerHTML = 'Tienes que estar loggeado para poder enviar un mensaje';
         } else {

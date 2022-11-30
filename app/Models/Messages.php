@@ -30,8 +30,8 @@ class Messages extends model
         $query = "INSERT INTO $this->table (username, issue, issue_slug, msg_text) VALUES (?, ?, ?, ?);";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('ssss', $username, $issue, $issue_slug, $text);
-            $issue_slug = strtolower(str_replace(' ', '-', $issue));
+            $stmt->bind_param('ssss', $username, $issue, $slug, $text);
+            $slug = (strtolower(str_replace(' ', '-', $issue)));
             if ($stmt->execute()) {
                 return true;
             }
@@ -43,7 +43,7 @@ class Messages extends model
 
     function get_messages()
     {
-        $query = "SELECT * FROM $this->table";
+        $query = "SELECT * FROM $this->table ORDER BY date_time DESC";
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
@@ -51,11 +51,11 @@ class Messages extends model
             $json = [];
             while ($row = $res->fetch_assoc()) {
                 $json[] = [
-                    'username' => '<div class="msg-container remitter">' . utf8_encode($row['username']) . '</div>',
-                    'title' => '<div class="msg-container">' . $this->format_msg(utf8_encode($row['issue'])) . '</div>',
+                    'username' => '<div class="msg-container remitter">' . ($row['username']) . '</div>',
+                    'title' => '<div class="msg-container">' . $this->format_msg(($row['issue'])) . '</div>',
                     'slug' => $row['issue_slug'],
-                    'datetime' => '<div class="msg-container">' . utf8_encode($row['date_time']) . '</div>',
-                    'msg_text' => '<div class="msg-container">' . utf8_encode($row['msg_text']) . '</div>',
+                    'datetime' => '<div class="msg-container">' . ($row['date_time']) . '</div>',
+                    'msg_text' => '<div class="msg-container">' . ($row['msg_text']) . '</div>',
                     'toggle_read' => '<div class="msg-container">' . $this->format_isread() . '</div>',
                     'is_read' => $row['is_read']
                 ];
