@@ -10,7 +10,7 @@ class Recipes extends model
 
     private string $table = 'recipes';
 
-    function get_recipes($slug = null): ?array
+    function get_recipes($slug = null)
     {
         try {
             if (isset($slug)) {
@@ -23,26 +23,18 @@ class Recipes extends model
             }
             $stmt->execute();
             if ($res = $stmt->get_result()) {
-                $json = [];
-                while ($row = $res->fetch_assoc()) {
-                    $json[] = [
-                        'slug' => $row['slug'],
-                        'src' => $row['src'],
-                        'title' => $row['title'],
-                        'description' => $row['description'],
-                        'admixtures' => $row['admixtures'],
-                        'making' => $row['making'],
-                        'ratings' => $row['ratings'] ?? 0,
-                        'points' => $row['points'] ?? 0,
-                        'difficulty' => $row['difficulty']
-                    ];
+                if ($res->num_rows > 0) {
+                    $json = [];
+                    while ($row = $res->fetch_assoc()) {
+                        $json[] = $row;
+                    }
+                    return $json;
                 }
-                return $json;
             }
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
-        return null;
+        return false;
     }
 
     function rating($slug, $comment_rating): bool
@@ -87,6 +79,39 @@ class Recipes extends model
             echo $e->getMessage();
         }
         return false;
+    }
+
+    function datatable_recipes()
+    {
+        $query = "SELECT * FROM $this->table";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $results = $stmt->get_result();
+            if ($results->num_rows > 0) {
+                $json = [];
+                while ($row = $results->fetch_assoc()) {
+                    $json[] = [
+                        'title' => '<div class="username user-cell">' . $row['title'] . '</div>',
+                        'update' => $this->format_link('Modificar receta'),
+                        'delete' => $this->format_link('Borrar receta'),
+                    ];
+                }
+                return $json;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+    function format_link(string $link): string
+    {
+        return '
+            <div class="username user-cell">
+                <div class="text-muted text-hover-secondary cursor-pointer toggle-user_active">' . $link . '</div>
+            </div>
+            ';
     }
 
 }

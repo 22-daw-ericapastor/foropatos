@@ -182,9 +182,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     await fetch('?get_recipes')
         .then(response => response.json())
         .then(data => {
-            for (let i in data) {
-                recipes_container_content = recipes_container_content + format_content(data[i], i);
-                open_modal_content = open_modal_content + format_modal_dialogs(data[i], i);
+            if (data['response'] === false) {
+                recipes_container.innerHTML = 'No se puede acceder las recetas';
+            } else {
+                let datos = data['response'];
+                for (let i in datos) {
+                    recipes_container_content = recipes_container_content + format_content(datos[i], i);
+                    open_modal_content = open_modal_content + format_modal_dialogs(datos[i], i);
+                }
             }
         });
 

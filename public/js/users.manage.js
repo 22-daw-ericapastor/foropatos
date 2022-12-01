@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
             ],
             pageLength: rows_in_datatable,
             responsive: true,
-            order: [[2, 'desc']],// position 3 -> from more recent to less recent by request date
             ordering: false,
             paging: false
         });

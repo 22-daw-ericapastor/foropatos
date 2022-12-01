@@ -12585,16 +12585,16 @@ form a {
     display: grid;
     align-content: center;
     justify-content: center;
-    width: 2.5rem;
+    width: 5rem;
     height: 2.5rem;
 }
 
-#users-table {
+#recipes-table, #users-table {
     border: 1px solid var(--bs-gray) !important;
     border-radius: 10px;
 }
 
-#users-table_filter input {
+#recipes-table_filter input, #users-table_filter input {
     border-radius: 20px;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -12632,4 +12632,28 @@ form a {
 .paginate_button.current:active, .paginate_button.current:focus {
     background-color: rgba(var(--bs-primary-rgb), 0.7) !important;
     background-image: var(--bs-gradient) !important;
+}
+
+#recipe-manage .container.recipes_datatable-container {
+    max-width: 600px;
+}
+
+.recipes_datatable-container td {
+    border: 1px solid rgba(var(--bs-dark-rgb), 0.2);
+}
+
+.recipes_datatable-container tbody tr:first-child td:first-child {
+    border-radius: 9px 0 0;
+}
+
+.recipes_datatable-container tbody tr:first-child td:last-child {
+    border-radius: 0 9px 0 0;
+}
+
+.recipes_datatable-container tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 9px;
+}
+
+.recipes_datatable-container tbody tr:last-child td:last-child {
+    border-radius: 0 0 9px;
 }

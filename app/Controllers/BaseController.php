@@ -221,6 +221,10 @@ class BaseController
         controller('Recipes')->add_recipes();
     }
 
+    function datatable_recipes(){
+        controller('Recipes')->datatable_recipes();
+    }
+
 
     /**
      * Comments methods

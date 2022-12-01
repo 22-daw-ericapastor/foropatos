@@ -12,7 +12,12 @@ class Recipes extends controller
      */
     function get_recipes(): void
     {
-        echo json_encode(model('Recipes')->get_recipes());
+        echo json_encode(['response' => model('Recipes')->get_recipes()]);
+    }
+
+    function datatable_recipes()
+    {
+        echo json_encode(['response' => model('Recipes')->datatable_recipes()]);
     }
 
     /**
