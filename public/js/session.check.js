@@ -15,7 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function logged_check() {
         fetch('?is_logged').then(r => r.json()).then(data => {
             console.log(data)
-            window.location.assign(baseurl);
+            if (data['response'] === true) {
+                window.location.assign(baseurl);
+            }
         });
     }
 
