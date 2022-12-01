@@ -36,4 +36,9 @@ class Recipes extends controller
         }
     }
 
+    function recipe_manage()
+    {
+        // call to get_recipes in Recipes Model
+    }
+
 }

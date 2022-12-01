@@ -75,17 +75,7 @@
                     <div class="account-option-wrapper">
                         <div class="account-option fs-6 m-auto">
                             <b>Gestionar Recetas</b>
-                            <ul class="account-list fs-6">
-                                <li>
-                                    <a class="btn btn-light" href="?add_recipe">Añadir receta</a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-light" href="?modify_recipe">Modificar receta</a>
-                                </li>
-                                <li>
-                                    <a class="btn btn-light" href="?delete_recipe">Borrar receta</a>
-                                </li>
-                            </ul>
+                            <a href="?recipe_manage" class="go btn btn-primary">&#x2192;</a>
                         </div>
                     </div>
                     <hr/>

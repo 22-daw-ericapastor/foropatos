@@ -151,6 +151,20 @@ class BaseController
     }
 
     /**
+     * Manage recipes page redirection
+     * -----------------------------------------------------------------------------------------------------------------
+     * @return void
+     */
+    function recipe_manage()
+    {
+        if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
+            template('pages/recipe.manage', ['page' => 'recipe_manage']);
+        } else {
+            $this->home();
+        }
+    }
+
+    /**
      * User is logged check
      * -----------------------------------------------------------------------------------------------------------------
      * If the parameter $__user is on the session array it returns a json array with true as $response, and false if it

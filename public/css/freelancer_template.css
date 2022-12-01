@@ -12585,8 +12585,8 @@ form a {
     display: grid;
     align-content: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 #users-table {
