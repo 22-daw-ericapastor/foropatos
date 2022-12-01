@@ -10,6 +10,7 @@
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
+            <h6 class="my-5 text-center" id="ajax-table_response"></h6>
             <div class="container">
                 <div class="table-wrapper">
                     <table id="users-table" class="table hover order-column compact table-responsive"></table>

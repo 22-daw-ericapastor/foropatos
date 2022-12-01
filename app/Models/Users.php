@@ -56,6 +56,23 @@ class Users extends model
         return false;
     }
 
+    function get_all_from_user($username)
+    {
+        $query = "SELECT * FROM $this->table where username=?";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('s', $username);
+            $stmt->execute();
+            $res = $stmt->get_result();
+            if ($res->num_rows === 1) {
+                return $res->fetch_assoc();
+            }
+        } catch (mysqli_sql_exception $e) {
+            return $e->getMessage();
+        }
+        return false;
+    }
+
     function change_username($old_username, $new_username)
     {
         $query = "UPDATE $this->table SET username=? WHERE username=?;";
@@ -124,6 +141,21 @@ class Users extends model
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->bind_param('is', $permissions, $username);
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            return $e->getMessage();
+        }
+        return false;
+    }
+
+    function delete_user(string $username): bool
+    {
+        $query = "DELETE FROM $this->table WHERE username=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('s', $username);
             if ($stmt->execute()) {
                 return true;
             }

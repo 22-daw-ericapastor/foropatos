@@ -131,8 +131,19 @@ class Users extends controller
 
     function delete_user()
     {
-        if (isset($_GET['user'])) {
-
+        if (isset($_GET['delete_user'])) {
+            $username = $_GET['delete_user'];
+            if ($user = model('Users')->get_all_from_user($username)) {
+                if (model('DeletedUsers')->insert($user) && model('Users')->delete_user($username)) {
+                    echo '<p class="text-success">El usuario fue eliminado con éxito.</p>';
+                } else {
+                    echo '<p class="text-danger">El usuario no pudo ser eliminado.<br/>Contacte con Effy para que lo resuelva.</p>';
+                }
+            } else {
+                echo '<p class="text-danger">El usuario no pudo ser eliminado.<br/>Contacte con Effy para que lo resuelva.</p>';
+            }
+        } else {
+            echo '<p class="text-danger">El usuario no pudo ser eliminado.<br/>Contacte con Effy para que lo resuelva.</p>';
         }
     }
 

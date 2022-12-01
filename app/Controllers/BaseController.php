@@ -289,7 +289,7 @@ class BaseController
 
     function delete_user()
     {
-
+        controller('Users')->delete_user();
     }
 
 }
