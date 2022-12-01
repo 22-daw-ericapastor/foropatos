@@ -109,9 +109,14 @@ class Users extends controller
             $is_active = intval($_GET['toggle_active']);
             $user = $_GET['user'];
             if (model('Users')->toggle_active($is_active, $user) === true) {
-                echo json_encode(['response' => true]);
+                if($is_active===1){
+                    echo '<p class="text-success">¡' . $user . ' ya está activo de nuevo!</p>';
+                }else{
+                    echo '<p class="text-success">¡' . $user . ' fue desactivado!</p>';
+                }
             } else {
-                echo json_encode(['response' => false]);
+                echo '<p class="text-danger">No fue posible actualizar a ' . $user .
+                    '.<br/>Contacte con Effy para que lo resuelva.</p>';
             }
         }
     }
@@ -122,9 +127,14 @@ class Users extends controller
             $permissions = intval($_GET['toggle_permissions']);
             $user = $_GET['user'];
             if (model('Users')->toggle_permissions($permissions, $user) === true) {
-                echo json_encode(['response' => true]);
+                if ($permissions === 1) {
+                    echo '<p class="text-success">¡' . $user . ' subió de nivel!</p>';
+                } else {
+                    echo '<p class="text-success">¡' . $user . ' bajó de nivel!</p>';
+                }
             } else {
-                echo json_encode(['response' => false]);
+                echo '<p class="text-danger">No fue posible actualizar a ' . $user .
+                    '.<br/>Contacte con Effy para que lo resuelva.</p>';
             }
         }
     }
@@ -135,15 +145,18 @@ class Users extends controller
             $username = $_GET['delete_user'];
             if ($user = model('Users')->get_all_from_user($username)) {
                 if (model('DeletedUsers')->insert($user) && model('Users')->delete_user($username)) {
-                    echo '<p class="text-success">El usuario fue eliminado con éxito.</p>';
+                    echo '<p class="text-success">' . $username . ' fue eliminado con éxito.</p>';
                 } else {
-                    echo '<p class="text-danger">El usuario no pudo ser eliminado.<br/>Contacte con Effy para que lo resuelva.</p>';
+                    echo '<p class="text-danger">' . $username . ' no pudo ser eliminado.' .
+                        '<br/>Contacte con Effy para que lo resuelva.</p>';
                 }
             } else {
-                echo '<p class="text-danger">El usuario no pudo ser eliminado.<br/>Contacte con Effy para que lo resuelva.</p>';
+                echo '<p class="text-danger">El usuario no pudo ser eliminado.' .
+                    '<br/>Contacte con Effy para que lo resuelva.</p>';
             }
         } else {
-            echo '<p class="text-danger">El usuario no pudo ser eliminado.<br/>Contacte con Effy para que lo resuelva.</p>';
+            echo '<p class="text-danger">El usuario no pudo ser eliminado.' .
+                '<br/>Contacte con Effy para que lo resuelva.</p>';
         }
     }
 

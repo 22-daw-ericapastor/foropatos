@@ -261,8 +261,10 @@ table.dataTable tfoot th {
 }
 table.dataTable thead th,
 table.dataTable thead td {
-    padding: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    visibility: hidden !important;
 }
 table.dataTable thead th:active,
 table.dataTable thead td:active {

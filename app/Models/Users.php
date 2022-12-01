@@ -198,7 +198,7 @@ class Users extends model
         return
             '<div class="d-flex justify-content-center align-items-center user-table-option column">' .
             '    <div>' . $is_active . '</div>' .
-            '    <button type="button" class="btn btn-pink toggle-user_active"">' . $status . '</button>' .
+            '    <div class="text-muted text-hover-secondary cursor-pointer toggle-user_active"">' . $status . '</div>' .
             '</div>';
     }
 
@@ -209,7 +209,7 @@ class Users extends model
         return
             '<div class="d-flex justify-content-center align-items-center user-table-option column">' .
             '    <div>' . $permissions . '</div>' .
-            '    <button type="button" class="btn btn-pink toggle-user_permissions">' . $level . '</button>' .
+            '    <div class="text-muted text-hover-primary cursor-pointer toggle-user_permissions">' . $level . '</div>' .
             '</div>';
     }
 
@@ -218,7 +218,7 @@ class Users extends model
         return
             '<div class="d-flex justify-content-center align-items-center user-table-option">' .
             '    <div>' .
-            '        <button type="button" class="btn btn-pink delete_user">Eliminar usuario</button>' .
+            '        <div class="text-muted text-hover-secondary cursor-pointer delete_user">Eliminar usuario</div>' .
             '    </div>' .
             '</div>';
     }

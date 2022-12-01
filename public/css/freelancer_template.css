@@ -2023,13 +2023,6 @@ progress {
     border-color: #dee2e6;
 }
 
-.table > :not(caption) > * > * {
-    padding: 0.5rem 0.5rem;
-    background-color: var(--bs-table-bg);
-    border-bottom-width: 0.125rem;
-    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
-}
-
 .table > tbody {
     vertical-align: inherit;
 }
@@ -8450,6 +8443,16 @@ textarea.form-control-lg {
     color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
 }
 
+.text-hover-primary:hover {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-primary-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-hover-secondary:hover {
+    --bs-text-opacity: 1;
+    color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+}
+
 .text-body {
     --bs-text-opacity: 1;
     color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity)) !important;
@@ -12586,10 +12589,20 @@ form a {
     height: 30px;
 }
 
+#users-table {
+    border: 1px solid var(--bs-gray) !important;
+    border-radius: 10px;
+}
+
 #users-table_filter input {
     border-radius: 20px;
     padding-left: 1rem;
     padding-right: 1rem;
+    margin-bottom: 10px;
+}
+
+#users-table_length {
+    display: none;
 }
 
 .user-table-option {
@@ -12597,7 +12610,7 @@ form a {
 }
 
 .user-cell {
-    height: 60px;
+    min-height: 60px;
     display: grid;
     align-items: center;
 }

@@ -63,8 +63,9 @@ CREATE TABLE messages(
 
 -- Set default admin
 INSERT INTO users (username, email, passwd, permissions)
-VALUES ('effy', 'effy@mail.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU1pKUSQaHbIqWTMJTp1ckO', 1),
-  ('effynoadmin', 'effy@noadmin.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU1pKUSQaHbIqWTMJTp1ckO', 0);
+VALUES ('effy', 'effy@correofalso.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU1pKUSQaHbIqWTMJTp1ckO', 1),
+  ('effynoadmin', 'effynoadmin@otrocorreofalso.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU1pKUSQaHbIqWTMJTp1ckO', 0),
+  ('effyadmin', 'effyadmin@estonoesotrocorreofalso.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU1pKUSQaHbIqWTMJTp1ckO', 0);
 
 -- Set default images
 INSERT INTO recipes (slug, src, title, description, difficulty)

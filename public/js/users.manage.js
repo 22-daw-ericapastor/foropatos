@@ -54,10 +54,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         async function toggle_user_active(is_active, user) {
             await fetch('?toggle_active=' + is_active + '&user=' + user)
-                .then(r => r.json())
+                .then(r => r.text())
                 .then(data => {
-                    console.log(data);
-                    // cambiar inner HTML y rellenar
+                    table_response.innerHTML = data;
+                    if (data.match(/!/)) {
+                        table.destroy();
+                        table = draw_table();
+                    }
                 })
         }
 
@@ -65,8 +68,11 @@ document.addEventListener('DOMContentLoaded', function () {
             await fetch('?toggle_permissions=' + permissions + '&user=' + user)
                 .then(r => r.text())
                 .then(data => {
-                    console.log(data)
-                    // cambiar inner HTML y rellenar
+                    table_response.innerHTML = data;
+                    if (data.match(/!/)) {
+                        table.destroy();
+                        table = draw_table();
+                    }
                 })
         }
 
