@@ -8,9 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
             url: '?get_users', dataSrc: 'data',
         },
         columns: [
-            {title: "Username", data: "username", class: "pe-3 text-center"},
-            {title: "Activo", data: "is_active", class: "pe-3 text-center"},
-            {title: "Permisos", data: "permissions", class: "pe-3 text-center"},
+            {title: "", data: "username", class: "pe-3 text-center"},
+            {title: "", data: "toggle_active", class: "pe-3 text-center"},
+            {title: "", data: "toggle_permissions", class: "pe-3 text-center"},
+            {title: "", data: "delete_user", class: "pe-3 text-center"}
         ],
         pageLength: rows_in_datatable,
         responsive: true,
@@ -23,13 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const toggle_permissions = document.getElementsByClassName('toggle-user_permissions');
         for (let i = 0; i < toggle_active.length; i++) {
             let user = table.data()[i]['username'];
-            let is_active = table.data()[i]['toggle_active'];
-            let permissions = table.data()[i]['toggle_permissions'];
-            toggle_active[i].addEventListener('click', function () {
-                toggle_user_active(is_active, user);
+            let is_active = table.data()[i]['is_active'];
+            let permissions = table.data()[i]['permissions'];
+            toggle_active[i].addEventListener('click', async function () {
+                is_active = is_active === '1' || is_active === 1 ? 0 : 1;
+                await toggle_user_active(is_active, user);
             });
-            toggle_permissions[i].addEventListener('click', function () {
-                toggle_user_permissions(permissions, user);
+            toggle_permissions[i].addEventListener('click', async function () {
+                permissions = permissions === '1' || permissions === 1 ? 0 : 1;
+                await toggle_user_permissions(permissions, user);
             });
         }
 

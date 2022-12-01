@@ -39,6 +39,6 @@ $route = array_keys($_GET)[0] ?? 'home';
 // Go to route
 new go($route);
 
-//phpinfo();
+// phpinfo();
 
-//var_dump($_SESSION);
+// var_dump($_SESSION);

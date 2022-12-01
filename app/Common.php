@@ -48,5 +48,7 @@ function session_re_start()
         session_destroy();
     }
     ini_set('session.gc_maxlifetime', timeout);
+    ini_set('session.gc_probability', timeout);
+    ini_set('session.gc_divisor', timeout);
     session_start();
 }

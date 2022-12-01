@@ -11,7 +11,7 @@ class Comments extends controller
      * Publish comment
      * -----------------------------------------------------------------------------------------------------------------
      *
-     * @return string
+     * @return void
      */
     function comment(): void
     {

@@ -1,0 +1,5 @@
+¡Hola! En la ruta foropatos/app/Database está el script de creación de la base de datos. Los datos de conexión con la
+base de datos están al inicio de la clase BaseModel en la ruta foropatos/app/Models, por si necesitas cambiarlos. El
+resto de cosas funcionan en consecuencia.
+
+Gracias por tu tiempo y espero que te guste.

@@ -3297,6 +3297,41 @@ textarea.form-control-lg {
     border-color: #198754;
 }
 
+.btn-pink {
+    color: var(--bs-dark);
+    background-color: rgba(var(--bs-pink-rgb), 0.3);
+    border-color: rgba(var(--bs-pink-rgb), 0.3);
+}
+
+.btn-pink:hover {
+    color: var(--bs-dark);
+    background-color: rgba(var(--bs-pink-rgb), 0.6);
+    border-color: rgba(var(--bs-pink-rgb), 0.6);
+}
+
+.btn-check:focus + .btn-pink, .btn-pink:focus {
+    color: var(--bs-dark);
+    background-color: rgba(var(--bs-pink-rgb), 0.45);
+    border-color: rgba(var(--bs-pink-rgb), 0.45);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-pink-rgb), 0.5);
+}
+
+.btn-check:checked + .btn-pink, .btn-check:active + .btn-pink, .btn-pink:active, .btn-pink.active, .show > .btn-pink.dropdown-toggle {
+    color: var(--bs-dark);
+    background-color: rgba(var(--bs-pink-rgb), 0.45);
+    border-color: rgba(var(--bs-pink-rgb), 0.45);
+}
+
+.btn-check:checked + .btn-pink:focus, .btn-check:active + .btn-pink:focus, .btn-pink:active:focus, .btn-pink.active:focus, .show > .btn-pink.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.25rem rgba(60, 198, 171, 0.5);
+}
+
+.btn-pink:disabled, .btn-pink.disabled {
+    color: var(--bs-dark);
+    background-color: rgba(var(--bs-pink-rgb), 0.2);
+    border-color: rgba(var(--bs-pink-rgb), 0.2);
+}
+
 .btn-info {
     color: #000;
     background-color: #0dcaf0;
@@ -12549,4 +12584,10 @@ form a {
     justify-content: center;
     width: 30px;
     height: 30px;
+}
+
+#users-table_filter input {
+    border-radius: 20px;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }

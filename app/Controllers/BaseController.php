@@ -22,7 +22,8 @@ class BaseController
             try {
                 $this->$route();
             } catch (Exception|Error $e) {
-                $this->home();
+                //$this->home();
+                echo $e->getMessage();
             }
         }
     }

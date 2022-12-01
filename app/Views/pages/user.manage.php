@@ -1,7 +1,7 @@
 <?php if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1): ?>
     <!-- Recipes Section-->
     <section class="page-section portfolio mt-6" id="users-manage">
-        <div class="container account-container">
+        <div class="container">
             <!-- Account Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Gestionar usuarios</h2>
             <!-- Icon Divider-->
@@ -20,7 +20,7 @@
 <?php else: ?>
     <!-- Recipes Section-->
     <section class="page-section portfolio mt-6" id="users-manage">
-        <div class="container account-container">
+        <div class="container">
             <!-- Account Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Gestionar usuarios</h2>
             <!-- Icon Divider-->

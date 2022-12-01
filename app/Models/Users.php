@@ -56,31 +56,6 @@ class Users extends model
         return false;
     }
 
-    function get_users()
-    {
-        $query = "SELECT * from $this->table;";
-        try {
-            $stmt = $this->conn->prepare($query);
-            if ($stmt->execute()) {
-                $result = $stmt->get_result();
-                $json = [];
-                while ($row = $result->fetch_assoc()) {
-                    $json[] = [
-                        'username' => $row['username'],
-                        'is_active' => $this->format_is_active($row['is_active']),
-                        'permissions' => $this->format_permissions($row['permissions']),
-                        'toggle_active' => $row['is_active'],
-                        'toggle_permissions' => $row['permissions']
-                    ];
-                }
-                return $json;
-            }
-        } catch (mysqli_sql_exception $e) {
-            return $e->getMessage();
-        }
-        return false;
-    }
-
     function change_username($old_username, $new_username)
     {
         $query = "UPDATE $this->table SET username=? WHERE username=?;";
@@ -158,13 +133,41 @@ class Users extends model
         return false;
     }
 
+    function get_users()
+    {
+        $query = "SELECT * from $this->table;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            if ($stmt->execute()) {
+                $result = $stmt->get_result();
+                $json = [];
+                while ($row = $result->fetch_assoc()) {
+                    $json[] = [
+                        'username' => $row['username'],
+                        'toggle_active' => $this->format_is_active($row['is_active']),
+                        'toggle_permissions' => $this->format_permissions($row['permissions']),
+                        'is_active' => $row['is_active'],
+                        'permissions' => $row['permissions'],
+                        'delete_user' => $this->format_delete()
+                    ];
+                }
+                return $json;
+            }
+        } catch (mysqli_sql_exception $e) {
+            return $e->getMessage();
+        }
+        return false;
+    }
+
     function format_is_active($is_active): string
     {
         $status = $is_active === 1 ? "Desactivar" : "Activar";
+        $is_active = $is_active === 1 ? "Activo" : "Inactivo";
         return
-        '    <div class="d-flex justify-content-center align-items-center user-table-option">' .
+            '<div class="d-flex justify-content-center align-items-center user-table-option">' .
             '    <div>' .
-            '       <button type="button" class="btn btn-primary toggle-user_active"">' . $status . '</button>' .
+            '       <div>' . $is_active . '</div>' .
+            '       <button type="button" class="btn btn-pink toggle-user_active"">' . $status . '</button>' .
             '    </div>' .
             '</div>';
     }
@@ -172,11 +175,24 @@ class Users extends model
     function format_permissions($permissions): string
     {
         $level = $permissions == 1 ? 'Bajar de nivel' : 'Subir de nivel';
-        return '
-        <div class="d-flex justify-content-center align-items-center user-table-option">' .
-            '  <div><button type="button" class="btn btn-primary toggle-user_permissions">' . $level . '</button></div>' .
-            '</div>
-        ';
+        $permissions = $permissions == 1 ? 'Administrador' : 'Usuario';
+        return
+            '<div class="d-flex justify-content-center align-items-center user-table-option">' .
+            '    <div>' .
+            '        <div>' . $permissions . '</div>' .
+            '        <button type="button" class="btn btn-light toggle-user_permissions">' . $level . '</button>' .
+            '    </div>' .
+            '</div>';
+    }
+
+    function format_delete(): string
+    {
+        return
+            '<div class="d-flex justify-content-center align-items-center user-table-option">' .
+            '    <div>' .
+            '        <button type="button" class="btn btn-light toggle-user_permissions">Eliminar usuario</button>' .
+            '    </div>' .
+            '</div>';
     }
 
 }
