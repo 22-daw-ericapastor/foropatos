@@ -15,14 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function logged_check() {
         fetch('?is_logged').then(r => r.json()).then(data => {
             console.log(data)
-            if (data['response'] === false) {
-                alert("<p class='text-center'>" +
-                    "    Llevas más de cinco minutos inactivo." +
-                    "    <br/>" +
-                    "    Debes loggearte de nuevo." +
-                    "</p>")
-                window.location.assign(baseurl);
-            }
+            window.location.assign(baseurl);
         });
     }
 
