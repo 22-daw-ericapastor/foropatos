@@ -75,11 +75,5 @@
     </div>
 </section>
 <section id="open-modal"></section>
-<script>
-    let url = window.location.href;
-    if (url.match(/\?$/) || url.match(/\/$/)) {
-        window.location.assign('http://localhost/foropatos/?home');
-    }
-</script>
 <script src="<?= baseurl ?>js/recipes.modal.js"></script>
 <script src="<?= baseurl ?>js/home.message.js"></script>

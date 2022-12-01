@@ -37,5 +37,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="<?= baseurl ?>js/freelancer_template.js"></script>
+<script src="<?= baseurl ?>js/session.check.js"></script>
 </body>
 </html>
