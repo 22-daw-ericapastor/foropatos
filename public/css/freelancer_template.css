@@ -12591,3 +12591,17 @@ form a {
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+.user-table-option {
+    gap: 1px;
+}
+
+.user-cell {
+    height: 60px;
+    display: grid;
+    align-items: center;
+}
+
+.user-cell .btn {
+    padding: 0.1rem 0.5rem;
+}

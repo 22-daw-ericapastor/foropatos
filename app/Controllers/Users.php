@@ -108,7 +108,7 @@ class Users extends controller
         if (isset($_GET['toggle_active']) && isset($_GET['user'])) {
             $is_active = intval($_GET['toggle_active']);
             $user = $_GET['user'];
-            if (model('Users')->toggle_active($is_active, $user) !== false) {
+            if (model('Users')->toggle_active($is_active, $user) === true) {
                 echo json_encode(['response' => true]);
             } else {
                 echo json_encode(['response' => false]);
@@ -118,11 +118,10 @@ class Users extends controller
 
     function toggle_permissions()
     {
-        var_dump($_GET);
-        if (isset($_GET['permissions']) && isset($_GET['user'])) {
-            $permissions = intval($_GET['permissions']);
+        if (isset($_GET['toggle_permissions']) && isset($_GET['user'])) {
+            $permissions = intval($_GET['toggle_permissions']);
             $user = $_GET['user'];
-            if (model('Users')->toggle_permissions($permissions, $user) !== false) {
+            if (model('Users')->toggle_permissions($permissions, $user) === true) {
                 echo json_encode(['response' => true]);
             } else {
                 echo json_encode(['response' => false]);

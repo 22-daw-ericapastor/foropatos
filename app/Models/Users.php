@@ -143,12 +143,12 @@ class Users extends model
                 $json = [];
                 while ($row = $result->fetch_assoc()) {
                     $json[] = [
-                        'username' => $row['username'],
-                        'toggle_active' => $this->format_is_active($row['is_active']),
-                        'toggle_permissions' => $this->format_permissions($row['permissions']),
+                        'username' => '<div class="username user-cell">' . $row['username'] . '</div>',
+                        'toggle_active' => '<div class="user-cell">' . $this->format_is_active($row['is_active']) . '</div>',
+                        'toggle_permissions' => '<div class="user-cell">' . $this->format_permissions($row['permissions']) . '</div>',
                         'is_active' => $row['is_active'],
                         'permissions' => $row['permissions'],
-                        'delete_user' => $this->format_delete()
+                        'delete_user' => '<div class="user-cell">' . $this->format_delete() . '</div>'
                     ];
                 }
                 return $json;
@@ -164,11 +164,9 @@ class Users extends model
         $status = $is_active === 1 ? "Desactivar" : "Activar";
         $is_active = $is_active === 1 ? "Activo" : "Inactivo";
         return
-            '<div class="d-flex justify-content-center align-items-center user-table-option">' .
-            '    <div>' .
-            '       <div>' . $is_active . '</div>' .
-            '       <button type="button" class="btn btn-pink toggle-user_active"">' . $status . '</button>' .
-            '    </div>' .
+            '<div class="d-flex justify-content-center align-items-center user-table-option column">' .
+            '    <div>' . $is_active . '</div>' .
+            '    <button type="button" class="btn btn-pink toggle-user_active"">' . $status . '</button>' .
             '</div>';
     }
 
@@ -177,11 +175,9 @@ class Users extends model
         $level = $permissions == 1 ? 'Bajar de nivel' : 'Subir de nivel';
         $permissions = $permissions == 1 ? 'Administrador' : 'Usuario';
         return
-            '<div class="d-flex justify-content-center align-items-center user-table-option">' .
-            '    <div>' .
-            '        <div>' . $permissions . '</div>' .
-            '        <button type="button" class="btn btn-light toggle-user_permissions">' . $level . '</button>' .
-            '    </div>' .
+            '<div class="d-flex justify-content-center align-items-center user-table-option column">' .
+            '    <div>' . $permissions . '</div>' .
+            '    <button type="button" class="btn btn-pink toggle-user_permissions">' . $level . '</button>' .
             '</div>';
     }
 
@@ -190,7 +186,7 @@ class Users extends model
         return
             '<div class="d-flex justify-content-center align-items-center user-table-option">' .
             '    <div>' .
-            '        <button type="button" class="btn btn-light toggle-user_permissions">Eliminar usuario</button>' .
+            '        <button type="button" class="btn btn-pink delete_user">Eliminar usuario</button>' .
             '    </div>' .
             '</div>';
     }

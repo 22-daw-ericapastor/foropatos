@@ -2,48 +2,57 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const rows_in_datatable = 10;
 
-    let table = new DataTable('#users-table', {
-        processing: true, // fill with ajax request
-        ajax: {
-            url: '?get_users', dataSrc: 'data',
-        },
-        columns: [
-            {title: "", data: "username", class: "pe-3 text-center"},
-            {title: "", data: "toggle_active", class: "pe-3 text-center"},
-            {title: "", data: "toggle_permissions", class: "pe-3 text-center"},
-            {title: "", data: "delete_user", class: "pe-3 text-center"}
-        ],
-        pageLength: rows_in_datatable,
-        responsive: true,
-        order: [[2, 'desc']],// position 3 -> from more recent to less recent by request date
-        ordering: false,
-    });
+    function draw_table() {
+        return new DataTable('#users-table', {
+            processing: true, // fill with ajax request
+            ajax: {
+                url: '?get_users', dataSrc: 'data',
+            },
+            columns: [
+                {title: "", data: "username", class: "pe-3 text-center"},
+                {title: "", data: "toggle_active", class: "pe-3 text-center"},
+                {title: "", data: "toggle_permissions", class: "pe-3 text-center"},
+                {title: "", data: "delete_user", class: "pe-3 text-center"}
+            ],
+            pageLength: rows_in_datatable,
+            responsive: true,
+            order: [[2, 'desc']],// position 3 -> from more recent to less recent by request date
+            ordering: false,
+        });
+    }
 
-    table.on('draw.dt', function () {
+    let table = draw_table();
+
+    table.on('draw.dt', async function () {
         const toggle_active = document.getElementsByClassName('toggle-user_active');
         const toggle_permissions = document.getElementsByClassName('toggle-user_permissions');
+        const user = document.getElementsByClassName('username');
+        const data = table.data();
         for (let i = 0; i < toggle_active.length; i++) {
-            let user = table.data()[i]['username'];
-            let is_active = table.data()[i]['is_active'];
-            let permissions = table.data()[i]['permissions'];
-            toggle_active[i].addEventListener('click', async function () {
+            // Toggle user (in)active onclick
+            let is_active = data[i]['is_active'];
+            toggle_active[i].addEventListener('click', function () {
                 is_active = is_active === '1' || is_active === 1 ? 0 : 1;
-                await toggle_user_active(is_active, user);
+                toggle_user_active(is_active, user[i].innerHTML);
             });
-            toggle_permissions[i].addEventListener('click', async function () {
+            // Toggle permissions admin/user onclick
+            let permissions = data[i]['permissions'];
+            console.log(toggle_permissions)
+            toggle_permissions[i].addEventListener('click', function () {
+                console.log(permissions)
                 permissions = permissions === '1' || permissions === 1 ? 0 : 1;
-                await toggle_user_permissions(permissions, user);
+                console.log(permissions)
+                toggle_user_permissions(permissions, user[i].innerHTML);
             });
+
         }
 
         async function toggle_user_active(is_active, user) {
-            console.log(is_active)
             await fetch('?toggle_active=' + is_active + '&user=' + user)
                 .then(r => r.json())
                 .then(data => {
-                    if (data['response'] !== false) {
-                        window.location.assign(window.location.href);
-                    }
+                    console.log(data);
+                    // cambiar inner HTML y rellenar
                 })
         }
 
@@ -52,12 +61,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(r => r.text())
                 .then(data => {
                     console.log(data)
-                    /*if (data['response'] !== false) {
-                        window.location.assign(window.location.href);
-                    }*/
+                    // cambiar inner HTML y rellenar
                 })
         }
 
+    });
+
+    table.on('draw.dt', async function () {
     });
 
 });

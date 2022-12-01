@@ -4,7 +4,7 @@ CREATE DATABASE foropatos;
 
 USE foropatos;
 
-CREATE TABLE IF NOT EXISTS users(
+CREATE TABLE users(
   username VARCHAR(20),
   email VARCHAR(50),
   passwd VARCHAR(100),
@@ -13,7 +13,15 @@ CREATE TABLE IF NOT EXISTS users(
   PRIMARY KEY(username)
 );
 
-CREATE TABLE IF NOT EXISTS recipes(
+CREATE TABLE deleted_users(
+  username VARCHAR(20),
+  email VARCHAR(50),
+  passwd VARCHAR(100),
+  permissions TINYINT(1) DEFAULT 0,
+  PRIMARY KEY(username)
+);
+
+CREATE TABLE recipes(
   id INT UNSIGNED AUTO_INCREMENT,
   slug VARCHAR(20),
   src VARCHAR(100),
@@ -28,7 +36,7 @@ CREATE TABLE IF NOT EXISTS recipes(
   KEY(slug)
 );
 
-CREATE TABLE IF NOT EXISTS comments(
+CREATE TABLE comments(
   id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(50),
   recipe_slug VARCHAR(25),
@@ -40,7 +48,7 @@ CREATE TABLE IF NOT EXISTS comments(
   FOREIGN KEY(recipe_slug) REFERENCES recipes(slug)
 );
 
-CREATE TABLE IF NOT EXISTS messages(
+CREATE TABLE messages(
   id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(50),
   issue VARCHAR(20),
