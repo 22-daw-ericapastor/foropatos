@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             responsive: true,
             order: [[2, 'desc']],// position 3 -> from more recent to less recent by request date
             ordering: false,
+            paging: false
         });
     }
 
