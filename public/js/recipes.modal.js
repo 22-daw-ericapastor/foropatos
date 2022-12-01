@@ -360,14 +360,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                     .then(response => response.text())
                     .then(data => {
                         comment_response[i].innerHTML = data;
-                        if (data.match(/enviado/)) {
+                        if (data.match(/enviado/) || data.match(/Ya has/)) {
                             comment_text[i].value = '';
                             unselect_stars();
                             fill_comments();
                         }
                         setTimeout(function () {
                             comment_response[i].innerHTML = '';
-                        }, 2000);
+                        }, 2500);
                     });
 
             });
@@ -388,6 +388,8 @@ document.addEventListener('DOMContentLoaded', async function () {
                     comment_response[i].innerHTML = '<p class="text-danger">Tienes que loggearte para poder comentar o ver comentarios.</p>';
                 }
             } else {
+                setInterval(function () {
+                }, 15000);
                 fill_comments();
                 select_star();
                 submit_comments();

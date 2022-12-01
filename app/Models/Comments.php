@@ -25,6 +25,23 @@ class Comments extends model
         return false;
     }
 
+    public function get_comment($username, $slug)
+    {
+        $query = "SELECT * FROM $this->table WHERE username=? AND recipe_slug=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('ss', $username, $slug);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
     public function get_comments($slug)
     {
         $query = "SELECT * FROM $this->table WHERE recipe_slug=?";

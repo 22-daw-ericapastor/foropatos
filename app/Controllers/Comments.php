@@ -22,10 +22,14 @@ class Comments extends controller
             $comment = validate($_GET['comment']);
             if ($comment != '') {
                 if ($rating != "0") {
-                    if (model('Comments')->comment($username, $slug, $rating, $comment) && model('Recipes')->rating($slug, $rating)) {
-                        echo '<p class="text-success">¡Comentario enviado con éxito!';
-                    } else {
-                        echo '<p class="text-danger">Ha habido un problema al enviar tu comentario...<br/>No vuelvas a intentarlo.</p>';
+                    if (!model('Comments')->get_comment($username, $slug)) {
+                        if (model('Comments')->comment($username, $slug, $rating, $comment) && model('Recipes')->rating($slug, $rating)) {
+                            echo '<p class="text-success">¡Comentario enviado con éxito!';
+                        } else {
+                            echo '<p class="text-danger">Ha habido un problema al enviar tu comentario...<br/>No vuelvas a intentarlo.</p>';
+                        }
+                    }else{
+                        echo '<p class="text-danger">¡Ya has valorado esta receta! Disculpa las molestias y vete a hacer otra cosa.</p>';
                     }
                 } else {
                     echo '<p class="text-danger">Selecciona una valoración.</p>';
