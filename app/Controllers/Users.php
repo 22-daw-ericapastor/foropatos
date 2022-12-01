@@ -127,6 +127,13 @@ class Users extends controller
                 echo json_encode(['response' => false]);
             }
         }
-
     }
+
+    function delete_user()
+    {
+        if (isset($_GET['user'])) {
+
+        }
+    }
+
 }
