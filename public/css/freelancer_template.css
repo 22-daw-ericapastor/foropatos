@@ -12657,3 +12657,11 @@ form a {
 .recipes_datatable-container tbody tr:last-child td:last-child {
     border-radius: 0 0 9px;
 }
+
+#recipe-manage table.dataTable thead th, #recipe-manage table.dataTable thead td,
+#users-manage table.dataTable thead th, #users-manage table.dataTable thead td {
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    visibility: hidden !important;
+}

@@ -39,4 +39,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- Datatables script-->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-<script src="<?=baseurl?>js/recipe.manage.js"></script>
+<script src="<?=baseurl?>js/pages.recipe.manage.js"></script>

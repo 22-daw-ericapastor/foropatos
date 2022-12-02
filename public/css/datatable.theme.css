@@ -259,13 +259,6 @@ table.dataTable thead th,
 table.dataTable tfoot th {
     font-weight: bold;
 }
-table.dataTable thead th,
-table.dataTable thead td {
-    padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-    visibility: hidden !important;
-}
 table.dataTable thead th:active,
 table.dataTable thead td:active {
     outline: none;

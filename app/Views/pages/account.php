@@ -162,4 +162,4 @@
 <!-- Datatables script-->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <!-- My script-->
-<script src="<?= baseurl ?>js/account.js"></script>
+<script src="<?= baseurl ?>js/pages.account.js"></script>

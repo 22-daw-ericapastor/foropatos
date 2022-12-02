@@ -57,7 +57,8 @@ class Messages extends model
                     'datetime' => '<div class="msg-container">' . ($row['date_time']) . '</div>',
                     'msg_text' => '<div class="msg-container">' . ($row['msg_text']) . '</div>',
                     'toggle_read' => '<div class="msg-container">' . $this->format_isread() . '</div>',
-                    'is_read' => $row['is_read']
+                    'is_read' => $row['is_read'],
+                    'delete'=> '<div class="msg-container"><div class="btn btn-danger del_msg-btn">Borrar</div></div>'
                 ];
             }
             return $json;
