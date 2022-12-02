@@ -218,7 +218,7 @@ class BaseController
 
     function add_recipe()
     {
-        controller('Recipes')->add_recipes();
+        controller('Recipes')->add_recipe();
     }
 
     function datatable_recipes(){

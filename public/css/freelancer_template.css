@@ -12523,10 +12523,6 @@ form a {
     min-height: calc(100vh - 471px);
 }
 
-.msg-table {
-    width: 98%;
-}
-
 .msg-container {
     width: 100%;
     min-height: 60px;
@@ -12589,7 +12585,7 @@ form a {
 }
 
 #recipes-table, #users-table {
-    border: 1px solid var(--bs-gray) !important;
+    background: rgba(var(--bs-primary-rgb), 0.1);
     border-radius: 10px;
 }
 
@@ -12597,7 +12593,7 @@ form a {
     border-radius: 20px;
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-bottom: 10px;
+    margin-bottom: 2rem;
 }
 
 #users-table_length {
@@ -12663,4 +12659,29 @@ form a {
     border: 0 !important;
     background: transparent !important;
     visibility: hidden !important;
+}
+
+.table-wrapper {
+    position: relative;
+}
+
+.add_rcp-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+}
+
+.difficulty-form {
+    width: 100%;
+}
+.rcp-difficulty {
+    display: grid;
+    grid-template-columns: 20px auto;
+    gap: 0.5rem;
+}
+
+#add_rcp-form .form-label {
+    font-size: 1rem;
+    color: #6c757d99;
 }

@@ -66,12 +66,13 @@ class Recipes extends model
         return false;
     }
 
-    function add_recipe(array $params): bool
+    function add_recipe($src, $title, $short_description, $difficulty): bool
     {
-        $query = "INSERT INTO $this->table (slug, src, title, short_description, description) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO $this->table (slug, src, title, short_description, difficulty) VALUES (?, ?, ?, ?, ?)";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('sssss', $param['slug'], $param['src'], $param['title'], $param['short_decription'], $param['description']);
+            $stmt->bind_param('ssssi', $slug, $src, $title, $short_description, $difficulty);
+            $slug = (strtolower(str_replace(' ', '-', $title)));
             if ($stmt->execute()) {
                 return true;
             }

@@ -13,6 +13,9 @@
             <h6 class="my-5 text-center" id="ajax-table_response"></h6>
             <div class="container">
                 <div class="table-wrapper">
+                    <div class="add_rcp-btn">
+                        <a href="?add_recipe" class="btn btn-primary">Añadir receta</a>
+                    </div>
                     <table id="recipes-table" class="table hover order-column compact table-responsive"></table>
                 </div>
             </div>
