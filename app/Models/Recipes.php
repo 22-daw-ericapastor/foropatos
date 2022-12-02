@@ -115,8 +115,8 @@ class Recipes extends model
                 while ($row = $results->fetch_assoc()) {
                     $json[] = [
                         'title' => '<div class="username user-cell">' . $row['title'] . '</div>',
-                        'update' => '<div class="username user-cell"><a class="text-primary update_recipe text-hover-secondary cursor-pointer toggle-user_active">Modificar receta</a></div>',
-                        'delete' => '<div class="username user-cell"><a class="text-primary delete_recipe text-hover-secondary cursor-pointer toggle-user_active">Borrar receta</a></div>',
+                        'update' => '<div class="username user-cell"><a class="text-primary text-hover-secondary cursor-pointer update_recipe">Modificar receta</a></div>',
+                        'delete' => '<div class="username user-cell"><a class="text-primary text-hover-secondary cursor-pointer delete_recipe">Borrar receta</a></div>',
                         'slug' => $row['slug']
                     ];
                 }

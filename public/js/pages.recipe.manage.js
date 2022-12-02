@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const table_response = document.getElementById('ajax-table_response');
 
+    const updt_rcp_section = document.getElementById('updtrcp');
+
     function draw_table() {
         return new DataTable('#recipes-table', {
             processing: true, // fill with ajax request
@@ -24,7 +26,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let table = draw_table();
 
+    // Call delete and modify onclick after table is draw
     table.on('draw.dt', async function () {
+        const table_data = table.data();
+        const update_link = document.querySelectorAll('.update_recipe');
+        const delete_link = document.querySelectorAll('.delete_recipe');
+        for (let i = 0; i < update_link.length; i++) {
+            let slug = table_data[i]['slug'];
+            update_link[i].onclick = async function () {
+                updt_rcp_section.classList.remove('d-none');
+                updt_rcp_section.classList.add('d-block');
+            }
+            delete_link[i].onclick = function () {
+                fetch('?delete_recipe=' + slug)
+                    .then(res => res.text())
+                    .then(data => {
+                        table_response.innerHTML = data;
+                        if (data.match(/eliminada/)) {
+                            table.destroy();
+                            table = draw_table();
+                        }
+                    });
+            }
+        }
     });
 
 });

@@ -71,5 +71,5 @@
         </div>
     </div>
 </section>
-<script src="<?= baseurl ?>js/pages.addrcp.js"></script>
+<script src="<?= baseurl ?>js/pages.recipes.mixtures.js"></script>
 <?php
