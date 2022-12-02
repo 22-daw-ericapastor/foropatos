@@ -16,13 +16,13 @@
                     <!-- Title input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="rcp_title" type="text" name="rcp_title"
-                               placeholder=""/>
+                               placeholder="" maxlength="20"/>
                         <label for="rcp_title">Título</label>
                     </div>
                     <!-- Short description input-->
                     <div class="form-floating mb-3">
-                        <input class="form-control" id="short_description" type="text" name="short_description"/>
-                        <label for="short_description">Pequeña descripción</label>
+                        <input class="form-control" id="description" type="text" name="description"/>
+                        <label for="description">Pequeña descripción</label>
                     </div>
                     <!-- Difficulty input-->
                     <div class="form difficulty-form mb-3">

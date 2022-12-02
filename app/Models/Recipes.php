@@ -72,12 +72,12 @@ class Recipes extends model
         return ['ratings' => $num_ratings, 'points' => $points_media];
     }
 
-    function add_recipe($src, $title, $short_description, $difficulty): bool
+    function add_recipe($src, $title, $description, $difficulty): bool
     {
-        $query = "INSERT INTO $this->table (slug, src, title, short_description, difficulty) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO $this->table (slug, src, title, description, difficulty) VALUES (?, ?, ?, ?, ?)";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('ssssi', $slug, $src, $title, $short_description, $difficulty);
+            $stmt->bind_param('ssssi', $slug, $src, $title, $description, $difficulty);
             $slug = (strtolower(str_replace(' ', '-', $title)));
             if ($stmt->execute()) {
                 return true;

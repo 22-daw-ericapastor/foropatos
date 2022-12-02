@@ -36,7 +36,7 @@
             <!-- Manage recipes link-->
             <a href="?recipe_manage" class="btn btn-primary">Gestionar recetas &#x2192;</a>
             <!-- Recipes Grid Items-->
-            <div class="row justify-content-center" id="recipes-grid"></div>
+            <div class="row justify-content-start" id="recipes-grid"></div>
         </div>
     </div>
 </section>

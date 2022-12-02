@@ -10,7 +10,7 @@ const baseurl = 'http://localhost/foropatos/public/';
  * Public directory
  * ---------------------------------------------------------------------------------------------------------------------
  */
-const publicdir = __DIR__ . '/public';
+const publicdir = __DIR__ . '/public/';
 
 /**
  * View directory

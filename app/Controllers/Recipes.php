@@ -29,12 +29,13 @@ class Recipes extends controller
         // Check the user is logged
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
             // Check the fields exist
-            if (isset($_REQUEST['rcp_title']) && isset($_REQUEST['short_description']) && isset($_REQUEST['difficulty']) && isset($_FILES['img_src'])) {
+            if (isset($_REQUEST['rcp_title']) && isset($_REQUEST['description']) && isset($_REQUEST['difficulty']) && isset($_FILES['img_src'])) {
                 // Check fields are not empty
-                if ($_REQUEST['rcp_title'] !== '' && $_REQUEST['short_description'] !== '' && $_REQUEST['difficulty'] !== '') {
-                    $target_dir = publicdir . '/assets/imgs/recipes/'; // need the final slash or else it uploads in the parent directory
+                if ($_REQUEST['rcp_title'] !== '' && $_REQUEST['description'] !== '' && $_REQUEST['difficulty'] !== '') {
+                    $recipesdir = 'assets/imgs/recipes/';
+                    $target_dir = publicdir . $recipesdir; // need the final slash or else it uploads in the parent directory
                     // Check file is an image
-                    if (getimagesize($_FILES["img_src"]["tmp_name"])!==false) {
+                    if (getimagesize($_FILES["img_src"]["tmp_name"]) !== false) {
                         // Check if file already exists
                         $target_file = $target_dir . basename($_FILES["img_src"]["name"]);
                         if (!file_exists($target_file)) {
@@ -46,16 +47,16 @@ class Recipes extends controller
                                     // Everything is ok at this point -> try to upload the file
                                     if (move_uploaded_file($_FILES['img_src']['tmp_name'], $target_file)) {
                                         // Here the image is uploaded
+                                        $src = $recipesdir . basename($_FILES["img_src"]["name"]);
                                         $title = validate($_REQUEST['rcp_title']);
-                                        $sd = validate($_REQUEST['short_description']);
+                                        $description = validate($_REQUEST['description']);
                                         $difficulty = intval($_REQUEST['difficulty']);
-                                        if (model('Recipes')->add_recipe($target_file, $title, $sd, $difficulty)) {
+                                        if (model('Recipes')->add_recipe($src, $title, $description, $difficulty)) {
                                             $data['response'] = '<p class="text-success">¡Se añadió la receta!</p>';
                                         } else {
                                             $data['response'] = '<p class="text-danger">Hubo un problema interno. Soluciónalo, pendeja.</p>';
-                                            $data['response'] = model('Recipes')->add_recipe($target_file, $title, $sd, $difficulty);
                                         }
-                                    }else{
+                                    } else {
                                         $data['response'] = '<p class="text-danger">La imagen no se ha podido subir. Problema interno.</p>';
                                     }
                                 } else {
@@ -73,8 +74,9 @@ class Recipes extends controller
                 } else {
                     $data['response'] = '<p class="text-danger">Hay campos vacíos.</p>';
                 }
-            }
+            } // No {else} here, this if is set for when the page is loaded for the first time
         } else {
+            // User is not signed in
             $this->home();
             return;
         }

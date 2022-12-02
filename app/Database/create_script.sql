@@ -26,7 +26,7 @@ CREATE TABLE recipes(
   id INT UNSIGNED AUTO_INCREMENT,
   slug VARCHAR(20),
   src VARCHAR(100),
-  title VARCHAR(30),
+  title VARCHAR(20),
   description VARCHAR(100),
   admixtures VARCHAR(200) DEFAULT 'Cat - "3kg",ipsum - 0.5g,Twitch - <em>Aged like a fine egg</em>',
   making TEXT DEFAULT 'Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again. Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.<br/> Cat ipsum dolor sit amet, twitch tail in permanent irritation, get poop stuck in paws jumping out of litter box and run around the house scream meowing and smearing hot cat mud all over pushed the mug off the table, vommit food and eat it again.',

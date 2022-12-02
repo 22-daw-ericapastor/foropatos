@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let esc = url_base.match(/[?#]/);
         url_base = url_base.substring(0, url_base.indexOf(esc));
     }
+    url_base = url_base + 'public/';
 
     /**
      * Recipes list variable content
@@ -92,12 +93,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         else {
             if (points % 1 !== 0) {
                 for (let i = 0; i < points - 1; i++) {
-                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
+                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'assets/imgs/icons/star.png">';
                 }
-                stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/half-star.png">';
+                stars = stars + '<img alt="..." height="20px" src="' + url_base + 'assets/imgs/icons/half-star.png">';
             } else {
                 for (let i = 0; i < points; i++) {
-                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
+                    stars = stars + '<img alt="..." height="20px" src="' + url_base + 'assets/imgs/icons/star.png">';
                 }
             }
         }
@@ -265,11 +266,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     function format_comment_list(content) {
         let stars = '';
         for (let i = 0; i < content['rating']; i++) {
-            stars = stars + '<img alt="..." height="12px" src="' + url_base + 'public/assets/imgs/icons/star.png">';
+            stars = stars + '<img alt="..." height="12px" src="' + url_base + 'assets/imgs/icons/star.png">';
         }
         return '<li class="comment-item">' +
             '     <p class="comment-user_time">' +
-            '       <span class="comment-user-logo" style="background: url(' + url_base + 'public/assets/imgs/guest-user.png' + ')">' +
+            '       <span class="comment-user-logo" style="background: url(' + url_base + 'assets/imgs/guest-user.png' + ')">' +
             '       </span>' +
             '       <b>' + content['username'] + '</b>' +
             '       <em>' + content['datetime'] + '</em> ' +
