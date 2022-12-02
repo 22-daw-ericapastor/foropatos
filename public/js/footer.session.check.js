@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.assign(baseurl);
     }
 
-    setInterval(function () {
-        logged_check();
-    }, 30000);
-
     function logged_check() {
         fetch('?is_logged').then(r => r.json()).then(data => {
             console.log(data)
