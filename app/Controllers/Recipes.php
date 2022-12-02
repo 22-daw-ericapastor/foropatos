@@ -32,20 +32,31 @@ class Recipes extends controller
             if (isset($_REQUEST['rcp_title']) && isset($_REQUEST['short_description']) && isset($_REQUEST['difficulty']) && isset($_FILES['img_src'])) {
                 // Check fields are not empty
                 if ($_REQUEST['rcp_title'] !== '' && $_REQUEST['short_description'] !== '' && $_REQUEST['difficulty'] !== '') {
-                    $target_dir = publicdir . '/assets/imgs/recipes';
-                    $target_file = $target_dir . basename($_FILES["img_src"]["name"]);
-                    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    $target_dir = publicdir . '/assets/imgs/recipes/'; // need the final slash or else it uploads in the parent directory
                     // Check file is an image
                     if (getimagesize($_FILES["img_src"]["tmp_name"])!==false) {
                         // Check if file already exists
+                        $target_file = $target_dir . basename($_FILES["img_src"]["name"]);
                         if (!file_exists($target_file)) {
                             // Check file size
-                            if (!$_FILES["img_src"]["size"] > 500000) {
+                            if ($_FILES["img_src"]["size"] < 500000) {
                                 // Check file format
+                                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
                                 if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
                                     // Everything is ok at this point -> try to upload the file
                                     if (move_uploaded_file($_FILES['img_src']['tmp_name'], $target_file)) {
-                                        $data['response'] = '<p class="text-success">El archivo' . htmlspecialchars(basename($_FILES['img_src']['name'])) . 'se ha subido.</p>';
+                                        // Here the image is uploaded
+                                        $title = validate($_REQUEST['rcp_title']);
+                                        $sd = validate($_REQUEST['short_description']);
+                                        $difficulty = intval($_REQUEST['difficulty']);
+                                        if (model('Recipes')->add_recipe($target_file, $title, $sd, $difficulty)) {
+                                            $data['response'] = '<p class="text-success">¡Se añadió la receta!</p>';
+                                        } else {
+                                            $data['response'] = '<p class="text-danger">Hubo un problema interno. Soluciónalo, pendeja.</p>';
+                                            $data['response'] = model('Recipes')->add_recipe($target_file, $title, $sd, $difficulty);
+                                        }
+                                    }else{
+                                        $data['response'] = '<p class="text-danger">La imagen no se ha podido subir. Problema interno.</p>';
                                     }
                                 } else {
                                     $data['response'] = '<p class="text-danger">Solo se admiten imágenes PNG, JPEG o JPG.</p>';
@@ -56,16 +67,6 @@ class Recipes extends controller
                         } else {
                             $data['response'] = '<p class="text-danger">El nombre de imagen ya existe en este directorio.</p>';
                         }
-                        /*
-                        $src = $_REQUEST['img_src'];
-                        $title = validate($_REQUEST['rcp_title']);
-                        $sd = validate($_REQUEST['short_description']);
-                        $difficulty = intval($_REQUEST['difficulty']);
-                        if (model('Recipes')->add_recipe($src, $title, $sd, $difficulty)) {
-                            $data['response'] = '<p class="text-success">¡Se añadió la receta!</p>';
-                        } else {
-                            $data['response'] = '<p class="text-danger">Hubo un problema interno. Soluciónalo, pendeja.</p>';
-                        }*/
                     } else {
                         $data['response'] = '<p class="text-danger">El archivo no es una imagen.</p>';
                     }

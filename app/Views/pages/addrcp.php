@@ -8,7 +8,7 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <h6 class="text-danger"><?php if (isset($data['response'])) var_dump($data['response']); ?></h6>
+        <h6 class="text-center"><?php if (isset($data['response'])) var_dump($data['response']); ?></h6>
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
