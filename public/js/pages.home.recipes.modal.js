@@ -106,9 +106,10 @@ document.addEventListener('DOMContentLoaded', async function () {
         let admixtures = '';
         let mixtures = 'Por rellenar';
         if (content['admixtures']) {
-            admixtures = content['admixtures'].split(',');
+            mixtures='';
+            admixtures = content['admixtures'].split(', ');
             for (let i = 0; i < admixtures.length; i++) {
-                mixtures = mixtures + (i + 1) + '. ' + admixtures[i] + '<br/>';
+                mixtures = mixtures + ' - ' + admixtures[i] + '<br/>';
             }
         }
         // Difficulty

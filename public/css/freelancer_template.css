@@ -12394,9 +12394,11 @@ form a {
     gap: 3rem;
     margin-top: 3rem;
 }
+
 .recipes-grid-container .btn {
     position: absolute;
-    top:0; right:0;
+    top: 0;
+    right: 0;
 }
 
 .cursor-pointer {
@@ -12484,7 +12486,7 @@ form a {
     margin: 10px auto 0;
 }
 
-.account-edit-btn {
+.edit-btn {
     display: inline-grid;
     justify-content: center;
     align-items: center;
@@ -12677,10 +12679,10 @@ form a {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2000;
+    z-index: 10;
 }
 
-.difficulty-form {
+.form-static {
     width: 100%;
 }
 
@@ -12691,6 +12693,36 @@ form a {
 }
 
 #add_rcp-form .form-label {
+    position: relative;
+    height: auto;
+}
+
+#add_rcp-form input[type=file] {
+    padding: 0;
+    height: 3rem;
     font-size: 1rem;
-    color: #6c757d99;
+    line-height: 2;
+    width: auto;
+    color: var(--bs-danger);
+}
+
+#add_rcp-form textarea {
+    height: 10rem;
+}
+
+.img-src-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+#admixtures ~ label {
+    padding: 1rem;
+}
+
+#admixtures {
+    padding: 1.5rem 0.8rem;
+    height: auto;
+    min-height: 5.5rem;
 }

@@ -72,13 +72,28 @@ class Recipes extends model
         return ['ratings' => $num_ratings, 'points' => $points_media];
     }
 
-    function add_recipe($src, $title, $description, $difficulty): bool
+    function add_recipe($src, $title, $description, $admixtures, $making, $difficulty): bool
     {
-        $query = "INSERT INTO $this->table (slug, src, title, description, difficulty) VALUES (?, ?, ?, ?, ?)";
+        $query = "INSERT INTO $this->table (slug, src, title, description, admixtures, making, difficulty) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('ssssi', $slug, $src, $title, $description, $difficulty);
+            $stmt->bind_param('ssssssi', $slug, $src, $title, $description, $admixtures, $making, $difficulty);
             $slug = (strtolower(str_replace(' ', '-', $title)));
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+    function delete_recipe($slug): bool
+    {
+        $query = "DELETE FROM $this->table WHERE slug=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('s', $slug);
             if ($stmt->execute()) {
                 return true;
             }
@@ -100,8 +115,9 @@ class Recipes extends model
                 while ($row = $results->fetch_assoc()) {
                     $json[] = [
                         'title' => '<div class="username user-cell">' . $row['title'] . '</div>',
-                        'update' => $this->format_link('Modificar receta'),
-                        'delete' => $this->format_link('Borrar receta'),
+                        'update' => '<div class="username user-cell"><a class="text-primary update_recipe text-hover-secondary cursor-pointer toggle-user_active">Modificar receta</a></div>',
+                        'delete' => '<div class="username user-cell"><a class="text-primary delete_recipe text-hover-secondary cursor-pointer toggle-user_active">Borrar receta</a></div>',
+                        'slug' => $row['slug']
                     ];
                 }
                 return $json;
@@ -115,8 +131,8 @@ class Recipes extends model
     function format_link(string $link): string
     {
         return '
-            <div class="username user-cell">
-                <div class="text-muted text-hover-secondary cursor-pointer toggle-user_active">' . $link . '</div>
+            
+                <div class="text-primary text-hover-secondary cursor-pointer toggle-user_active">' . $link . '</div>
             </div>
             ';
     }

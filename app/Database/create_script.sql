@@ -24,15 +24,15 @@ CREATE TABLE deleted_users(
 
 CREATE TABLE recipes(
   id INT UNSIGNED AUTO_INCREMENT,
-  slug VARCHAR(20),
+  slug VARCHAR(30),
   src VARCHAR(100),
-  title VARCHAR(20),
+  title VARCHAR(30),
   description VARCHAR(100),
   admixtures VARCHAR(200),
   making TEXT,
   ratings INT DEFAULT 0,
   points FLOAT DEFAULT 0,
-  difficulty TINYINT,
+  difficulty TINYINT DEFAULT 1,
   PRIMARY KEY(id),
   KEY(slug)
 );
@@ -40,7 +40,7 @@ CREATE TABLE recipes(
 CREATE TABLE comments(
   id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(50),
-  recipe_slug VARCHAR(25),
+  recipe_slug VARCHAR(30),
   recipe_rating INT,
   comment_text VARCHAR(200),
   date_time DATETIME DEFAULT NOW(),

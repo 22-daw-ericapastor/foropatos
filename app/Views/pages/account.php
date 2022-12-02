@@ -22,7 +22,7 @@
                         <b>Username</b>
                         <span>
                         <em class="px-3 text-info fs-5"><?= $_SESSION['__user']['username'] ?></em>
-                        <button class="btn btn-primary account-edit-btn">
+                        <button class="btn btn-primary edit-btn">
                             <img alt="..." src="<?= baseurl ?>assets/imgs/icons/edit.png" height="16px"
                                  class="cursor-pointer invert-color"/>
                         </button>
@@ -42,7 +42,7 @@
                         <b>Contraseña</b>
                         <span>
                             <em class="px-3 text-info fs-5">******</em>
-                            <button class="btn btn-primary account-edit-btn">
+                            <button class="btn btn-primary edit-btn">
                                 <img alt="..." src="<?= baseurl ?>assets/imgs/icons/edit.png" height="16px"
                                      class="cursor-pointer invert-color"/>
                             </button>

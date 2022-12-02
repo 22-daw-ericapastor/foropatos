@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const rows_in_datatable = 10;
 
-    const btn = document.querySelectorAll('.account-edit-btn');
+    const btn = document.querySelectorAll('.edit-btn');
 
     const form = document.querySelectorAll('.account-edit-form');
 

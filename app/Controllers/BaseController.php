@@ -221,7 +221,13 @@ class BaseController
         controller('Recipes')->add_recipe();
     }
 
-    function datatable_recipes(){
+    function delete_recipe()
+    {
+        controller('Recipes')->delete_recipe();
+    }
+
+    function datatable_recipes()
+    {
         controller('Recipes')->datatable_recipes();
     }
 
@@ -267,7 +273,8 @@ class BaseController
         controller('Messages')->msg_is_read();
     }
 
-    function delmsg(){
+    function delmsg()
+    {
         controller('Messages')->delmsg();
     }
 

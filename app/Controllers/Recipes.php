@@ -28,10 +28,10 @@ class Recipes extends controller
         $data['page'] = 'addrcp';
         // Check the user is logged
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
-            // Check the fields exist
-            if (isset($_REQUEST['rcp_title']) && isset($_REQUEST['description']) && isset($_REQUEST['difficulty']) && isset($_FILES['img_src'])) {
+            // Check the fields exist by checking the clicked button
+            if (isset($_REQUEST['addrcp'])) {
                 // Check fields are not empty
-                if ($_REQUEST['rcp_title'] !== '' && $_REQUEST['description'] !== '' && $_REQUEST['difficulty'] !== '') {
+                if ($_REQUEST['rcp_title'] !== '' && $_REQUEST['description'] !== '') {
                     $recipesdir = 'assets/imgs/recipes/';
                     $target_dir = publicdir . $recipesdir; // need the final slash or else it uploads in the parent directory
                     // Check file is an image
@@ -50,8 +50,13 @@ class Recipes extends controller
                                         $src = $recipesdir . basename($_FILES["img_src"]["name"]);
                                         $title = validate($_REQUEST['rcp_title']);
                                         $description = validate($_REQUEST['description']);
+                                        $admixtures = validate($_REQUEST['admixtures']);
+                                        $making = validate($_REQUEST['making']);
                                         $difficulty = intval($_REQUEST['difficulty']);
-                                        if (model('Recipes')->add_recipe($src, $title, $description, $difficulty)) {
+                                        if ($admixtures != '') {
+                                            // Put them between comas????? is this an array
+                                        }
+                                        if (model('Recipes')->add_recipe($src, $title, $description, $admixtures, $making, $difficulty)) {
                                             $data['response'] = '<p class="text-success">¡Se añadió la receta!</p>';
                                         } else {
                                             $data['response'] = '<p class="text-danger">Hubo un problema interno. Soluciónalo, pendeja.</p>';
@@ -81,6 +86,19 @@ class Recipes extends controller
             return;
         }
         template('pages/addrcp', $data);
+    }
+
+    function delete_recipe()
+    {
+        if (isset($_GET['delete_recipe']) && $_GET['delete_recipe'] != '') {
+            if (model('Recipes')->delete_recipe($_GET['delete_recipe'])) {
+                echo '<p class="text-success">Receta eliminada.</p>';
+            } else {
+                echo '<p class="text-danger">Algo fue mal, no se pudo eliminar la receta.</p>';
+            }
+        } else {
+            echo '<p class="text-danger">Algo fue mal, faltan datos.</p>';
+        }
     }
 
     function recipe_manage()
