@@ -33,8 +33,10 @@
         </div>
         <div class="recipes-grid-container">
             <h5 class="fw-bold text-primary">¡Click para leer, leer para saber!</h5>
-            <!-- Manage recipes link-->
-            <a href="?recipe_manage" class="btn btn-primary">Gestionar recetas &#x2192;</a>
+            <?php if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1): ?>
+                <!-- Manage recipes link-->
+                <a href="?recipe_manage" class="btn btn-primary">Gestionar recetas &#x2192;</a>
+            <?php endif; ?>
             <!-- Recipes Grid Items-->
             <div class="row justify-content-start" id="recipes-grid"></div>
         </div>

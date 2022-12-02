@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const admixtures_btn = document.querySelector('.admixtures-btn');
     const admixtures_input = document.querySelector('#admixtures_input');
     const admixtures = document.querySelector('#admixtures');
-    console.log(admixtures_input)
+    const admixtures_list = document.querySelector('#admixtures ~ label');
     admixtures_btn.onclick = function () {
         add_item();
     }
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else {
                 admixtures.value = admixtures.value + ", " + admixtures_input.value;
             }
+            admixtures_list.innerHTML = admixtures.value;
             admixtures_input.value = '';
         }
     }

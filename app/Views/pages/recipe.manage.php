@@ -20,25 +20,21 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- BEGIN Update recipe form-->
-    <section class="page-section" id="updtrcp">
-        <div class="container">
+        <!-- BEGIN Update recipe form-->
+        <div class="container" id="uptd_rcp-container">
             <!-- Add recipe Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Editar receta</h2>
+            <h2 class="text-center text-uppercase text-secondary mb-0">Editar receta</h2>
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                 <div class="divider-custom-line"></div>
             </div>
-            <h6 class="text-center text-primary my-2">Los campos marcados con asterisco son obligatorios.
-                <br/>Los otros puedes rellenarlos ahora o más tarde.</h6>
+            <h6 class="text-center text-primary my-2">Los campos marcados con asterisco son obligatorios.</h6>
             <h6 class="text-center my-2"><?php if (isset($data['response'])) echo $data['response']; ?></h6>
             <!-- Contact Section Form-->
             <div class="row justify-content-center">
-                <div class="col-lg-8 col-xl-7">
+                <div class="col-11">
                     <form id="add_rcp-form" method="post" action="?add_recipe" enctype="multipart/form-data">
                         <!-- Title input-->
                         <div class="form-floating mb-3">
@@ -118,4 +114,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <!-- Datatables script-->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-<script src="<?=baseurl?>js/pages.recipe.manage.js"></script>
+<script src="<?= baseurl ?>js/pages.recipe.manage.js"></script>
