@@ -12387,8 +12387,16 @@ form a {
     overflow: hidden;
 }
 
-#recipes-grid {
-    padding-top: 4rem;
+.recipes-grid-container {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+.recipes-grid-container .btn {
+    position: absolute;
+    top:0; right:0;
 }
 
 .cursor-pointer {
@@ -12675,6 +12683,7 @@ form a {
 .difficulty-form {
     width: 100%;
 }
+
 .rcp-difficulty {
     display: grid;
     grid-template-columns: 20px auto;

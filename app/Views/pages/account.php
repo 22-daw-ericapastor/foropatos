@@ -37,8 +37,7 @@
                 </div>
                 <hr/>
                 <!-- Password-->
-                <div class=" account-option-wrapper
-                        ">
+                <div class=" account-option-wrapper">
                     <div class="account-option fs-6 m-auto">
                         <b>Contraseña</b>
                         <span>
@@ -69,13 +68,6 @@
                             <button type="button" class="btn btn-primary go"
                                     data-bs-target="#msg-modal" data-bs-toggle="modal">&#43;
                             </button>
-                        </div>
-                    </div>
-                    <hr/>
-                    <div class="account-option-wrapper">
-                        <div class="account-option fs-6 m-auto">
-                            <b>Gestionar Recetas</b>
-                            <a href="?recipe_manage" class="go btn btn-primary">&#x2192;</a>
                         </div>
                     </div>
                     <hr/>

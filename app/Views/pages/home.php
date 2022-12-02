@@ -31,9 +31,13 @@
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <h5 class="fw-bold text-primary">¡Click para leer, leer para saber!</h5>
-        <!-- Recipes Grid Items-->
-        <div class="row justify-content-center" id="recipes-grid"></div>
+        <div class="recipes-grid-container">
+            <h5 class="fw-bold text-primary">¡Click para leer, leer para saber!</h5>
+            <!-- Manage recipes link-->
+            <a href="?recipe_manage" class="btn btn-primary">Gestionar recetas &#x2192;</a>
+            <!-- Recipes Grid Items-->
+            <div class="row justify-content-center" id="recipes-grid"></div>
+        </div>
     </div>
 </section>
 <!-- Contact Section-->
