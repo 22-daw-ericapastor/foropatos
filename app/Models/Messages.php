@@ -41,6 +41,21 @@ class Messages extends model
         return false;
     }
 
+    function delmsg($slug): bool
+    {
+        $query = "DELETE FROM $this->table WHERE issue_slug=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('s', $slug);
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
     function get_messages()
     {
         $query = "SELECT * FROM $this->table ORDER BY date_time DESC";
@@ -58,7 +73,7 @@ class Messages extends model
                     'msg_text' => '<div class="msg-container">' . ($row['msg_text']) . '</div>',
                     'toggle_read' => '<div class="msg-container">' . $this->format_isread() . '</div>',
                     'is_read' => $row['is_read'],
-                    'delete'=> '<div class="msg-container"><div class="btn btn-danger del_msg-btn">Borrar</div></div>'
+                    'delete' => '<div class="msg-container"><div class="btn btn-danger del_msg-btn">Borrar</div></div>'
                 ];
             }
             return $json;

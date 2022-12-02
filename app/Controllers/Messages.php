@@ -23,7 +23,7 @@ class Messages extends controller
             } else {
                 echo json_encode(['response' => 'El usuario no existe.']);
             }
-        }else{
+        } else {
             echo json_encode(['response' => 'Falta información.']);
         }
     }
@@ -57,5 +57,23 @@ class Messages extends controller
     {
         echo json_encode(['data' => model('Messages')->get_messages()]);
     }
+
+    function delmsg()
+    {
+        if (isset($_SESSION['__user']) && isset($_SESSION['__user']['username'])) {
+            if (isset($_GET['delmsg']) && $_GET['delmsg'] !== '') {
+                if (model('Messages')->delmsg($_GET['delmsg'])) {
+                    echo '<span class="text-danger">Se borró el mensaje con éxito.</span>';
+                } else {
+                    echo '<span class="text-danger">Hubo un fallo interno del programa.</span>';
+                }
+            } else {
+                echo '<span class="text-danger">Falta información.</span>';
+            }
+        } else {
+            echo '<span class="text-danger">No estas loggeado.</span>';
+        }
+    }
+
 }
 

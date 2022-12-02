@@ -103,9 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let is_read = table.data()[i]['is_read'];
             format_is_read_btn(btn_read[i], is_read);
             let user = document.getElementsByClassName('remitter')[i].innerHTML;
-            console.log(user)
             let slug = table.data()[i]['slug'];
-            console.log(slug)
             btn_read[i].addEventListener('click', function () {
                 if (is_read === 1) {
                     is_read = 0;
@@ -127,14 +125,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function delete_message() {
         const del_msg_btn = document.getElementsByClassName('del_msg-btn');
         const table_data = table.data();
-        for (let i = 0; i < del_msg_btn; i++) {
+        for (let i = 0; i < del_msg_btn.length; i++) {
             del_msg_btn[i].addEventListener('click', async function () {
+                console.log('hi')
                 let slug = table_data[i]['slug'];
+                console.log(slug)
                 await fetch('?delmsg=' + slug)
                     .then(r => r.text())
                     .then(data => {
-                        console.log(data)
-
+                        document.getElementById('ajax-table_response').innerHTML = data;
+                        table.destroy();
+                        table=create_table();
                     });
             });
         }

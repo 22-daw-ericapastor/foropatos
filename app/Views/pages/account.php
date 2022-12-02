@@ -66,7 +66,7 @@
                     <div class="account-option-wrapper">
                         <div class="account-option fs-6 m-auto">
                             <b>Ver mensajes</b>
-                            <button type="button" class="btn btn-primary plus-sign"
+                            <button type="button" class="btn btn-primary go"
                                     data-bs-target="#msg-modal" data-bs-toggle="modal">&#43;
                             </button>
                         </div>
@@ -111,6 +111,8 @@
                                 <div class="col-lg-11">
                                     <!-- Modal - Title-->
                                     <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Mensajes</h2>
+                                    <!-- Database response goes here-->
+                                    <h6 class="my-5 text-center" id="ajax-table_response"></h6>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -135,9 +137,6 @@
             </div>
         </div>
     </section>
-    <section id="open-comments-modal"></section>
-    <section id="open-recipes-modal"></section>
-    <section id="open-users-modal"></section>
 
 <?php else: ?>
 

@@ -12450,15 +12450,6 @@ form a {
     }
 }
 
-.plus-sign, .account-edit-btn {
-    height: 2.5rem;
-    width: 2.5rem;
-    display: inline-grid;
-    align-content: center;
-    align-items: center;
-    justify-items: center;
-}
-
 .account-list {
     display: flex;
     flex-flow: row wrap;
@@ -12483,6 +12474,14 @@ form a {
 .account-edit-form {
     width: 75%;
     margin: 10px auto 0;
+}
+
+.account-edit-btn {
+    display: inline-grid;
+    justify-content: center;
+    align-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .account-edit-form:not(.show) {

@@ -267,6 +267,10 @@ class BaseController
         controller('Messages')->msg_is_read();
     }
 
+    function delmsg(){
+        controller('Messages')->delmsg();
+    }
+
     /**
      * User methods
      * =================================================================================================================
