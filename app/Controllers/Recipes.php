@@ -36,42 +36,38 @@ class Recipes extends controller
                     $target_dir = publicdir . $recipesdir; // need the final slash or else it uploads in the parent directory
                     // Check file is an image
                     if (getimagesize($_FILES["img_src"]["tmp_name"]) !== false) {
-                        // Check if file already exists
+                        // Get the extension of the file
+                        $imageFileType = strtolower(pathinfo($target_dir . basename($_FILES["img_src"]["name"]), PATHINFO_EXTENSION));
+                        // Rename the file with the extension
+                        $_FILES["img_src"]["name"] = time() . '.' . $imageFileType;
+                        // Keep the full target file link
                         $target_file = $target_dir . basename($_FILES["img_src"]["name"]);
-                        if (!file_exists($target_file)) {
-                            // Check file size
-                            if ($_FILES["img_src"]["size"] < 500000) {
-                                // Check file format
-                                $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-                                if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
-                                    // Everything is ok at this point -> try to upload the file
-                                    if (move_uploaded_file($_FILES['img_src']['tmp_name'], $target_file)) {
-                                        // Here the image is uploaded
-                                        $src = $recipesdir . basename($_FILES["img_src"]["name"]);
-                                        $title = validate($_REQUEST['rcp_title']);
-                                        $description = validate($_REQUEST['description']);
-                                        $admixtures = validate($_REQUEST['admixtures']);
-                                        $making = validate($_REQUEST['making']);
-                                        $difficulty = intval($_REQUEST['difficulty']);
-                                        if ($admixtures != '') {
-                                            // Put them between comas????? is this an array
-                                        }
-                                        if (model('Recipes')->add_recipe($src, $title, $description, $admixtures, $making, $difficulty)) {
-                                            $data['response'] = '<p class="text-success">¡Se añadió la receta!</p>';
-                                        } else {
-                                            $data['response'] = '<p class="text-danger">Hubo un problema interno. Soluciónalo, pendeja.</p>';
-                                        }
+                        // Check file size
+                        if ($_FILES["img_src"]["size"] < 500000) {
+                            // Check file format
+                            if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
+                                // Everything is ok at this point -> try to upload the file
+                                if (move_uploaded_file($_FILES['img_src']['tmp_name'], $target_file)) {
+                                    // Here the image is uploaded
+                                    $src = $recipesdir . basename($_FILES["img_src"]["name"]);
+                                    $title = validate($_REQUEST['rcp_title']);
+                                    $description = validate($_REQUEST['description']);
+                                    $admixtures = validate($_REQUEST['admixtures']);
+                                    $making = validate($_REQUEST['making']);
+                                    $difficulty = intval($_REQUEST['difficulty']);
+                                    if (model('Recipes')->add_recipe($src, $title, $description, $admixtures, $making, $difficulty)) {
+                                        $data['response'] = '<p class="text-success">¡Se añadió la receta!</p>';
                                     } else {
-                                        $data['response'] = '<p class="text-danger">La imagen no se ha podido subir. Problema interno.</p>';
+                                        $data['response'] = '<p class="text-danger">Hubo un problema interno. Soluciónalo, pendeja.</p>';
                                     }
                                 } else {
-                                    $data['response'] = '<p class="text-danger">Solo se admiten imágenes PNG, JPEG o JPG.</p>';
+                                    $data['response'] = '<p class="text-danger">La imagen no se ha podido subir. Problema interno.</p>';
                                 }
                             } else {
-                                $data['response'] = '<p class="text-danger">La imagen es demasiado grande.</p>';
+                                $data['response'] = '<p class="text-danger">Solo se admiten imágenes PNG, JPEG o JPG.</p>';
                             }
                         } else {
-                            $data['response'] = '<p class="text-danger">El nombre de imagen ya existe en este directorio.</p>';
+                            $data['response'] = '<p class="text-danger">La imagen es demasiado grande.</p>';
                         }
                     } else {
                         $data['response'] = '<p class="text-danger">El archivo no es una imagen.</p>';
