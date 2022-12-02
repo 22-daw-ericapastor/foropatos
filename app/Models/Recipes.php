@@ -39,6 +39,22 @@ class Recipes extends model
 
     function rating($slug, $comment_rating): bool
     {
+        $rate = $this->get_ratings($slug, $comment_rating);
+        $query = "UPDATE $this->table SET ratings=?, points=? WHERE slug=?";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('dds', $rate['ratings'], $rate['points'], $slug);
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+    function get_ratings($slug, $comment_rating): array
+    {
         // get the recipe from database
         $recipe = $this->get_recipes($slug);
         // get the number of ratings that the recipe has already
@@ -53,17 +69,7 @@ class Recipes extends model
         $new_points = $old_points + $comment_rating;
         // calculate the new media of points / ratings
         $points_media = $new_points / $num_ratings;
-        $query = "UPDATE $this->table SET ratings=?, points=? WHERE slug=?";
-        try {
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('dds', $num_ratings, $points_media, $slug);
-            if ($stmt->execute()) {
-                return true;
-            }
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-        return false;
+        return ['ratings' => $num_ratings, 'points' => $points_media];
     }
 
     function add_recipe($src, $title, $short_description, $difficulty): bool
