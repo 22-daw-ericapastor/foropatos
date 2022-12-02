@@ -1,11 +1,18 @@
 <section class="page-section mt-6" id="addrcp">
     <div class="container">
+        <!-- Add recipe Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Añadir receta</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <h6 class="text-danger"><?php if (isset($data['response'])) var_dump($data['response']); ?></h6>
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
-                <form id="add_rcp-form" method="post" action="?add_recipe">
-                    <h6 class="text-danger"><?php if (isset($data['response'])) echo $data['response']; ?></h6>
-                    <h6 class="text-danger"><?php if (isset($data['request'])) var_dump($data['request']); ?></h6>
+                <form id="add_rcp-form" method="post" action="?add_recipe" enctype="multipart/form-data">
                     <!-- Title input-->
                     <div class="form-floating mb-3">
                         <input class="form-control" id="rcp_title" type="text" name="rcp_title"
@@ -43,3 +50,4 @@
     </div>
 </section>
 <script src="<?= baseurl ?>js/pages.addrcp.js"></script>
+<?php

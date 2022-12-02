@@ -109,9 +109,10 @@ class Users extends controller
             $is_active = intval($_GET['toggle_active']);
             $user = $_GET['user'];
             if (model('Users')->toggle_active($is_active, $user) === true) {
-                if($is_active===1){
+                $_SESSION['__user']['is_active'] = $is_active;
+                if ($is_active === 1) {
                     echo '<p class="text-success">¡' . $user . ' ya está activo de nuevo!</p>';
-                }else{
+                } else {
                     echo '<p class="text-success">¡' . $user . ' fue desactivado!</p>';
                 }
             } else {
