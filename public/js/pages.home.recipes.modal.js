@@ -102,15 +102,25 @@ document.addEventListener('DOMContentLoaded', async function () {
                 }
             }
         }
-        const admixtures = content['admixtures'].split(',');
-        let mixtures = '';
-        for (let i = 0; i < admixtures.length; i++) {
-            mixtures = mixtures + (i + 1) + '. ' + admixtures[i] + '<br/>';
+        // Admixtures
+        let admixtures = '';
+        let mixtures = 'Por rellenar';
+        if (content['admixtures']) {
+            admixtures = content['admixtures'].split(',');
+            for (let i = 0; i < admixtures.length; i++) {
+                mixtures = mixtures + (i + 1) + '. ' + admixtures[i] + '<br/>';
+            }
         }
+        // Difficulty
         let level = content['difficulty'];
         if (level === 1) level = 'Fácil.';
         else if (level === 2) level = 'Normal.';
         else if (level === 3) level = 'Difícil.';
+        // Making
+        let making = 'Por rellenar.';
+        if (content['making']) {
+            making = content['making'];
+        }
         return '<div class="portfolio-modal modal fade" id="modal' + index + '" tabindex="-1" aria-labelledby="modal"' +
             '     aria-hidden="true">' +
             '     <div class="modal-dialog">' +
@@ -141,7 +151,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             '                   <!-- Recipes - Making-->' +
             '                   <h5 class="text-primary">Elaboración</h5>' +
             '                   <p class="mb-4 text-start">' +
-            '                     ' + content['making'] +
+            '                     ' + making +
             '                   </p>' +
             '                   <div class="rating">' +
             '                     <h5 class="text-primary m-0">Valoraciones</h5>' +
