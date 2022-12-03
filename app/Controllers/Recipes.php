@@ -66,17 +66,19 @@ class Recipes extends controller
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
             if (isset($_REQUEST['updtrcp'])) { // this checks that the button submit was pressed
                 $src = null;
+                // declare slug recipe
+                $slug = $_REQUEST['updtrcp'];
                 if ($_FILES['full_path']) {
                     $src = $this->upload_image('/assets/imgs/recipes/');
                     if (!preg_match('/imgs/', $src)) {
                         $data['response'] = $src;
                     }
                 } else {
-                    $src = model('Recipes')->get_recipes($_REQUEST['updtrcp'])[0]['src'];
+                    $src = model('Recipes')->get_recipes($slug)[0]['src'];
                 }
                 if (!$data['response'] && isset($src)) {
                     $params = [
-                        'slug' => $_REQUEST['updtrcp'],
+                        'slug' => $slug,
                         'src' => $src,
                         'title' => validate($_REQUEST['rcp_title']),
                         'description' => validate($_REQUEST['description']),
