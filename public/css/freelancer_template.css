@@ -12596,9 +12596,15 @@ form a {
     height: 2.5rem;
 }
 
-#recipes-table, #users-table {
-    background: rgba(var(--bs-primary-rgb), 0.1);
-    border-radius: 10px;
+#recipes-table {
+    padding-top: 4rem;
+    border: none;
+}
+
+#recipes-table_filter {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 #recipes-table_filter input, #users-table_filter input {
@@ -12614,6 +12620,11 @@ form a {
 
 .user-table-option {
     gap: 1px;
+}
+
+.select {
+    padding: 0.5rem 1.2rem;
+    font-family: monospace;
 }
 
 .user-cell {
@@ -12641,9 +12652,9 @@ form a {
     background-image: var(--bs-gradient) !important;
 }
 
-#recipe-manage {
+.content-wrapper {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto;
     align-items: start;
     align-content: space-between;
     gap: 1rem;
@@ -12659,8 +12670,12 @@ form a {
     padding: 2.25rem 0.75rem;
     border-radius: 1rem;
 }
-#uptd_rcp-container .form-control{background:transparent;}
-#uptd_rcp-container .form-control ~label {
+
+#uptd_rcp-container .form-control {
+    background: transparent;
+}
+
+#uptd_rcp-container .form-control ~ label {
     padding: 1.5rem 1.25rem;
 }
 
@@ -12727,8 +12742,13 @@ form a {
     color: var(--bs-danger);
 }
 
-#add_rcp-form textarea {
+#add_rcp-form #making {
     height: 10rem;
+    font-size: 1.2rem;
+}
+
+#add_rcp-form #admixtures_input {
+    padding: 0.85rem;
 }
 
 .img-src-wrapper {
@@ -12740,10 +12760,19 @@ form a {
 
 #admixtures ~ label {
     padding: 1rem;
+    color: var(--bs-dark);
+    font-size: 1.5rem;
 }
 
 #admixtures {
     padding: 1.5rem 0.8rem;
     height: auto;
     min-height: 5.5rem;
+}
+
+.updt_rcp-img {
+    width: 100px;
+    height: 100px;
+    background: rgba(var(--bs-primary-rgb), 0.5);
+    background-size: contain !important;
 }
