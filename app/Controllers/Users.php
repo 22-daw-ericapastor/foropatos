@@ -11,23 +11,27 @@ class Users extends controller
         $data['page'] = 'my_account';
         if (isset($_SESSION['__user'])) {
             if (isset($_POST['username']) && $_POST['username'] !== '') {
-                $model = model('Users');
-                $old_username = $_SESSION['__user']['username'];
                 $new_username = validate($_POST['username']); // This is the one written by the person.
-                if ($new_username !== $old_username) {
-                    if (!$model->get_user($new_username)) {
-                        if ($model->change_username($old_username, $new_username)) {
-                            $data ['response'] = '<p class="h6 mt-3 text-success text-center">¡Todo listo! Tu nombre de usuario cambió.</p>';
-                            $_SESSION['__user']['username'] = $new_username;
-                        } else {
-                            $data['response'] = '<p class="h6 mt-3 text-danger text-center">Ha habido algún fallo interno,
+                if (preg_match('/^[0-9A-Za-z_-]+$/', $new_username)) { // Check there's no special chars
+                    $model = model('Users');
+                    $old_username = $_SESSION['__user']['username'];
+                    if ($new_username !== $old_username) {
+                        if (!$model->get_user($new_username)) {
+                            if ($model->change_username($old_username, $new_username)) {
+                                $data ['response'] = '<p class="h6 mt-3 text-success text-center">¡Todo listo! Tu nombre de usuario cambió.</p>';
+                                $_SESSION['__user']['username'] = $new_username;
+                            } else {
+                                $data['response'] = '<p class="h6 mt-3 text-danger text-center">Ha habido algún fallo interno,
                                 escriba un mensaje a un administrador y vuelva a intentarlo mañana.</p>';
+                            }
+                        } else {
+                            $data['response'] = '<p class="h6 mt-3 text-danger text-center">Parece que ese nombre de usuario ya está cogido.</p>';
                         }
                     } else {
-                        $data['response'] = '<p class="h6 mt-3 text-danger text-center">Parece que ese nombre de usuario ya está cogido.</p>';
+                        $data['response'] = '<p class="h6 mt-3 text-danger text-center">Ese es el mismo nombre de usuario que ya tienes.</p>';
                     }
                 } else {
-                    $data['response'] = '<p class="h6 mt-3 text-danger text-center">Ese es el mismo nombre de usuario que ya tienes.</p>';
+                    $data['response'] = '<p class="h6 mt-3 text-danger text-center">No puedes escribir carácteres especiales. Permitidos: Guión alto y bajo, letras y números.</p>';
                 }
             } else {
                 $data['response'] = '<p class="h6 mt-3 text-danger text-center">Rellena todos los campos.</p>';

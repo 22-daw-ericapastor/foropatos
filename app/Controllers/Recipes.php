@@ -68,7 +68,7 @@ class Recipes extends controller
                 $src = null;
                 // declare slug recipe
                 $slug = $_REQUEST['updtrcp'];
-                if ($_FILES['full_path']) {
+                if (isset($_FILES['full_path'])) {
                     $src = $this->upload_image('/assets/imgs/recipes/');
                     if (!preg_match('/imgs/', $src)) {
                         $data['response'] = $src;
@@ -76,7 +76,7 @@ class Recipes extends controller
                 } else {
                     $src = model('Recipes')->get_recipes($slug)[0]['src'];
                 }
-                if (!$data['response'] && isset($src)) {
+                if (!isset($data['response']) && isset($src)) {
                     $params = [
                         'slug' => $slug,
                         'src' => $src,

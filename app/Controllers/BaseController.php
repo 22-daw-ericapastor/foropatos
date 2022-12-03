@@ -63,23 +63,28 @@ class BaseController
                 isset($_POST['passwd']) && $_POST['passwd'] != '' &&
                 isset($_POST['passwd_repeat']) && $_POST['passwd_repeat'] != '') {
                 $username = validate($_POST['username']);
-                $email = validate($_POST['email']);
-                $passwd = validate($_POST['passwd']);
-                $passwd_repeat = validate($_POST['passwd_repeat']);
-                if (!$model->get_user($username)) {
-                    if ($passwd === $passwd_repeat) {
-                        if ($model->new_user($username, $email, $passwd)) {
-                            $data ['signup_success'] = 'El formulario se envió con éxito.';
-                            template('session/successful.signup', $data);
-                            return;
+                // Check there's no special chars in username
+                if (preg_match('/^[0-9A-Za-z_-]+$/', $username)) {
+                    $email = validate($_POST['email']);
+                    $passwd = validate($_POST['passwd']);
+                    $passwd_repeat = validate($_POST['passwd_repeat']);
+                    if (!$model->get_user($username)) {
+                        if ($passwd === $passwd_repeat) {
+                            if ($model->new_user($username, $email, $passwd)) {
+                                $data ['signup_success'] = 'El formulario se envió con éxito.';
+                                template('session/successful.signup', $data);
+                                return;
+                            } else {
+                                $data ['response'] = 'El formulario no pudo enviarse, disculpe las molestias.';
+                            }
                         } else {
-                            $data ['response'] = 'El formulario no pudo enviarse, disculpe las molestias.';
+                            $data ['response'] = 'Las contraseñas no coinciden.';
                         }
                     } else {
-                        $data ['response'] = 'Las contraseñas no coinciden.';
+                        $data['response'] = '¡Ups! Escoge otro nombre de usuario, ya está en uso.';
                     }
                 } else {
-                    $data['response'] = '¡Ups! Escoge otro nombre de usuario, ya está en uso.';
+                    $data['response'] = 'No puedes escribir carácteres especiales. Permitidos: Guión alto y bajo, letras y números.';
                 }
             }
             template('session/signup', $data);
