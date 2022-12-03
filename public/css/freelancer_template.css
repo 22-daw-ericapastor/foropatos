@@ -12666,7 +12666,6 @@ form a {
 }
 
 #uptd_rcp-container {
-    background: rgba(var(--bs-pink-rgb), 0.2);
     padding: 2.25rem 0.75rem;
     border-radius: 1rem;
 }
@@ -12775,4 +12774,10 @@ form a {
     height: 100px;
     background: rgba(var(--bs-primary-rgb), 0.5);
     background-size: contain !important;
+}
+
+@media (min-width: 992px) {
+    .w-lg-75 {
+        width: 75%;
+    }
 }

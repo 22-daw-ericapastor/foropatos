@@ -197,6 +197,38 @@ class BaseController
         }
     }
 
+    function upload_image($recipesdir): string
+    {
+        $target_dir = publicdir . $recipesdir; // need the final slash or else it uploads in the parent directory
+        // Check file is an image
+        if (getimagesize($_FILES["img_src"]["tmp_name"]) !== false) {
+            // Get the extension of the file
+            $imageFileType = strtolower(pathinfo($target_dir . basename($_FILES["img_src"]["name"]), PATHINFO_EXTENSION));
+            // Rename the file with the extension
+            $_FILES["img_src"]["name"] = time() . '.' . $imageFileType;
+            // Keep the full target file link
+            $target_file = $target_dir . basename($_FILES["img_src"]["name"]);
+            // Check file size
+            if ($_FILES["img_src"]["size"] < 500000) {
+                // Check file format
+                if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
+                    // Everything is ok at this point -> try to upload the file
+                    if (move_uploaded_file($_FILES['img_src']['tmp_name'], $target_file)) {
+                        return $recipesdir . basename($_FILES["img_src"]["name"]);
+                    } else {
+                        return '<p class="text-danger">La imagen no se ha podido subir. Problema interno.</p>';
+                    }
+                } else {
+                    return '<p class="text-danger">Solo se admiten imágenes PNG, JPEG o JPG.</p>';
+                }
+            } else {
+                return '<p class="text-danger">La imagen es demasiado grande.</p>';
+            }
+        } else {
+            return '<p class="text-danger">El archivo no es una imagen.</p>';
+        }
+    }
+
     /**
      * Routing methods
      * =================================================================================================================
@@ -219,6 +251,11 @@ class BaseController
     function add_recipe()
     {
         controller('Recipes')->add_recipe();
+    }
+
+    function updt_rcp()
+    {
+        controller('Recipes')->updt_rcp();
     }
 
     function delete_recipe()

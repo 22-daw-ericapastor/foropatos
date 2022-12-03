@@ -41,9 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < update_link.length; i++) {
             let slug = table_data[i]['slug'];
             update_link[i].onclick = async function () {
-                // Open container
-                updt_container.classList.remove('d-none');
-                updt_container.classList.toggle('d-block', true);
                 // Fill form fields with recipe data
                 // Fill title
                 $('#rcp_title').val(titles[i].innerHTML);
@@ -62,21 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 $('#making').val(table_data[i]['making']);
                 // Fill admixtures if not empty
                 let admixt = table_data[i]['admixtures'];
-                if (admixt === '' || admixt === null) admixt = 'La lista está vacía';
                 console.log(admixt)
+                if (admixt === '' || admixt === null) admixt = 'La lista está vacía';
+                else $('#admixtures').val(admixt);
                 $('#admixtures ~ label').html(admixt);
-                /*
-                $('#difficulty').children.forEach(option => {
-                    if (table_data[i]['difficulty'] === parseInt(option.val())) {
-                        option.select();
-                    }
-                });*/
+                // put slug in button submit value so it will submit for updating
+                $('#updt-btn').val(table_data[i]['slug']);
             }
-            $('.close-panel').on('click', function () {
-                // Open container
-                updt_container.classList.remove('d-block');
-                updt_container.classList.toggle('d-none', true);
-            });
             delete_link[i].onclick = function () {
                 fetch('?delete_recipe=' + slug)
                     .then(res => res.text())

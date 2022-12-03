@@ -72,13 +72,41 @@ class Recipes extends model
         return ['ratings' => $num_ratings, 'points' => $points_media];
     }
 
-    function add_recipe($src, $title, $description, $admixtures, $making, $difficulty): bool
+    function add_recipe($params): bool
     {
         $query = "INSERT INTO $this->table (slug, src, title, description, admixtures, making, difficulty) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->bind_param('ssssssi', $slug, $src, $title, $description, $admixtures, $making, $difficulty);
             $slug = (strtolower(str_replace(' ', '-', $title)));
+            $src = $params['src'];
+            $title = $params['title'];
+            $description = $params['description'];
+            $admixtures = $params['admixtures'];
+            $making = $params['making'];
+            $difficulty = $params['difficulty'];
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+    function updt_rcp($params): bool
+    {
+        $query = "UPDATE $this->table SET src=?, title=?, description=?, admixtures=?, making=?, difficulty=? WHERE slug=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('sssssis', $src, $title, $desc, $mix, $making, $diff, $slug);
+            $src = $params['src'];
+            $title = $params['title'];
+            $desc = $params['description'];
+            $mix = $params['admixtures'];
+            $making = $params['making'];
+            $diff = $params['difficulty'];
+            $slug = $params['slug'];
             if ($stmt->execute()) {
                 return true;
             }
@@ -115,8 +143,12 @@ class Recipes extends model
                 while ($row = $results->fetch_assoc()) {
                     $json[] = [
                         'title' => '<div class="username user-cell">' . $row['title'] . '</div>',
-                        'update' => '<div class="user-cell"><a class="text-primary text-hover-secondary cursor-pointer update_recipe">Modificar receta</a></div>',
-                        'delete' => '<div class="user-cell"><a class="text-primary text-hover-secondary cursor-pointer delete_recipe">Borrar receta</a></div>',
+                        'update' => '<div class="user-cell">' .
+                            '            <button class="btn btn-primary py-2 update_recipe" type="button" data-bs-target="#modal" data-bs-toggle="modal">' .
+                            '                Editar receta' .
+                            '            </button>' .
+                            '        </div>',
+                        'delete' => '<div class="user-cell"><a class="text-secondary text-hover-secondary cursor-pointer delete_recipe">Borrar receta</a></div>',
                         'slug' => $row['slug'],
                         'description' => $row['description'],
                         'difficulty' => $row['difficulty'],
@@ -131,15 +163,6 @@ class Recipes extends model
             echo $e->getMessage();
         }
         return false;
-    }
-
-    function format_link(string $link): string
-    {
-        return '
-            
-                <div class="text-primary text-hover-secondary cursor-pointer toggle-user_active">' . $link . '</div>
-            </div>
-            ';
     }
 
 }

@@ -31,49 +31,24 @@ class Recipes extends controller
             // Check the fields exist by checking the clicked button
             if (isset($_REQUEST['addrcp'])) {
                 // Check fields are not empty
-                if ($_REQUEST['rcp_title'] !== '' && $_REQUEST['description'] !== '') {
-                    $recipesdir = 'assets/imgs/recipes/';
-                    $target_dir = publicdir . $recipesdir; // need the final slash or else it uploads in the parent directory
-                    // Check file is an image
-                    if (getimagesize($_FILES["img_src"]["tmp_name"]) !== false) {
-                        // Get the extension of the file
-                        $imageFileType = strtolower(pathinfo($target_dir . basename($_FILES["img_src"]["name"]), PATHINFO_EXTENSION));
-                        // Rename the file with the extension
-                        $_FILES["img_src"]["name"] = time() . '.' . $imageFileType;
-                        // Keep the full target file link
-                        $target_file = $target_dir . basename($_FILES["img_src"]["name"]);
-                        // Check file size
-                        if ($_FILES["img_src"]["size"] < 500000) {
-                            // Check file format
-                            if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
-                                // Everything is ok at this point -> try to upload the file
-                                if (move_uploaded_file($_FILES['img_src']['tmp_name'], $target_file)) {
-                                    // Here the image is uploaded
-                                    $src = $recipesdir . basename($_FILES["img_src"]["name"]);
-                                    $title = validate($_REQUEST['rcp_title']);
-                                    $description = validate($_REQUEST['description']);
-                                    $admixtures = validate($_REQUEST['admixtures']);
-                                    $making = validate($_REQUEST['making']);
-                                    $difficulty = intval($_REQUEST['difficulty']);
-                                    if (model('Recipes')->add_recipe($src, $title, $description, $admixtures, $making, $difficulty)) {
-                                        $data['response'] = '<p class="text-success">¡Se añadió la receta!</p>';
-                                    } else {
-                                        $data['response'] = '<p class="text-danger">Hubo un problema interno. Soluciónalo, pendeja.</p>';
-                                    }
-                                } else {
-                                    $data['response'] = '<p class="text-danger">La imagen no se ha podido subir. Problema interno.</p>';
-                                }
-                            } else {
-                                $data['response'] = '<p class="text-danger">Solo se admiten imágenes PNG, JPEG o JPG.</p>';
-                            }
-                        } else {
-                            $data['response'] = '<p class="text-danger">La imagen es demasiado grande.</p>';
-                        }
+                // Upload image and save response
+                $src = $this->upload_image('assets/imgs/recipes/');
+                if (preg_match('/imgs/', $src)) {
+                    $params = [
+                        'src' => $src,
+                        'title' => validate($_REQUEST['rcp_title']),
+                        'description' => validate($_REQUEST['description']),
+                        'admixtures' => validate($_REQUEST['admixtures']),
+                        'making' => validate($_REQUEST['making']),
+                        'difficulty' => intval($_REQUEST['difficulty'])
+                    ];
+                    if (model('Recipes')->add_recipe($params)) {
+                        $data['response'] = '<p class="text-success">¡Se añadió la receta!</p>';
                     } else {
-                        $data['response'] = '<p class="text-danger">El archivo no es una imagen.</p>';
+                        $data['response'] = '<p class="text-danger">Hubo un problema interno. Soluciónalo, pendeja.</p>';
                     }
                 } else {
-                    $data['response'] = '<p class="text-danger">Hay campos vacíos.</p>';
+                    $data['response'] = $src;
                 }
             } // No {else} here, this if is set for when the page is loaded for the first time
         } else {
@@ -82,6 +57,46 @@ class Recipes extends controller
             return;
         }
         template('pages/addrcp', $data);
+    }
+
+    function updt_rcp()
+    {
+        $data['page'] = 'recipe_manage';
+        // Check the user is signed in
+        if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
+            if (isset($_REQUEST['updtrcp'])) { // this checks that the button submit was pressed
+                $src = null;
+                if ($_FILES['full_path']) {
+                    $src = $this->upload_image('/assets/imgs/recipes/');
+                    if (!preg_match('/imgs/', $src)) {
+                        $data['response'] = $src;
+                    }
+                } else {
+                    $src = model('Recipes')->get_recipes($_REQUEST['updtrcp'])[0]['src'];
+                }
+                if (!$data['response'] && isset($src)) {
+                    $params = [
+                        'slug' => $_REQUEST['updtrcp'],
+                        'src' => $src,
+                        'title' => validate($_REQUEST['rcp_title']),
+                        'description' => validate($_REQUEST['description']),
+                        'admixtures' => validate($_REQUEST['admixtures']),
+                        'making' => validate($_REQUEST['making']),
+                        'difficulty' => intval($_REQUEST['difficulty'])
+                    ];
+                    if (model('Recipes')->updt_rcp($params)) {
+                        $data['response'] = '<p class="text-success">¡Se actualizó la receta!</p>';
+                    } else {
+                        $data['response'] = '<p class="text-danger">Hubo un problema interno. Avisa a Effy, o déjalo.</p>';
+                    }
+                }
+            } // No {else} here, bc it means the page was loaded for the first time
+        } else {
+            // User is not signed in, redirect home
+            $this->home();
+            return;
+        }
+        template('pages/recipe.manage', $data);
     }
 
     function delete_recipe()
