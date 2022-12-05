@@ -93,10 +93,20 @@ class Users extends controller
     function acc_deactivate()
     {
         if (isset($_SESSION['__user'])) {
-            if (model('Users')->acc_deactivate($_SESSION['__user']['username'])) {
-                echo json_encode(['response' => true]);
+            $username = $_SESSION['__user']['username'];
+            if ($user = model('Users')->get_all_from_user($username)) {
+                // check user admin
+                if (($user['permissions'] === 1 && model('Users')->count_admins() > 1) || $user['permissions'] === 0) {
+                    if (model('Users')->toggle_active($username) === true) {
+                        echo '<p class="text-success">¡Tu cuenta se ha desactivado con éxito!<br/>En unos segundos se te sacará de la aplicación.</p>';
+                    } else {
+                        echo '<p class="text-danger">Ha habido un problema dando de baja tu cuenta. Vuelve a intentarlo más tarde.</p>';
+                    }
+                } else {
+                    echo '<p class="text-danger">' . $username . ' es el único administrador. Configura otro para poder dar de baja a este usuario.</p>';
+                }
             } else {
-                echo json_encode(['response' => 'Ha habido un problema desactivando tu cuenta. Vuelve a intentarlo más tarde.']);
+                echo '<p class="text-danger">No se encuentra el usuario.</p>';
             }
         }
     }
@@ -115,7 +125,7 @@ class Users extends controller
             if ($user = model('Users')->get_all_from_user($username)) {
                 // check user admin
                 if (($user['permissions'] === 1 && model('Users')->count_admins() > 1) || $user['permissions'] === 0) {
-                    if (model('Users')->toggle_active($is_active, $username) === true) {
+                    if (model('Users')->toggle_active($username, $is_active) === true) {
                         $_SESSION['__user']['is_active'] = $is_active;
                         if ($is_active === 1) {
                             echo '<p class="text-success">¡' . $username . ' ya está activo de nuevo!</p>';

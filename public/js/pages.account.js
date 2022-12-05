@@ -43,15 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('.account_deactivate-btn').onclick = function () {
         const response = document.querySelector('#account_deactivate-response');
         console.log(response)
-        fetch('?acc_deactivate').then(r => r.json()).then(data => {
-            if (data['response'] === true) {
-                response.innerHTML = '¡Tu cuenta se ha descativado con éxito!<br/>' +
-                    'En unos segundos se te sacará de la aplicación.';
+        fetch('?acc_deactivate').then(r => r.text()).then(data => {
+            response.innerHTML = data;
+            if (data.match(/desactivado/)) {
                 setTimeout(function () {
                     window.location.assign('?signout');
                 }, 4000);
-            } else {
-                response.innerHTML = data['response'];
             }
         });
     }
@@ -100,8 +97,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Event listener for tick is read not read
         const btn_read = document.getElementsByClassName('toggle-is_read');
         for (let i = 0; i < btn_read.length; i++) {
+            // fill read and not read
             let is_read = table.data()[i]['is_read'];
             format_is_read_btn(btn_read[i], is_read);
+            // create event for click on read button
             let user = document.getElementsByClassName('remitter')[i].innerHTML;
             let slug = table.data()[i]['slug'];
             btn_read[i].addEventListener('click', function () {
@@ -135,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(data => {
                         document.getElementById('ajax-table_response').innerHTML = data;
                         table.destroy();
-                        table=create_table();
+                        table = create_table();
                     });
             });
         }

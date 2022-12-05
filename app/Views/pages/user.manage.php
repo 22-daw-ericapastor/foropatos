@@ -11,7 +11,7 @@
                 <div class="divider-custom-line"></div>
             </div>
             <h6 class="my-5 text-center" id="ajax-table_response"></h6>
-            <div class="container">
+            <div class="container users_datatable-container">
                 <div class="table-wrapper">
                     <table id="users-table" class="table hover row-border compact table-responsive"></table>
                 </div>

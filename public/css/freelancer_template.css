@@ -11,8 +11,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
-    --bs-blue: #99CCFF;
-    --bs-pink: #FFCCFF;
+    --bs-blue: #0754e0;
+    --bs-indigo: #6f00c7;
+    --bs-pink: #e182ae;
+    --bs-light-pink: #eeb4ce;
     --bs-yellow: #CC9933;
     --bs-darkblue: #2c3e50;
     --bs-teal: #ffc107;
@@ -37,7 +39,7 @@
     --bs-danger: #dc3545;
     --bs-light: #F0F0F0;
     --bs-dark: #212529;
-    --bs-pink-rgb: 255, 204, 255;
+    --bs-pink-rgb: 196, 149, 196;
     --bs-primary-rgb: 204, 102, 153;
     --bs-secondary-rgb: 153, 0, 0;
     --bs-success-rgb: 25, 135, 84;
@@ -237,13 +239,13 @@ sup {
 }
 
 a {
-    color: var(--bs-blue);
+    color: var(--bs-pink);
     text-decoration: underline;
     transition: all 0.4s ease;
 }
 
 a:hover {
-    color: var(--bs-pink);
+    color: var(--bs-light-pink);
     transition: all 0.2s ease;
 }
 
@@ -8420,8 +8422,14 @@ textarea.form-control-lg {
 
 .text-pink {
     --bs-text-opacity: 1;
-    color: rgba(var(--bs-pink-rgb), var(--bs-text-opacity)) !important;
+    color: var(--bs-pink) !important;
 }
+
+.text-indigo{
+    color: var(--bs-indigo);
+}
+.text-blue{
+    color: var(--bs-blue);}
 
 .text-light {
     --bs-text-opacity: 1;
@@ -12672,6 +12680,9 @@ form a {
 
 #recipe-manage .container.recipes_datatable-container {
     max-width: 600px;
+}
+#users-manage .container.users_datatable-container{
+    max-width: 900px;
 }
 
 #uptd_rcp-container {

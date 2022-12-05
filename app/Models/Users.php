@@ -104,28 +104,18 @@ class Users extends model
         return false;
     }
 
-    function acc_deactivate($username): bool
+    function toggle_active($username, $is_active = 0): bool
     {
-        $query = "UPDATE $this->table SET is_active=? WHERE username=?;";
         try {
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('is', $is_active, $username);
-            $is_active = 0;
-            if ($stmt->execute()) {
-                return true;
+            if ($is_active === 0) {
+                $query = "UPDATE $this->table SET is_active=?, permissions=? WHERE username=?;";
+                $stmt = $this->conn->prepare($query);
+                $stmt->bind_param('iis', $is_active, $is_active, $username);
+            } else {
+                $query = "UPDATE $this->table SET is_active=? WHERE username=?;";
+                $stmt = $this->conn->prepare($query);
+                $stmt->bind_param('is', $is_active, $username);
             }
-        } catch (mysqli_sql_exception $e) {
-            return $e->getMessage();
-        }
-        return false;
-    }
-
-    function toggle_active($is_active, $username)
-    {
-        $query = "UPDATE $this->table SET is_active=? WHERE username=?;";
-        try {
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('is', $is_active, $username);
             if ($stmt->execute()) {
                 return true;
             }
@@ -194,7 +184,7 @@ class Users extends model
     function format_is_active($is_active): string
     {
         $status = $is_active === 1 ? "Desactivar" : "Activar";
-        $is_active = $is_active === 1 ? "Activo" : "Inactivo";
+        $is_active = $is_active === 1 ? '<b class="text-pink">Activo</b>' : '<b class="text-danger">Inactivo</b>';
         return
             '<div class="d-flex justify-content-center align-items-center user-table-option column">' .
             '    <div>' . $is_active . '</div>' .
@@ -205,7 +195,7 @@ class Users extends model
     function format_permissions($permissions): string
     {
         $level = $permissions == 1 ? 'Bajar de nivel' : 'Subir de nivel';
-        $permissions = $permissions == 1 ? 'Administrador' : 'Usuario';
+        $permissions = $permissions == 1 ? '<b class="text-indigo">Administrador</b>' : '<b class="text-blue">Usuario</b>';
         return
             '<div class="d-flex justify-content-center align-items-center user-table-option column">' .
             '    <div>' . $permissions . '</div>' .

@@ -45,7 +45,7 @@ class Messages extends controller
                         <br/>No vuelvas a intentarlo.</h6>';
                 }
             } else {
-                echo '<h6 class="text-danger text-center">Ha habido un problema al enviar tu comentario...
+                echo '<h6 class="text-danger text-center">Ha habido un problema al enviar tu mensaje...
                         <br/>No vuelvas a intentarlo.</h6>';
             }
         } else {

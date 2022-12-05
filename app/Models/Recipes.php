@@ -39,7 +39,7 @@ class Recipes extends model
 
     function datatable_recipes()
     {
-        $query = "SELECT * FROM $this->table";
+        $query = "SELECT * FROM $this->table ORDER BY uploaded_date DESC;";
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->execute();

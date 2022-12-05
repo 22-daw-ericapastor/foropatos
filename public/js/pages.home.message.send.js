@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.match(/enviado/)) {
                         issue_title.value = '';
                         issue_text.value = '';
+                        issue_btn.disabled = true;
                         setTimeout(function () {
                             response.innerHTML = '';
                         }, 4000);
