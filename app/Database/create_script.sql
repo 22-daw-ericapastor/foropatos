@@ -95,19 +95,18 @@ VALUES
 -- Initial messages
 INSERT INTO messages (username, issue, issue_slug, msg_text)
 VALUES
-  ('user4', 'qwe', 'qwe', 'wqe'),
-  ('user7', 'qwe', 'qwe1', 'wqe'),
-  ('user3', 'qwe', 'qwe2', 'wqe'),
-  ('user8', 'qwe', 'qwe3', 'wqe'),
-  ('user10', 'qwe', 'qw4e', 'wqe'),
-  ('user5', 'qwe', 'qwe5', 'wqe'),
-  ('user9', 'qwe', 'qwe6', 'wqe'),
-  ('user2', 'qwe', 'qwe7', 'wqe'),
-  ('user0', 'qwe', 'qwe8', 'wqe'),
-  ('user14', 'qwe', 'qw9e', 'wqe'),
-  ('user6', 'qwe', 'qwe0', 'wqe'),
-  ('user3', 'qwe', 'qw1e', 'wqe'),
-  ('user13', 'qwe', 'qw2e', 'wqe'),
-  ('user6', 'qwe', 'qw3e', 'wqe'),
-  ('user12', 'qwe', 'qwe4', 'wqe');
-  
+  ('user4', 'msg1', 'msg1', 'msg1'),
+  ('user7', 'msg2', 'msg2', 'msg2'),
+  ('user3', 'msg3', 'msg3', 'msg3'),
+  ('user8', 'msg4', 'msg4', 'msg4'),
+  ('user10', 'msg5', 'msg5', 'msg5'),
+  ('user5', 'msg6', 'msg6', 'msg6'),
+  ('user9', 'msg7', 'msg7', 'msg7'),
+  ('user2', 'msg8', 'msg8', 'msg8'),
+  ('user0', 'msg9', 'msg9', 'msg9'),
+  ('user14', 'msg10', 'msg10', 'msg10'),
+  ('user6', 'msg11', 'msg11', 'msg11'),
+  ('user3', 'msg12', 'msg12', 'msg12'),
+  ('user13', 'msg13', 'msg13', 'msg13'),
+  ('user6', 'msg14', 'msg14', 'msg14'),
+  ('user12', 'msg15', 'msg15', 'msg15');

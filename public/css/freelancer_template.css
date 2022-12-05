@@ -8425,11 +8425,13 @@ textarea.form-control-lg {
     color: var(--bs-pink) !important;
 }
 
-.text-indigo{
+.text-indigo {
     color: var(--bs-indigo);
 }
-.text-blue{
-    color: var(--bs-blue);}
+
+.text-blue {
+    color: var(--bs-blue);
+}
 
 .text-light {
     --bs-text-opacity: 1;
@@ -12615,6 +12617,10 @@ form a {
     padding-top: 4rem;
 }
 
+#msg-table {
+    padding-top: 2rem;
+}
+
 #recipes-table, #users-table {
     margin-bottom: 1rem;
 }
@@ -12681,7 +12687,8 @@ form a {
 #recipe-manage .container.recipes_datatable-container {
     max-width: 600px;
 }
-#users-manage .container.users_datatable-container{
+
+#users-manage .container.users_datatable-container {
     max-width: 900px;
 }
 
