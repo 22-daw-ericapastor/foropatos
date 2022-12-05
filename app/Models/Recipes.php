@@ -108,10 +108,10 @@ class Recipes extends model
 
     function add_recipe($params): bool
     {
-        $query = "INSERT INTO $this->table (src, title, description, admixtures, making, difficulty, slug) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO $this->table (slug, src, title, description, admixtures, making, difficulty) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('sssssis', $src, $title, $description, $admixtures, $making, $difficulty, $slug);
+            $stmt->bind_param('ssssssi', $slug, $src, $title, $description, $admixtures, $making, $difficulty);
             $src = $params['src'];
             $title = $params['title'];
             $description = $params['description'];

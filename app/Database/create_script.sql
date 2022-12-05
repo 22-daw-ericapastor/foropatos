@@ -32,7 +32,7 @@ CREATE TABLE recipes(
   ratings INT DEFAULT 0,
   points FLOAT DEFAULT 0,
   difficulty TINYINT DEFAULT 1,
-  uploaded_date DATETIME,
+  uploaded_date DATETIME DEFAULT NOW()foropatos,
   PRIMARY KEY(slug)
 );
 

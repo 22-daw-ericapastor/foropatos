@@ -91,14 +91,13 @@ class Recipes extends controller
                 if (preg_match('/^[A-Za-z ]+$/', $title)) {
                     // declare slug recipe
                     $original_slug = $_REQUEST['updtrcp'];
-
                     $new_slug = strtolower(str_replace(' ', '-', validate($_REQUEST['rcp_title'])));
                     if ($original_slug !== $new_slug) {
                         if (model('Recipes')->get_recipes($new_slug) !== false) {
                             $data['response'] = '<p class="text-danger">Ya hay una receta con ese nombre.</p>';
                         }
                     }
-                    if (!isset($data['response']) && isset($_FILES['full_path'])) {
+                    if (!isset($data['response']) && $_FILES['img_src']['full_path'] !== '') {
                         $src = $this->upload_image('/assets/imgs/recipes/');
                         if (!preg_match('/imgs/', $src)) {
                             $data['response'] = $src;
