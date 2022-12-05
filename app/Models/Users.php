@@ -223,4 +223,11 @@ class Users extends model
             '</div>';
     }
 
+    function count_admins()
+    {
+        $query = "SELECT COUNT(*) from $this->table WHERE permissions=1 GROUP BY username;";
+        $stmt = $this->conn->query($query);
+        return $stmt->num_rows;
+    }
+
 }

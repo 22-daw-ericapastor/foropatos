@@ -26,17 +26,7 @@ class Recipes extends model
                 if ($res->num_rows > 0) {
                     $json = [];
                     while ($row = $res->fetch_assoc()) {
-                        $json[] = [
-                            'slug' => $row['slug'],
-                            'src' => $row['src'],
-                            'title' => $row['title'],
-                            'description' => $row['description'],
-                            'admixtures' => $row['admixtures'],
-                            'making' => $row['making'],
-                            'ratings' => $row['ratings'],
-                            'points' => $row['points'],
-                            'difficulty' => $row['difficulty']
-                        ];
+                        $json[] = $row;
                     }
                     return $json;
                 }

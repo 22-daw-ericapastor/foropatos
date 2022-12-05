@@ -111,18 +111,29 @@ class Users extends controller
     {
         if (isset($_GET['toggle_active']) && isset($_GET['user'])) {
             $is_active = intval($_GET['toggle_active']);
-            $user = $_GET['user'];
-            if (model('Users')->toggle_active($is_active, $user) === true) {
-                $_SESSION['__user']['is_active'] = $is_active;
-                if ($is_active === 1) {
-                    echo '<p class="text-success">¡' . $user . ' ya está activo de nuevo!</p>';
+            $username = $_GET['user'];
+            if ($user = model('Users')->get_all_from_user($username)) {
+                // check user admin
+                if (($user['permissions'] === 1 && model('Users')->count_admins() > 1) || $user['permissions'] === 0) {
+                    if (model('Users')->toggle_active($is_active, $username) === true) {
+                        $_SESSION['__user']['is_active'] = $is_active;
+                        if ($is_active === 1) {
+                            echo '<p class="text-success">¡' . $username . ' ya está activo de nuevo!</p>';
+                        } else {
+                            echo '<p class="text-success">¡' . $username . ' fue desactivado!</p>';
+                        }
+                    } else {
+                        echo '<p class="text-danger">No fue posible actualizar a ' . $username .
+                            '.<br/>Contacte con Effy para que lo resuelva.</p>';
+                    }
                 } else {
-                    echo '<p class="text-success">¡' . $user . ' fue desactivado!</p>';
+                    echo '<p class="text-danger">' . $username . ' es el único administrador. Configura otro para poder dar de baja a este usuario.</p>';
                 }
             } else {
-                echo '<p class="text-danger">No fue posible actualizar a ' . $user .
-                    '.<br/>Contacte con Effy para que lo resuelva.</p>';
+                echo '<p class="text-danger">No se encuentra el usuario.</p>';
             }
+        } else {
+            echo '<p class="text-danger">No hay datos para buscar al usuario.</p>';
         }
     }
 
@@ -130,17 +141,28 @@ class Users extends controller
     {
         if (isset($_GET['toggle_permissions']) && isset($_GET['user'])) {
             $permissions = intval($_GET['toggle_permissions']);
-            $user = $_GET['user'];
-            if (model('Users')->toggle_permissions($permissions, $user) === true) {
-                if ($permissions === 1) {
-                    echo '<p class="text-success">¡' . $user . ' subió de nivel!</p>';
+            $username = $_GET['user'];
+            if ($user = model('Users')->get_all_from_user($username)) {
+                // check user admin
+                if (($user['permissions'] === 1 && model('Users')->count_admins() > 1) || $user['permissions'] === 0) {
+                    if (model('Users')->toggle_permissions($permissions, $username) === true) {
+                        if ($permissions === 1) {
+                            echo '<p class="text-success">¡' . $username . ' subió de nivel!</p>';
+                        } else {
+                            echo '<p class="text-success">¡' . $username . ' bajó de nivel!</p>';
+                        }
+                    } else {
+                        echo '<p class="text-danger">No fue posible actualizar a ' . $username .
+                            '.<br/>Contacte con Effy para que lo resuelva.</p>';
+                    }
                 } else {
-                    echo '<p class="text-success">¡' . $user . ' bajó de nivel!</p>';
+                    echo '<p class="text-danger">' . $username . ' es el único administrador. Configura otro para bajar de nivel a este usuario.</p>';
                 }
             } else {
-                echo '<p class="text-danger">No fue posible actualizar a ' . $user .
-                    '.<br/>Contacte con Effy para que lo resuelva.</p>';
+                echo '<p class="text-danger">No se encuentra el usuario.</p>';
             }
+        } else {
+            echo '<p class="text-danger">No hay datos para buscar al usuario.</p>';
         }
     }
 
@@ -149,19 +171,22 @@ class Users extends controller
         if (isset($_GET['delete_user'])) {
             $username = $_GET['delete_user'];
             if ($user = model('Users')->get_all_from_user($username)) {
-                if (model('DeletedUsers')->insert($user) && model('Users')->delete_user($username)) {
-                    echo '<p class="text-success">' . $username . ' fue eliminado con éxito.</p>';
+                // check user admin
+                if (($user['permissions'] === 1 && model('Users')->count_admins() > 1) || $user['permissions'] === 0) {
+                    if (model('DeletedUsers')->insert($user) && model('Users')->delete_user($username)) {
+                        echo '<p class="text-success">' . $username . ' fue eliminado con éxito.</p>';
+                    } else {
+                        echo '<p class="text-danger">' . $username . ' no pudo ser eliminado.' .
+                            '<br/>Contacte con Effy para que lo resuelva.</p>';
+                    }
                 } else {
-                    echo '<p class="text-danger">' . $username . ' no pudo ser eliminado.' .
-                        '<br/>Contacte con Effy para que lo resuelva.</p>';
+                    echo '<p class="text-danger">' . $username . ' es el único administrador. Configura otro para poder eliminar este usuario.</p>';
                 }
             } else {
-                echo '<p class="text-danger">El usuario no pudo ser eliminado.' .
-                    '<br/>Contacte con Effy para que lo resuelva.</p>';
+                echo '<p class="text-danger">No se encuentra el usuario.</p>';
             }
         } else {
-            echo '<p class="text-danger">El usuario no pudo ser eliminado.' .
-                '<br/>Contacte con Effy para que lo resuelva.</p>';
+            echo '<p class="text-danger">No se encuentra el usuario.</p>';
         }
     }
 

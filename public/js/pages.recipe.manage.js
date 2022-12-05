@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 url: '?datatable_recipes', dataSrc: 'response',
             },
             columns: [
-                {title: "", data: "title", class: "pe-3 text-center"},
+                {title: "Recetas", data: "title", class: "pe-3 text-center"},
                 {title: "", data: "update", class: "pe-3 text-center"},
                 {title: "", data: "delete", class: "pe-3 text-center"}
             ],
@@ -38,44 +38,49 @@ document.addEventListener('DOMContentLoaded', function () {
         const delete_link = document.querySelectorAll('.delete_recipe');
         const titles = document.querySelectorAll('.username');
         const diff_options = document.querySelector('#difficulty').children;
-        for (let i = 0; i < update_link.length; i++) {
-            let slug = table_data[i]['slug'];
-            update_link[i].onclick = async function () {
-                // Fill form fields with recipe data
-                // Fill title
-                $('#rcp_title').val(titles[i].innerHTML);
-                // Fill description
-                $('#description').val(table_data[i]['description']);
-                // Select difficulty
-                let rcp_diff = table_data[i]['difficulty'];
-                for (let i = 0; i < diff_options.length; i++) {
-                    if (parseInt(diff_options[i].value) === rcp_diff) {
-                        diff_options[i].selected = true;
-                    }
-                }
-                // Fill image?
-                document.querySelector('.updt_rcp-img').style.background = 'url("' + baseurl + table_data[i]['src'] + '")';
-                // Fill making
-                $('#making').val(table_data[i]['making']);
-                // Fill admixtures if not empty
-                let admixt = table_data[i]['admixtures'];
-                console.log(admixt)
-                if (admixt === '' || admixt === null) admixt = 'La lista está vacía';
-                else $('#admixtures').val(admixt);
-                $('#admixtures ~ label').html(admixt);
-                // put slug in button submit value so it will submit for updating
-                $('#updt-btn').val(table_data[i]['slug']);
-            }
-            delete_link[i].onclick = function () {
-                fetch('?delete_recipe=' + slug)
-                    .then(res => res.text())
-                    .then(data => {
-                        table_response.innerHTML = data;
-                        if (data.match(/eliminada/)) {
-                            table.destroy();
-                            table = draw_table();
+        const index = document.querySelector('.paginate_button.current').getAttribute('data-dt-idx');
+        for (let i = 0; i < table_data.length; i++) {
+            if (update_link[i] && delete_link[i]) {
+                update_link[i].onclick = function () {
+                    let data = table_data[i + index * 10];
+                    console.log(data['src'])
+                    /*
+                     * Fill form fields with recipe data
+                     */
+                    // Fill title
+                    $('#rcp_title').val(titles[i].innerHTML);
+                    // Fill description
+                    $('#description').val(data['description']);
+                    // Select difficulty
+                    let rcp_diff = data['difficulty'];
+                    for (let i = 0; i < diff_options.length; i++) {
+                        if (parseInt(diff_options[i].value) === rcp_diff) {
+                            diff_options[i].selected = true;
                         }
-                    });
+                    }
+                    // Fill image
+                    $('.updt_rcp-img')[0].style.background = 'url("' + baseurl + data['src'] + '")';
+                    // Fill making
+                    $('#making').val(data['making']);
+                    // Fill admixtures if not empty
+                    let admixt = data['admixtures'];
+                    if (admixt === '' || admixt === null) admixt = 'La lista está vacía';
+                    else $('#admixtures').val(admixt);
+                    $('#admixtures ~ label').html(admixt);
+                    // put slug in button submit value so it will submit for updating
+                    $('#updt-btn').val(data['slug']);
+                }
+                delete_link[i].onclick = function () {
+                    fetch('?delete_recipe=' + slug)
+                        .then(res => res.text())
+                        .then(data => {
+                            table_response.innerHTML = data;
+                            if (data.match(/eliminada/)) {
+                                table.destroy();
+                                table = draw_table();
+                            }
+                        });
+                }
             }
         }
     });

@@ -69,7 +69,7 @@ VALUES ('effy', 'effy@correofalso.com', '$2y$10$8c9K8lZY5Jv83Cvz/xz9pOwhXSXdQ.XU
 -- Set default images
 INSERT INTO recipes (slug, src, title, description, difficulty)
 VALUES
-  ('la-pikaburger', 'assets/imgs/recipes/burger.png', 'La Pikaburger', 'La Pikaburg...<br/>Pika... pikaaa... ¡achú!', 2),
+  ('la-pikaburger', 'assets/imgs/recipes/burger.png', 'La Pikaburger', 'La Pikaburg... Pika... pikaaa... ¡achú!', 2),
   ('mediterranean-salad', 'assets/imgs/recipes/salad.png', 'Ensalada mediterránea', 'La verdadera ensalada mediterránea... ¿Con cebolla o sin cebolla?', 1),
   ('ramen', 'assets/imgs/recipes/ramen.png', 'Ramen', 'Fideos de esos... japoneses.', 2),
   ('cupcakes', 'assets/imgs/recipes/cupcake.png', 'Cupcakes', '<i>Capqueiqs</i> de todos los sabores y colores.', 3),

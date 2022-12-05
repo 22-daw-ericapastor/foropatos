@@ -12597,8 +12597,8 @@ form a {
 }
 
 #recipes-table {
-    padding-top: 4rem;
-    border: none;
+    padding-top: 5rem;
+    margin-bottom: 1rem;
 }
 
 #recipes-table_filter {
@@ -12614,7 +12614,7 @@ form a {
     margin-bottom: 2rem;
 }
 
-#users-table_length, #recipes-table_length {
+#users-table_length, #recipes-table_length, #users-table_info {
     display: none;
 }
 
@@ -12676,34 +12676,6 @@ form a {
 
 #uptd_rcp-container .form-control ~ label {
     padding: 1.5rem 1.25rem;
-}
-
-.recipes_datatable-container td {
-    border: 1px solid rgba(var(--bs-dark-rgb), 0.2);
-}
-
-.recipes_datatable-container tbody tr:first-child td:first-child {
-    border-radius: 9px 0 0;
-}
-
-.recipes_datatable-container tbody tr:first-child td:last-child {
-    border-radius: 0 9px 0 0;
-}
-
-.recipes_datatable-container tbody tr:last-child td:first-child {
-    border-radius: 0 0 0 9px;
-}
-
-.recipes_datatable-container tbody tr:last-child td:last-child {
-    border-radius: 0 0 9px;
-}
-
-#recipe-manage table.dataTable thead th, #recipe-manage table.dataTable thead td,
-#users-manage table.dataTable thead th, #users-manage table.dataTable thead td {
-    padding: 0 !important;
-    border: 0 !important;
-    background: transparent !important;
-    visibility: hidden !important;
 }
 
 .table-wrapper {
