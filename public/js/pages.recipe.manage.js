@@ -38,20 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const delete_link = document.querySelectorAll('.delete_recipe');
         const titles = document.querySelectorAll('.username');
         const diff_options = document.querySelector('#difficulty').children;
-        const pages = document.querySelector('.paginate_button');
-        let index = 0;
-        for (let i = 0; i < pages.length; i++) {
-            if (pages[i].classList.contains('current')) index = i;
-        }
-        for (let j = 0; j < table_data.length; j++) {
-            let data = table_data[j + index * 10];
-            if (update_link[j] && delete_link[j]) {
-                update_link[j].onclick = function () {
+        const index = document.querySelector('.paginate_button.current').getAttribute('data-dt-idx');
+        for (let i = 0; i < table_data.length; i++) {
+            let data = table_data[i + index * 10];
+            if (update_link[i] && delete_link[i]) {
+                update_link[i].onclick = function () {
                     /*
                      * Fill form fields with recipe data
                      */
                     // Fill title
-                    $('#rcp_title').val(titles[j].innerHTML);
+                    $('#rcp_title').val(titles[i].innerHTML);
                     // Fill description
                     $('#description').val(data['description']);
                     // Select difficulty
@@ -73,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // put slug in button submit value so it will submit for updating
                     $('#updt-btn').val(data['slug']);
                 }
-                delete_link[j].onclick = async function () {
+                delete_link[i].onclick = async function () {
                     await fetch('?delete_recipe=' + data['slug'])
                         .then(res => res.text())
                         .then(data => {

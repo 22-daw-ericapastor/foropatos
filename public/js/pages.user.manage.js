@@ -33,10 +33,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const index = document.querySelector('.paginate_button.current').getAttribute('data-dt-idx');
         for (let i = 0; i < table_data.length; i++) {
             let data = table_data[i + index * 10];
-            // user of this row
-            let user = users[i].innerHTML;
             // Toggle user (in)active onclick
             if (toggle_active[i] && toggle_permissions[i] && delete_user_btn[i]) {
+                // user of this row
+                let user = users[i].innerHTML;
                 let is_active = data['is_active'];
                 toggle_active[i].addEventListener('click', function () {
                     is_active = is_active === '1' || is_active === 1 ? 0 : 1;
