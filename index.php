@@ -28,13 +28,16 @@ const appdir = __DIR__ . '/app/';
  * Time out for session
  * ---------------------------------------------------------------------------------------------------------------------
  */
-const timeout = 300; // time is in seconds
+const timeout = 5 * 60; // time is in seconds
 
 // Require Config file
 require_once appdir . 'Config/Config.php';
 
 // Start session
 session_re_start();
+
+// set a timeout
+
 
 // Use main controller
 use \Controllers\BaseController as go;

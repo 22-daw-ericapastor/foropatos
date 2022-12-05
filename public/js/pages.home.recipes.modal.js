@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let admixtures = '';
         let mixtures = 'Por rellenar';
         if (content['admixtures']) {
-            mixtures='';
+            mixtures = '';
             admixtures = content['admixtures'].split(', ');
             for (let i = 0; i < admixtures.length; i++) {
                 mixtures = mixtures + ' - ' + admixtures[i] + '<br/>';
@@ -381,6 +381,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                             comment_text[i].value = '';
                             unselect_stars();
                             fill_comments();
+                        } else if (data.match(/caducado/)) {
+                            setTimeout(function () {
+                                window.location.assign('?signout');
+                            }, 3000);
                         }
                         setTimeout(function () {
                             comment_response[i].innerHTML = '';

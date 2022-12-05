@@ -136,20 +136,20 @@ class Recipes extends controller
 
     function delete_recipe()
     {
-        if (isset($_GET['delete_recipe']) && $_GET['delete_recipe'] != '') {
-            if (model('Recipes')->delete_recipe($_GET['delete_recipe'])) {
-                echo '<p class="text-success">Receta eliminada.</p>';
+        if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
+            if (isset($_GET['delete_recipe']) && $_GET['delete_recipe'] != '') {
+                if (model('Recipes')->delete_recipe($_GET['delete_recipe'])) {
+                    echo '<p class="text-success">Receta eliminada.</p>';
+                } else {
+                    echo '<p class="text-danger">Algo fue mal, no se pudo eliminar la receta.</p>';
+                }
             } else {
-                echo '<p class="text-danger">Algo fue mal, no se pudo eliminar la receta.</p>';
+                echo '<p class="text-danger">Algo fue mal, faltan datos.</p>';
             }
         } else {
-            echo '<p class="text-danger">Algo fue mal, faltan datos.</p>';
+            echo '<p class="text-danger">Parece que el tiempo de tu sesión ha caducado.
+                <br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</p>';
         }
-    }
-
-    function recipe_manage()
-    {
-        // call to get_recipes in Recipes Model
     }
 
 }

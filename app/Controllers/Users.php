@@ -98,6 +98,7 @@ class Users extends controller
                 // check user admin
                 if (($user['permissions'] === 1 && model('Users')->count_admins() > 1) || $user['permissions'] === 0) {
                     if (model('Users')->toggle_active($username) === true) {
+                        $_SESSION['__user']['is_active'] = 0;
                         echo '<p class="text-success">¡Tu cuenta se ha desactivado con éxito!<br/>En unos segundos se te sacará de la aplicación.</p>';
                     } else {
                         echo '<p class="text-danger">Ha habido un problema dando de baja tu cuenta. Vuelve a intentarlo más tarde.</p>';

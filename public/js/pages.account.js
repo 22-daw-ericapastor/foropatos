@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelector('.account_deactivate-btn').onclick = function () {
         const response = document.querySelector('#account_deactivate-response');
-        console.log(response)
         fetch('?acc_deactivate').then(r => r.text()).then(data => {
             response.innerHTML = data;
             if (data.match(/desactivado/)) {
@@ -91,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function () {
             fetch('?msg_is_read=' + is_read + '&user=' + user + '&slug=' + slug)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
                     if (data['response'] === true) {
                         format_is_read_btn(btn, is_read);
                     }
@@ -102,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function delete_message(btn, data) {
         btn.addEventListener('click', async function () {
             let slug = data['slug'];
-            console.log(slug)
             await fetch('?delmsg=' + slug)
                 .then(r => r.text())
                 .then(data => {

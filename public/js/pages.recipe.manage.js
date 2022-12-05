@@ -77,6 +77,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             if (data.match(/eliminada/)) {
                                 table.destroy();
                                 table = draw_table();
+                            } else if (data.match(/caducado/)) {
+                                setTimeout(function () {
+                                    window.location.assign('?signout');
+                                }, 3000);
                             }
                         });
                 }

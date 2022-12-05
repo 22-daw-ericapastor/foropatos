@@ -28,7 +28,7 @@ class Comments extends controller
                         } else {
                             echo '<p class="text-danger">Ha habido un problema al enviar tu comentario...<br/>No vuelvas a intentarlo.</p>';
                         }
-                    }else{
+                    } else {
                         echo '<p class="text-danger">¡Ya has valorado esta receta! Disculpa las molestias y vete a hacer otra cosa.</p>';
                     }
                 } else {
@@ -38,7 +38,8 @@ class Comments extends controller
                 echo '<p class="text-danger">No puedes enviar un comentario vacío, pedazo de bárbaro. ^^</p>';
             }
         } else {
-            echo '<p class="text-danger">Tienes que loggearte para poder publicar comentarios.</p>';
+            echo '<p class="text-danger">Parece que el tiempo de tu sesión ha caducado.
+                <br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</p>';
         }
     }
 

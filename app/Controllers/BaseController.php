@@ -28,6 +28,17 @@ class BaseController
         }
     }
 
+    function check_user_activity()
+    {
+        if ((isset($_SESSION['__user']) && $_SESSION['__user']['is_active'] === 0)
+            || (isset($_SESSION['last_acted_on']) && (time() - $_SESSION['last_acted_on'] > timeout))) {
+            session_re_start();
+        } else {
+            session_regenerate_id(true);
+            $_SESSION['last_acted_on'] = time();
+        }
+    }
+
     /**
      * Home
      * -----------------------------------------------------------------------------------------------------------------
@@ -35,9 +46,7 @@ class BaseController
      */
     function home()
     {
-        if (isset($_SESSION['__user']) && $_SESSION['__user']['is_active'] === 0) {
-            session_re_start();
-        }
+        $this->check_user_activity();
         $data['page'] = 'home';
         // add here db request to get recipes to fill page and pass it to $data
         template('pages/home', $data);
@@ -112,6 +121,7 @@ class BaseController
                 if ($model->get_user($username)) {
                     if ($model->get_user($username, $passwd) && $model->get_user($username, $passwd)['is_active'] === 1) {
                         $_SESSION['__user'] = $model->get_user($username, $passwd);
+                        $_SESSION['last_acted_on'] = time();
                         $this->home();
                         return;
                     } else {
@@ -147,6 +157,7 @@ class BaseController
      */
     function user_manage()
     {
+        $this->check_user_activity();
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
             template('pages/user.manage', ['page' => 'user_manage']);
         } else {
@@ -161,6 +172,7 @@ class BaseController
      */
     function recipe_manage()
     {
+        $this->check_user_activity();
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
             template('pages/recipe.manage', ['page' => 'recipe_manage']);
         } else {
@@ -194,6 +206,7 @@ class BaseController
      */
     function account()
     {
+        $this->check_user_activity();
         if (isset($_SESSION['__user']) && $_SESSION['__user']['is_active'] === 1) {
             template('pages/account', ['page' => 'my_account']);
         } else {
@@ -252,24 +265,27 @@ class BaseController
         controller('Recipes')->get_recipes();
     }
 
+    function datatable_recipes()
+    {
+        controller('Recipes')->datatable_recipes();
+    }
+
     function add_recipe()
     {
+        $this->check_user_activity();
         controller('Recipes')->add_recipe();
     }
 
     function updt_rcp()
     {
+        $this->check_user_activity();
         controller('Recipes')->updt_rcp();
     }
 
     function delete_recipe()
     {
+        $this->check_user_activity();
         controller('Recipes')->delete_recipe();
-    }
-
-    function datatable_recipes()
-    {
-        controller('Recipes')->datatable_recipes();
     }
 
 
@@ -288,6 +304,7 @@ class BaseController
 
     function comment(): void
     {
+        $this->check_user_activity();
         controller('Comments')->comment();
     }
 
