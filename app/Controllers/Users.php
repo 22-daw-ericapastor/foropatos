@@ -12,7 +12,7 @@ class Users extends controller
         if (isset($_SESSION['__user'])) {
             if (isset($_POST['username']) && $_POST['username'] !== '') {
                 $new_username = validate($_POST['username']); // This is the one written by the person.
-                if (preg_match('/^[0-9A-Za-z_-]+$/', $new_username)) { // Check there's no special chars
+                if (preg_match('/^[0-9A-Za-z_-]+$/', $new_username)) { // Check there are no special chars
                     $model = model('Users');
                     $old_username = $_SESSION['__user']['username'];
                     if ($new_username !== $old_username) {

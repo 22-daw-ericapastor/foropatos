@@ -10,10 +10,13 @@
         </div>
         <h6 class="text-center text-primary my-2">Los campos marcados con asterisco son obligatorios.
             <br/>Los otros puedes rellenarlos ahora o más tarde.</h6>
-        <h6 class="text-center my-2"><?php if (isset($data['response'])) echo $data['response']; ?></h6>
+        <h6 class="text-center my-4"><?php if (isset($data['response'])) echo $data['response']; ?></h6>
         <!-- Contact Section Form-->
         <div class="row justify-content-center">
             <div class="col-lg-8 col-xl-7">
+                <div class="my-3 text-end">
+                    <a href="?recipe_manage" class="btn btn-primary">&#x2190; Gestionar recetas</a>
+                </div>
                 <form id="add_rcp-form" method="post" action="?add_recipe" enctype="multipart/form-data">
                     <!-- Title input-->
                     <div class="form-floating mb-3">

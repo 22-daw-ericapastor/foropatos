@@ -63,8 +63,7 @@ class BaseController
                 isset($_POST['passwd']) && $_POST['passwd'] != '' &&
                 isset($_POST['passwd_repeat']) && $_POST['passwd_repeat'] != '') {
                 $username = validate($_POST['username']);
-                // Check there's no special chars in username
-                if (preg_match('/^[0-9A-Za-z_-]+$/', $username)) {
+                if (preg_match('/^[0-9A-Za-z_-]+$/', $username)) { // Check there are no special chars
                     $email = validate($_POST['email']);
                     $passwd = validate($_POST['passwd']);
                     $passwd_repeat = validate($_POST['passwd_repeat']);

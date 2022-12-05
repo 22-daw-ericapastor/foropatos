@@ -32,7 +32,7 @@ const timeout = 300; // time is in seconds
 
 // Require Config file
 require_once appdir . 'Config/Config.php';
-
+/*
 // Start session
 session_re_start();
 
@@ -48,3 +48,5 @@ new go($route);
 // phpinfo();
 
 // var_dump($_SESSION);
+*/
+$model = new \Models\Recipes();

@@ -26,10 +26,54 @@ class Recipes extends model
                 if ($res->num_rows > 0) {
                     $json = [];
                     while ($row = $res->fetch_assoc()) {
-                        $json[] = $row;
+                        $json[] = [
+                            'slug' => $row['slug'],
+                            'src' => $row['src'],
+                            'title' => $row['title'],
+                            'description' => $row['description'],
+                            'admixtures' => $row['admixtures'],
+                            'making' => $row['making'],
+                            'ratings' => $row['ratings'],
+                            'points' => $row['points'],
+                            'difficulty' => $row['difficulty']
+                        ];
                     }
                     return $json;
                 }
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
+    function datatable_recipes()
+    {
+        $query = "SELECT * FROM $this->table";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            $results = $stmt->get_result();
+            if ($results->num_rows > 0) {
+                $json = [];
+                while ($row = $results->fetch_assoc()) {
+                    $json[] = [
+                        'title' => '<div class="username user-cell">' . $row['title'] . '</div>',
+                        'update' => '<div class="user-cell">' .
+                            '            <button class="btn btn-primary py-2 update_recipe" type="button" data-bs-target="#modal" data-bs-toggle="modal">' .
+                            '                Editar receta' .
+                            '            </button>' .
+                            '        </div>',
+                        'delete' => '<div class="user-cell"><a class="text-secondary text-hover-secondary cursor-pointer delete_recipe">Borrar receta</a></div>',
+                        'slug' => $row['slug'],
+                        'description' => $row['description'],
+                        'difficulty' => $row['difficulty'],
+                        'making' => $row['making'],
+                        'admixtures' => $row['admixtures'],
+                        'src' => $row['src'],
+                    ];
+                }
+                return $json;
             }
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
@@ -72,24 +116,31 @@ class Recipes extends model
         return ['ratings' => $num_ratings, 'points' => $points_media];
     }
 
-    function add_recipe($params): bool
+    function insupdt_query($query, $params)
     {
-        $query = "INSERT INTO $this->table (slug, src, title, description, admixtures, making, difficulty) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('ssssssi', $slug, $src, $title, $description, $admixtures, $making, $difficulty);
-            $slug = (strtolower(str_replace(' ', '-', $title)));
+            $stmt->bind_param('sssssis', $src, $title, $description, $admixtures, $making, $difficulty, $slug);
             $src = $params['src'];
             $title = $params['title'];
             $description = $params['description'];
             $admixtures = $params['admixtures'];
             $making = $params['making'];
             $difficulty = $params['difficulty'];
+            $slug = $params['slug'];
             if ($stmt->execute()) {
                 return true;
             }
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    function add_recipe($params): bool
+    {
+        $query = "INSERT INTO $this->table (src, title, description, admixtures, making, difficulty, slug) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        if ($this->insupdt_query($query, $params)) {
+            return true;
         }
         return false;
     }
@@ -97,21 +148,8 @@ class Recipes extends model
     function updt_rcp($params): bool
     {
         $query = "UPDATE $this->table SET src=?, title=?, description=?, admixtures=?, making=?, difficulty=? WHERE slug=?;";
-        try {
-            $stmt = $this->conn->prepare($query);
-            $stmt->bind_param('sssssis', $src, $title, $desc, $mix, $making, $diff, $slug);
-            $src = $params['src'];
-            $title = $params['title'];
-            $desc = $params['description'];
-            $mix = $params['admixtures'];
-            $making = $params['making'];
-            $diff = $params['difficulty'];
-            $slug = $params['slug'];
-            if ($stmt->execute()) {
-                return true;
-            }
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
+        if ($this->insupdt_query($query, $params)) {
+            return true;
         }
         return false;
     }
@@ -124,40 +162,6 @@ class Recipes extends model
             $stmt->bind_param('s', $slug);
             if ($stmt->execute()) {
                 return true;
-            }
-        } catch (mysqli_sql_exception $e) {
-            echo $e->getMessage();
-        }
-        return false;
-    }
-
-    function datatable_recipes()
-    {
-        $query = "SELECT * FROM $this->table";
-        try {
-            $stmt = $this->conn->prepare($query);
-            $stmt->execute();
-            $results = $stmt->get_result();
-            if ($results->num_rows > 0) {
-                $json = [];
-                while ($row = $results->fetch_assoc()) {
-                    $json[] = [
-                        'title' => '<div class="username user-cell">' . $row['title'] . '</div>',
-                        'update' => '<div class="user-cell">' .
-                            '            <button class="btn btn-primary py-2 update_recipe" type="button" data-bs-target="#modal" data-bs-toggle="modal">' .
-                            '                Editar receta' .
-                            '            </button>' .
-                            '        </div>',
-                        'delete' => '<div class="user-cell"><a class="text-secondary text-hover-secondary cursor-pointer delete_recipe">Borrar receta</a></div>',
-                        'slug' => $row['slug'],
-                        'description' => $row['description'],
-                        'difficulty' => $row['difficulty'],
-                        'making' => $row['making'],
-                        'admixtures' => $row['admixtures'],
-                        'src' => $row['src']
-                    ];
-                }
-                return $json;
             }
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();

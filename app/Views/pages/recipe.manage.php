@@ -18,7 +18,7 @@
                     <div class="container">
                         <div class="table-wrapper">
                             <div class="add_rcp-btn">
-                                <a href="?add_recipe" class="btn btn-primary">Añadir receta</a>
+                                <a href="?add_recipe" class="btn btn-primary">Añadir receta &#x2192;</a>
                             </div>
                             <table class="table hover w-100 order-column compact table-responsive mt-4"
                                    id="recipes-table"></table>

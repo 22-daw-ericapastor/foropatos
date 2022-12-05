@@ -23,7 +23,6 @@ CREATE TABLE deleted_users(
 );
 
 CREATE TABLE recipes(
-  id INT UNSIGNED AUTO_INCREMENT,
   slug VARCHAR(30),
   src VARCHAR(100),
   title VARCHAR(30),
@@ -33,8 +32,8 @@ CREATE TABLE recipes(
   ratings INT DEFAULT 0,
   points FLOAT DEFAULT 0,
   difficulty TINYINT DEFAULT 1,
-  PRIMARY KEY(id),
-  KEY(slug)
+  uploaded_date DATETIME,
+  PRIMARY KEY(slug)
 );
 
 CREATE TABLE comments(
@@ -76,3 +75,4 @@ VALUES
   ('cupcakes', 'assets/imgs/recipes/cupcake.png', 'Cupcakes', '<i>Capqueiqs</i> de todos los sabores y colores.', 3),
   ('comida-casera-para-mascotas', 'assets/imgs/recipes/petfood.png', 'Comida casera para mascotas', 'Aprende a cocinar para tu mejor amigo de manera segura', 3),
   ('recetas-con-atun-en-lata', 'assets/imgs/recipes/tuna.png', 'Recetas con atún en lata', 'Todo lo que puedes hacer con una lata de atún y... ¿más?', 1);
+  
