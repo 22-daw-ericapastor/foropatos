@@ -91,6 +91,7 @@ class Recipes extends controller
                 if (preg_match('/^[A-Za-z ]+$/', $title)) {
                     // declare slug recipe
                     $original_slug = $_REQUEST['updtrcp'];
+
                     $new_slug = strtolower(str_replace(' ', '-', validate($_REQUEST['rcp_title'])));
                     if ($original_slug !== $new_slug) {
                         if (model('Recipes')->get_recipes($new_slug) !== false) {
@@ -107,7 +108,8 @@ class Recipes extends controller
                     }
                     if (!isset($data['response']) && isset($src)) {
                         $params = [
-                            'slug' => $new_slug,
+                            'old_slug' => $original_slug,
+                            'new_slug' => $new_slug,
                             'src' => $src,
                             'title' => validate($_REQUEST['rcp_title']),
                             'description' => validate($_REQUEST['description']),

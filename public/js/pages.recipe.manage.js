@@ -37,13 +37,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const update_link = document.querySelectorAll('.update_recipe');
         const delete_link = document.querySelectorAll('.delete_recipe');
         const titles = document.querySelectorAll('.username');
+        const img = document.querySelector('#img_src');
         const diff_options = document.querySelector('#difficulty').children;
         const index = document.querySelector('.paginate_button.current').getAttribute('data-dt-idx');
+        console.log(img)
         for (let i = 0; i < table_data.length; i++) {
+            let data = table_data[i + index * 10];
             if (update_link[i] && delete_link[i]) {
                 update_link[i].onclick = function () {
-                    let data = table_data[i + index * 10];
-                    console.log(data['src'])
                     /*
                      * Fill form fields with recipe data
                      */
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     $('#updt-btn').val(data['slug']);
                 }
                 delete_link[i].onclick = function () {
-                    fetch('?delete_recipe=' + slug)
+                    fetch('?delete_recipe=' + data['slug'])
                         .then(res => res.text())
                         .then(data => {
                             table_response.innerHTML = data;

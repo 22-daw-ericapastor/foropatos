@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 url: '?get_users', dataSrc: 'data',
             },
             columns: [
-                {title: "", data: "username", class: "pe-3 text-center"},
+                {title: "Usuario", data: "username", class: "pe-3 text-center"},
                 {title: "", data: "toggle_active", class: "pe-3 text-center"},
                 {title: "", data: "toggle_permissions", class: "pe-3 text-center"},
                 {title: "", data: "delete_user", class: "pe-3 text-center"}
@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
             pageLength: rows_in_datatable,
             responsive: true,
             ordering: false,
-            paging: false
         });
     }
 
@@ -30,26 +29,31 @@ document.addEventListener('DOMContentLoaded', function () {
         const toggle_permissions = document.getElementsByClassName('toggle-user_permissions');
         const delete_user_btn = document.getElementsByClassName('delete_user');
         const users = document.getElementsByClassName('username');
-        const data = table.data();
-        for (let i = 0; i < toggle_active.length; i++) {
+        const table_data = table.data();
+        const index = document.querySelector('.paginate_button.current').getAttribute('data-dt-idx');
+        for (let i = 0; i < table_data.length; i++) {
+            let data = table_data[i + index * 10];
             // user of this row
             let user = users[i].innerHTML;
             // Toggle user (in)active onclick
-            let is_active = data[i]['is_active'];
-            toggle_active[i].addEventListener('click', function () {
-                is_active = is_active === '1' || is_active === 1 ? 0 : 1;
-                toggle_user_active(is_active, user);
-            });
-            // Toggle permissions admin/user onclick
-            let permissions = data[i]['permissions'];
-            toggle_permissions[i].addEventListener('click', function () {
-                permissions = permissions === '1' || permissions === 1 ? 0 : 1;
-                toggle_user_permissions(permissions, user);
-            });
-            // Delete user onclick
-            delete_user_btn[i].addEventListener('click', function () {
-                delete_user(user);
-            });
+            if (toggle_active[i] && toggle_permissions[i] && delete_user_btn[i]) {
+                let is_active = data['is_active'];
+                toggle_active[i].addEventListener('click', function () {
+                    is_active = is_active === '1' || is_active === 1 ? 0 : 1;
+                    toggle_user_active(is_active, user);
+                });
+                // Toggle permissions admin/user onclick
+                let permissions = data['permissions'];
+                toggle_permissions[i].addEventListener('click', function () {
+                    permissions = permissions === '1' || permissions === 1 ? 0 : 1;
+                    toggle_user_permissions(permissions, user);
+                });
+                // Delete user onclick
+                delete_user_btn[i].addEventListener('click', function () {
+                    delete_user(user);
+                });
+            }
+
         }
 
         async function toggle_user_active(is_active, user) {

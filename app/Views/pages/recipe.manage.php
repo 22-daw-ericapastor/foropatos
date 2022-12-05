@@ -13,7 +13,7 @@
                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                         <div class="divider-custom-line"></div>
                     </div>
-                    <h6 class="text-center my-5"><?php if (isset($data['response'])) echo($data['response']); ?></h6>
+                    <h6 class="text-center my-5"><?php if (isset($data['response'])) var_dump($data['response']); ?></h6>
                     <h6 class="my-5 text-center" id="ajax-table_response"></h6>
                     <div class="table-wrapper">
                         <div class="add_rcp-btn">

@@ -12596,9 +12596,23 @@ form a {
     height: 2.5rem;
 }
 
+.add_rcp-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
 #recipes-table {
-    padding-top: 5rem;
+    padding-top: 4rem;
+}
+
+#recipes-table, #users-table {
     margin-bottom: 1rem;
+}
+
+#recipes-table_length, #users-table_length {
+    display: none;
 }
 
 #recipes-table_filter {
@@ -12611,11 +12625,6 @@ form a {
     border-radius: 20px;
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-bottom: 2rem;
-}
-
-#users-table_length, #recipes-table_length, #users-table_info {
-    display: none;
 }
 
 .user-table-option {
@@ -12628,7 +12637,7 @@ form a {
 }
 
 .user-cell {
-    min-height: 60px;
+    min-height: 50px;
     display: grid;
     align-items: center;
 }
@@ -12680,13 +12689,6 @@ form a {
 
 .table-wrapper {
     position: relative;
-}
-
-.add_rcp-btn {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
 }
 
 .form-static {

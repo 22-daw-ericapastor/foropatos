@@ -106,8 +106,9 @@ class Recipes extends model
         return ['ratings' => $num_ratings, 'points' => $points_media];
     }
 
-    function insupdt_query($query, $params)
+    function add_recipe($params): bool
     {
+        $query = "INSERT INTO $this->table (src, title, description, admixtures, making, difficulty, slug) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             $stmt = $this->conn->prepare($query);
             $stmt->bind_param('sssssis', $src, $title, $description, $admixtures, $making, $difficulty, $slug);
@@ -124,22 +125,28 @@ class Recipes extends model
         } catch (mysqli_sql_exception $e) {
             echo $e->getMessage();
         }
-    }
-
-    function add_recipe($params): bool
-    {
-        $query = "INSERT INTO $this->table (src, title, description, admixtures, making, difficulty, slug) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        if ($this->insupdt_query($query, $params)) {
-            return true;
-        }
         return false;
     }
 
     function updt_rcp($params): bool
     {
-        $query = "UPDATE $this->table SET src=?, title=?, description=?, admixtures=?, making=?, difficulty=? WHERE slug=?;";
-        if ($this->insupdt_query($query, $params)) {
-            return true;
+        $query = "UPDATE $this->table SET slug=?, src=?, title=?, description=?, admixtures=?, making=?, difficulty=? WHERE slug=?;";
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param('ssssssis', $new_slug, $src, $title, $description, $admixtures, $making, $difficulty, $old_slug);
+            $new_slug = $params['new_slug'];
+            $src = $params['src'];
+            $title = $params['title'];
+            $description = $params['description'];
+            $admixtures = $params['admixtures'];
+            $making = $params['making'];
+            $difficulty = $params['difficulty'];
+            $old_slug = $params['old_slug'];
+            if ($stmt->execute()) {
+                return true;
+            }
+        } catch (mysqli_sql_exception $e) {
+            echo $e->getMessage();
         }
         return false;
     }
