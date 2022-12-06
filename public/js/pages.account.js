@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    /* Fill profile image*/
+
     /* Add open and close data change form (password and username)*/
     for (let i = 0; i < close.length; i++) {
         btn[i].addEventListener('click', function () {
@@ -100,9 +102,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    $('#toggle-msg_modal').on('click', function () {
+    $('#toggle-msg_modal').on('click', function (evt) {
         fetch('?is_logged').then(r => r.json()).then(data => {
             if (data['response'] === false) {
+                evt.preventDefault();
+                $('#msg-modal').style.display = 'none';
+                $('#msg-modal').classList.remove('show');
                 $('#session_check-response').html('Parece que el tiempo de tu sesión ha caducado.' +
                     '<br/>Serás redirigido en unos segundos para que vuelvas a loggearte.');
                 setTimeout(function () {

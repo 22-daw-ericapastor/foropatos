@@ -13,8 +13,9 @@
             <?php if ($_SESSION['__user']['permissions'] === 1): ?>
                 <h5 class="masthead-subheading text-center text-uppercase text-primary">Administrador</h5>
             <?php endif; ?>
-            <h5 class="text-center text-primary" id="session_check-response"></h5>
-            <?php if (isset($data['response'])) echo $data['response']; ?>
+            <h5 class="text-center text-danger" id="session_check-response">
+                <?php if (isset($data['response'])) echo $data['response']; ?>
+            </h5>
             <!-- Account Flex Items-->
             <div class="column justify-content-start mt-5 text-dark fw-boldn align-items-center">
                 <!-- Username-->

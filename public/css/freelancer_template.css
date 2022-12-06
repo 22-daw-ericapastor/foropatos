@@ -12761,7 +12761,7 @@ form a {
     min-height: 5.5rem;
 }
 
-.updt_rcp-img {
+.updt_rcp-img, .user-img {
     width: 100px;
     height: 100px;
     background: rgba(var(--bs-primary-rgb), 0.5);
