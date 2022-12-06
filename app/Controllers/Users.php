@@ -92,30 +92,27 @@ class Users extends controller
 
     function acc_deactivate()
     {
-        if (isset($_SESSION['__user'])) {
-            $username = $_SESSION['__user']['username'];
-            if ($user = model('Users')->get_all_from_user($username)) {
-                // check user admin
-                if (($user['permissions'] === 1 && model('Users')->count_admins() > 1) || $user['permissions'] === 0) {
-                    if (model('Users')->toggle_active($username) === true) {
-                        $_SESSION['__user']['is_active'] = 0;
-                        echo '<p class="text-success">¡Tu cuenta se ha desactivado con éxito!<br/>En unos segundos se te sacará de la aplicación.</p>';
-                    } else {
-                        echo '<p class="text-danger">Ha habido un problema dando de baja tu cuenta. Vuelve a intentarlo más tarde.</p>';
-                    }
+        $username = $_SESSION['__user']['username'];
+        if ($user = model('Users')->get_all_from_user($username)) {
+            // check user admin
+            if (($user['permissions'] === 1 && model('Users')->count_admins() > 1) || $user['permissions'] === 0) {
+                if (model('Users')->toggle_active($username) === true) {
+                    $_SESSION['__user']['is_active'] = 0;
+                    echo '<p class="text-success">¡Tu cuenta se ha desactivado con éxito!<br/>En unos segundos se te sacará de la aplicación.</p>';
                 } else {
-                    echo '<p class="text-danger">' . $username . ' es el único administrador. Configura otro para poder dar de baja a este usuario.</p>';
+                    echo '<p class="text-danger">Ha habido un problema dando de baja tu cuenta. Vuelve a intentarlo más tarde.</p>';
                 }
             } else {
-                echo '<p class="text-danger">No se encuentra el usuario.</p>';
+                echo '<p class="text-danger">' . $username . ' es el único administrador. Configura otro para poder dar de baja a este usuario.</p>';
             }
+        } else {
+            echo '<p class="text-danger">No se encuentra el usuario.</p>';
         }
     }
 
     function get_users()
     {
-        $model = model('Users');
-        echo json_encode(['data' => $model->get_users()]);
+        echo json_encode(['data' => model('Users')->get_users()]);
     }
 
     function toggle_active()

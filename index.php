@@ -24,12 +24,6 @@ const viewdir = __DIR__ . '/app/Views/';
  */
 const appdir = __DIR__ . '/app/';
 
-/**
- * Time out for session
- * ---------------------------------------------------------------------------------------------------------------------
- */
-const timeout = 5 * 60; // time is in seconds
-
 // Require Config file
 require_once appdir . 'Config/Config.php';
 
@@ -37,7 +31,6 @@ require_once appdir . 'Config/Config.php';
 session_re_start();
 
 // set a timeout
-
 
 // Use main controller
 use \Controllers\BaseController as go;

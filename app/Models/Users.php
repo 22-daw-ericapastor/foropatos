@@ -155,7 +155,7 @@ class Users extends model
         return false;
     }
 
-    function get_users()
+    function datatable_users()
     {
         $query = "SELECT * from $this->table;";
         try {

@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         return new DataTable('#users-table', {
             processing: true, // fill with ajax request
             ajax: {
-                url: '?get_users', dataSrc: 'data',
+                url: '?datatable_users', dataSrc: 'data',
             },
             columns: [
                 {title: "Usuario", data: "username", class: "pe-3 text-center"},

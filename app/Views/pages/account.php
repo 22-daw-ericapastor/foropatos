@@ -13,6 +13,7 @@
             <?php if ($_SESSION['__user']['permissions'] === 1): ?>
                 <h5 class="masthead-subheading text-center text-uppercase text-primary">Administrador</h5>
             <?php endif; ?>
+            <h5 class="text-center text-primary" id="session_check-response"></h5>
             <?php if (isset($data['response'])) echo $data['response']; ?>
             <!-- Account Flex Items-->
             <div class="column justify-content-start mt-5 text-dark fw-boldn align-items-center">
@@ -65,7 +66,7 @@
                     <div class="account-option-wrapper">
                         <div class="account-option fs-6 m-auto">
                             <b>Ver mensajes</b>
-                            <button type="button" class="btn btn-primary go"
+                            <button type="button" class="btn btn-primary go" id="toggle-msg_modal"
                                     data-bs-target="#msg-modal" data-bs-toggle="modal">&#43;
                             </button>
                         </div>
@@ -104,7 +105,7 @@
                                     <!-- Modal - Title-->
                                     <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Mensajes</h2>
                                     <!-- Database response goes here-->
-                                    <h6 class="my-5 text-center" id="ajax-table_response"></h6>
+                                    <h5 class="my-5 text-center" id="ajax-table_response"></h5>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
@@ -112,7 +113,6 @@
                                         <div class="divider-custom-line"></div>
                                     </div>
                                     <!-- Modal Text-->
-                                    <h6 class="mb-4 text-primary" id="msg-info"></h6>
                                     <table id="msg-table" style="width: 100%;"
                                            class="msg-table table hover order-column compact table-responsive"></table>
                                     <div class="panel-container mt-4">

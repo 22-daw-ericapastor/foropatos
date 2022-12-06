@@ -2,48 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const rows_in_datatable = 10;
 
-    const btn = document.querySelectorAll('.edit-btn');
-
-    const form = document.querySelectorAll('.account-edit-form');
-
-    const close = document.querySelectorAll('.close-form');
-
-    for (let i = 0; i < close.length; i++) {
-        btn[i].addEventListener('click', function () {
-            form[i].classList.add('show');
-        });
-        close[i].onclick = function () {
-            form[i].classList.remove('show');
-        }
-    }
-
-
-    let table = create_table();
-
-    function format_is_read_btn(btn, is_read) {
-        if (is_read === 1) {
-            btn.innerHTML = '&#x2713;';
-            btn.classList.add('btn-success');
-            btn.classList.remove('btn-danger');
-        } else if (is_read === 0) {
-            btn.innerHTML = '&#x2715;';
-            btn.classList.add('btn-danger');
-            btn.classList.remove('btn-success');
-        }
-    }
-
-    document.querySelector('.account_deactivate-btn').onclick = function () {
-        const response = document.querySelector('#account_deactivate-response');
-        fetch('?acc_deactivate').then(r => r.text()).then(data => {
-            response.innerHTML = data;
-            if (data.match(/desactivado/)) {
-                setTimeout(function () {
-                    window.location.assign('?signout');
-                }, 4000);
-            }
-        });
-    }
-
     // create table
     function create_table() {
         return new DataTable('#msg-table', {
@@ -65,15 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    function toggle_messages_panel() {
-        const title = document.getElementsByClassName('toggle-msg');
-        const msg_panel = document.getElementById('panel-msg_text');
-        const msg = document.getElementById('msg-body');
-        const close_msg = document.getElementById('close-msg');
-        for (let i = 0; i < title.length; i++) {
-        }
-    }
-
     function toggle_message_read(btn, data, user) {
         // Event listener for tick is read not read
         // fill read and not read
@@ -92,6 +41,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     if (data['response'] === true) {
                         format_is_read_btn(btn, is_read);
+                    } else {
+                        if (data['response'].match(/caducado/)) {
+                            $('#ajax-table_response').html(data['response']);
+                            setTimeout(function () {
+                                window.location.assign('?signout');
+                            }, 4000);
+                        }
                     }
                 });
         });
@@ -103,13 +59,71 @@ document.addEventListener('DOMContentLoaded', function () {
             await fetch('?delmsg=' + slug)
                 .then(r => r.text())
                 .then(data => {
-                    document.getElementById('ajax-table_response').innerHTML = data;
-                    table.destroy();
-                    table = create_table();
+                    $('#ajax-table_response').html(data);
+                    if (data.match(/caducado/)) {
+                        setTimeout(function () {
+                            window.location.assign('?signout');
+                        }, 4000);
+                    } else {
+                        table.destroy();
+                        table = create_table();
+                    }
                 });
         });
     }
 
+    const btn = document.querySelectorAll('.edit-btn');
+
+    const form = document.querySelectorAll('.account-edit-form');
+
+    const close = document.querySelectorAll('.close-form');
+
+    function format_is_read_btn(btn, is_read) {
+        if (is_read === 1) {
+            btn.innerHTML = '&#x2713;';
+            btn.classList.add('btn-success');
+            btn.classList.remove('btn-danger');
+        } else if (is_read === 0) {
+            btn.innerHTML = '&#x2715;';
+            btn.classList.add('btn-danger');
+            btn.classList.remove('btn-success');
+        }
+    }
+
+    /* Add open and close data change form (password and username)*/
+    for (let i = 0; i < close.length; i++) {
+        btn[i].addEventListener('click', function () {
+            form[i].classList.add('show');
+        });
+        close[i].onclick = function () {
+            form[i].classList.remove('show');
+        }
+    }
+
+    $('#toggle-msg_modal').on('click', function () {
+        fetch('?is_logged').then(r => r.json()).then(data => {
+            if (data['response'] === false) {
+                $('#session_check-response').html('Parece que el tiempo de tu sesión ha caducado.' +
+                    '<br/>Serás redirigido en unos segundos para que vuelvas a loggearte.');
+                setTimeout(function () {
+                    window.location.assign('?signout');
+                }, 4000);
+            }
+        });
+    });
+
+    $('.account_deactivate-btn').on('click', function () {
+        fetch('?acc_deactivate').then(r => r.text()).then(data => {
+            $('#account_deactivate-response').html(data);
+            if (data.match(/desactivado|caducado/)) {
+                setTimeout(function () {
+                    window.location.assign('?signout');
+                }, 4000);
+            }
+        });
+    });
+
+    let table = create_table();
 
     // event on draw
     table.on('draw.dt', async function () {
@@ -131,13 +145,31 @@ document.addEventListener('DOMContentLoaded', function () {
             if (title[i] && btn_read[i] && del_msg_btn[i]) {
                 // open msg container
                 title[i].addEventListener('click', function () {
-                    msg_panel.classList.add('show');
-                    msg.innerHTML = data['msg_text'];
+                    fetch('?is_logged').then(r => r.text()).then(data => {
+                        if (data['response'] === false) {
+                            $('#ajax-table_response').html('<span class="text-danger">Tiempo de sesion caducado.<br/>' +
+                                'Serás redirigido al login en unos segundos.</span>');
+                            setTimeout(function () {
+                                window.location.assign('?signout');
+                            }, 4000);
+                        } else {
+                            msg_panel.classList.add('show');
+                            msg.innerHTML = data['msg_text'];
+                        }
+                    });
                 });
                 // close msg container
                 close_msg.addEventListener('click', function () {
-                    msg_panel.classList.remove('show');
-                    msg.innerHTML = '';
+                    if (data['response'] === false) {
+                        $('#ajax-table_response').html('<span class="text-danger">Tiempo de sesion caducado.<br/>' +
+                            'Serás redirigido al login en unos segundos.</span>');
+                        setTimeout(function () {
+                            window.location.assign('?signout');
+                        }, 4000);
+                    } else {
+                        msg_panel.classList.remove('show');
+                        msg.innerHTML = '';
+                    }
                 });
                 let user = document.getElementsByClassName('remitter')[i].innerHTML;
                 await toggle_message_read(btn_read[i], data, user);

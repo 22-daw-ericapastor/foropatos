@@ -118,12 +118,6 @@
                                                         </form>
                                                     </div>
                                                 </div>
-                                                <div class="panel-container mt-4">
-                                                    <div class="panel p-6 collapse" id="panel-msg_text">
-                                                        <div class="text-center" id="msg-body"></div>
-                                                        <button class="btn-close" id="close-msg" type="button"></button>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -8,23 +8,21 @@
                 <p class="lead mb-0">Zaragüazas<br/>Camino de la Magia Salvaje, 21</p>
             </div>
             <!-- Footer Social Icons-->
-            <!-- Uncomment this line to add social nets
             <div class="col-lg-4 mb-5 mb-lg-0">
                 <h4 class="text-uppercase mb-4">Nuestras redes</h4>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="?home#">
+                    <i class="fab fa-fw fa-facebook-f"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="?home#">
+                    <i class="fab fa-fw fa-twitter"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="?home#">
+                    <i class="fab fa-fw fa-linkedin-in"></i></a>
+                <a class="btn btn-outline-light btn-social mx-1" href="?home#">
+                    <i class="fab fa-fw fa-dribbble"></i></a>
             </div>
-            -->
             <!-- Footer About Text-->
-            <div class="col-lg-8">
+            <div class="col-lg-4">
                 <h4 class="text-uppercase mb-4">Sobre Foropatos</h4>
-                <p class="lead mb-0">
-                    Foroplatos es de uso gratuito, creado por los alumnos de DAW de segundo año.
-                    <br/>Cualquier atribución contacten con <a href="#!">Guillermo</a>, según me han dicho,
-                    <br/>best master de rol de Españita.
-                </p>
+                <p class="lead mb-0">Foroplatos es de uso gratuito, creado por los alumnos de DAW de segundo año.</p>
             </div>
         </div>
     </div>

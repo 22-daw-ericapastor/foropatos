@@ -7,7 +7,6 @@ use Exception;
 
 class BaseController
 {
-
     /**
      * Main controller construct
      * -----------------------------------------------------------------------------------------------------------------
@@ -18,24 +17,16 @@ class BaseController
      */
     function __construct(string $route = null)
     {
+        // Check user activity as any controller is created
+        check_user_activity();
+        // Route to a method
         if (isset($route)) {
             try {
                 $this->$route();
             } catch (Exception|Error $e) {
-                //$this->home();
-                echo $e->getMessage();
+                $this->home();
+                //echo $e->getMessage();
             }
-        }
-    }
-
-    function check_user_activity()
-    {
-        if ((isset($_SESSION['__user']) && $_SESSION['__user']['is_active'] === 0)
-            || (isset($_SESSION['last_acted_on']) && (time() - $_SESSION['last_acted_on'] > timeout))) {
-            session_re_start();
-        } else {
-            session_regenerate_id(true);
-            $_SESSION['last_acted_on'] = time();
         }
     }
 
@@ -46,9 +37,7 @@ class BaseController
      */
     function home()
     {
-        $this->check_user_activity();
         $data['page'] = 'home';
-        // add here db request to get recipes to fill page and pass it to $data
         template('pages/home', $data);
     }
 
@@ -157,7 +146,6 @@ class BaseController
      */
     function user_manage()
     {
-        $this->check_user_activity();
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
             template('pages/user.manage', ['page' => 'user_manage']);
         } else {
@@ -172,7 +160,6 @@ class BaseController
      */
     function recipe_manage()
     {
-        $this->check_user_activity();
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {
             template('pages/recipe.manage', ['page' => 'recipe_manage']);
         } else {
@@ -206,7 +193,6 @@ class BaseController
      */
     function account()
     {
-        $this->check_user_activity();
         if (isset($_SESSION['__user']) && $_SESSION['__user']['is_active'] === 1) {
             template('pages/account', ['page' => 'my_account']);
         } else {
@@ -261,30 +247,29 @@ class BaseController
      */
 
     function get_recipes(): void
-    {
+    { /* This is used by Javascript form an AJAX call to fill HTML content.
+        This means it doesn't need to check user's activity or session as it has already been checked. */
         controller('Recipes')->get_recipes();
     }
 
     function datatable_recipes()
-    {
+    { /* This is used by Javascript form an AJAX call to fill HTML content.
+        This means it doesn't need to check user's activity or session as it has already been checked. */
         controller('Recipes')->datatable_recipes();
     }
 
     function add_recipe()
     {
-        $this->check_user_activity();
         controller('Recipes')->add_recipe();
     }
 
     function updt_rcp()
     {
-        $this->check_user_activity();
         controller('Recipes')->updt_rcp();
     }
 
     function delete_recipe()
     {
-        $this->check_user_activity();
         controller('Recipes')->delete_recipe();
     }
 
@@ -298,13 +283,13 @@ class BaseController
      */
 
     function comments_list()
-    {
+    { /* This is used by Javascript form an AJAX call to fill HTML content.
+        This means it doesn't need to check user's activity or session as it has already been checked. */
         controller('Comments')->comments_list();
     }
 
     function comment(): void
     {
-        $this->check_user_activity();
         controller('Comments')->comment();
     }
 
@@ -317,23 +302,39 @@ class BaseController
      */
 
     function get_messages()
-    {
+    { /* This is used by Javascript form an AJAX call to fill HTML content.
+        This means it doesn't need to check user's activity or session as it has already been checked. */
         controller('Messages')->get_messages();
     }
 
     function message()
     {
-        controller('Messages')->message();
+        if (isset($_SESSION['__user'])) {
+            controller('Messages')->message();
+        } else {
+            echo '<span class="text-danger">Parece que el tiempo de tu sesión ha caducado.
+                <br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</span>';
+        }
     }
 
     function msg_is_read()
     {
-        controller('Messages')->msg_is_read();
+        if (isset($_SESSION['__user'])) {
+            controller('Messages')->msg_is_read();
+        } else {
+            echo json_encode(['response' => '<span class="text-danger">Tiempo de sesion caducado.
+                <br/>Serás redirigido al login en unos segundos.</span>']);
+        }
     }
 
     function delmsg()
     {
-        controller('Messages')->delmsg();
+        if (isset($_SESSION['__user'])) {
+            controller('Messages')->delmsg();
+        } else {
+            echo '<span class="text-danger">Parece que el tiempo de tu sesión ha caducado.
+                <br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</span>';
+        }
     }
 
     /**
@@ -356,27 +357,47 @@ class BaseController
 
     function acc_deactivate()
     {
-        controller('Users')->acc_deactivate();
+        if (isset($_SESSION['__user'])) {
+            controller('Users')->acc_deactivate();
+        } else {
+            echo '<p class="text-danger">Parece que el tiempo de tu sesión ha caducado.
+                <br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</p>';
+        }
     }
 
-    function get_users()
-    {
-        controller('Users')->get_users();
+    function datatable_users()
+    { // JSON type of data process
+        controller('Users')->datatable_users();
     }
 
     function toggle_active()
     {
-        controller('Users')->toggle_active();
+        if (isset($_SESSION['__user'])) {
+            controller('Users')->toggle_active();
+        } else {
+            echo '<p class="text-danger">Parece que el tiempo de tu sesión ha caducado.
+                <br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</p>';
+        }
     }
 
     function toggle_permissions()
     {
-        controller('Users')->toggle_permissions();
+        if (isset($_SESSION['__user'])) {
+            controller('Users')->toggle_permissions();
+        } else {
+            echo '<p class="text-danger">Parece que el tiempo de tu sesión ha caducado.
+                <br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</p>';
+        }
     }
 
     function delete_user()
     {
-        controller('Users')->delete_user();
+        if (isset($_SESSION['__user'])) {
+            controller('Users')->delete_user();
+        } else {
+            echo '<p class="text-danger">Parece que el tiempo de tu sesión ha caducado.
+                <br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</p>';
+        }
     }
 
 }

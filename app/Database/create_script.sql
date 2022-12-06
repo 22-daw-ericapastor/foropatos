@@ -62,11 +62,12 @@ CREATE TABLE messages(
 
 -- Set default admin
 INSERT INTO users (username, email, passwd, permissions)
-VALUES ('user0', 'correo@email', '$2y$10$OOirP9Cl3o4fy.BIKIvIquDN.mmDryXo14whDVS2xWsuy5RB6s47m', 1);
+VALUES ('admin', 'correo@email', '$2y$10$RrEFbqxURZGJzYPPiRINROsgrsKK0hzO4ZbfWNRxGbzHza378ucR.', 1);
 
 -- Default users
 INSERT INTO users(username, email, passwd)
 VALUES
+VALUES ('user0', 'correo@email', '$2y$10$OOirP9Cl3o4fy.BIKIvIquDN.mmDryXo14whDVS2xWsuy5RB6s47m', 1),
   ('user1', 'correo@email', '$2y$10$OOirP9Cl3o4fy.BIKIvIquDN.mmDryXo14whDVS2xWsuy5RB6s47m'),
   ('user2', 'correo@email', '$2y$10$OOirP9Cl3o4fy.BIKIvIquDN.mmDryXo14whDVS2xWsuy5RB6s47m'),
   ('user3', 'correo@email', '$2y$10$OOirP9Cl3o4fy.BIKIvIquDN.mmDryXo14whDVS2xWsuy5RB6s47m'),
