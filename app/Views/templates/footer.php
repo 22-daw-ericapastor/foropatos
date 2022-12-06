@@ -33,6 +33,10 @@
 </div>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- JQuery script-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- Datatables script-->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 <!-- Core theme JS-->
 <script src="<?= baseurl ?>js/footer.freelancer_template.js"></script>
 <script src="<?= baseurl ?>js/footer.session.check.js"></script>

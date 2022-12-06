@@ -22,6 +22,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function signout() {
+        setTimeout(function () {
+            window.location.assign('?signout');
+        }, 4000);
+    }
+
     let table = draw_table();
 
     table.on('draw.dt', async function () {
@@ -31,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const users = document.getElementsByClassName('username');
         const table_data = table.data();
         const index = document.querySelector('.paginate_button.current').getAttribute('data-dt-idx');
+
         for (let i = 0; i < table_data.length; i++) {
             let data = table_data[i + index * 10];
             // Toggle user (in)active onclick
@@ -64,6 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.match(/!/)) {
                         table.destroy();
                         table = draw_table();
+                    } else if (data.match(/caducado/)) {
+                        signout();
                     }
                 })
         }
@@ -76,6 +85,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.match(/!/)) {
                         table.destroy();
                         table = draw_table();
+                    } else if (data.match(/caducado/)) {
+                        signout();
                     }
                 })
         }
@@ -88,6 +99,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (data.match(/fue eliminado/)) {
                         table.destroy();
                         table = draw_table();
+                    } else if (data.match(/caducado/)) {
+                        signout();
                     }
                 });
         }

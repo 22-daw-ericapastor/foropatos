@@ -399,6 +399,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     // False -> Make comments section unavailable and show an error message.
     // True -> Activate the previous functions
 
+    const issue_title = document.getElementById('issue-title');
+
+    const issue_text = document.getElementById('issue-msg');
+
+    const issue_btn = document.getElementById('contact-btn');
+
     await fetch('?is_logged')
         .then(response => response.json())
         .then(data => {
@@ -408,13 +414,44 @@ document.addEventListener('DOMContentLoaded', async function () {
                     comment_form[i].style.display = 'none';
                     comment_response[i].innerHTML = '<p class="text-danger">Tienes que loggearte para poder comentar o ver comentarios.</p>';
                 }
+                $('#contact-logged-info').html('Tienes que estar loggeado para poder enviar un mensaje');
             } else {
-                setInterval(function () {
-                }, 15000);
+                $('#contact-logged-info').html('¿Tienes dudas? ¿Sugerenecias? No dudes en escribirnos.');
+                [issue_text, issue_title].forEach(field => {
+                    field.addEventListener('keyup', function () {
+                        issue_btn.disabled = !(issue_title.value !== '' && issue_text.value !== ''
+                            && (
+                                (issue_title.value.length >= 3 && issue_title.value.length <= 20)
+                                && (issue_text.value.length >= 9 && issue_text.value.length <= 500)
+                            )
+                        );
+                    });
+                });
+
+                issue_btn.onclick = async function () {
+                    await send_msg();
+                }
                 fill_comments();
                 select_star();
                 submit_comments();
             }
         });
+
+    async function send_msg() {
+        await fetch('?message=' + issue_text.value + '&title=' + issue_title.value)
+            .then(response => response.text())
+            .then(data => {
+                let response = document.getElementById('contact-response-msg');
+                response.innerHTML = data;
+                if (data.match(/enviado/)) {
+                    issue_title.value = '';
+                    issue_text.value = '';
+                    issue_btn.disabled = true;
+                    setTimeout(function () {
+                        response.innerHTML = '';
+                    }, 4000);
+                }
+            });
+    }
 
 });

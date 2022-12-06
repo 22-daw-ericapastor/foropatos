@@ -16,12 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function validate_form(evt) {
-        let user_n_email = false, passwds = false;
-        if (username.value === '' && email.value === '') {
-            user_n_email = false;
-        } else {
-            user_n_email = true;
-        }
+        let passwds = false;
+        let user_n_email = !(username.value === '' && email.value === '');
         if (passwd.value.length > 0 && passwd.value.length < password_length) {
             if (evt.target !== passwd) {
                 document.getElementById('passwd_error').style.display = 'block';
@@ -38,11 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 passwds = true;
             }
         }
-        if (user_n_email && passwds) {
-            document.getElementById('signup_btn').disabled = false;
-        } else {
-            document.getElementById('signup_btn').disabled = true;
-        }
+        document.getElementById('signup_btn').disabled = !(user_n_email && passwds);
     }
 
 });

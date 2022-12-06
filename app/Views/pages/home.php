@@ -81,5 +81,4 @@
     </div>
 </section>
 <section id="open-modal"></section>
-<script src="<?= baseurl ?>js/pages.home.recipes.modal.js"></script>
-<script src="<?= baseurl ?>js/pages.home.message.send.js"></script>
+<script src="<?= baseurl ?>js/pages.home.js"></script>

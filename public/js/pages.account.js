@@ -160,16 +160,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 // close msg container
                 close_msg.addEventListener('click', function () {
-                    if (data['response'] === false) {
-                        $('#ajax-table_response').html('<span class="text-danger">Tiempo de sesion caducado.<br/>' +
-                            'Serás redirigido al login en unos segundos.</span>');
-                        setTimeout(function () {
-                            window.location.assign('?signout');
-                        }, 4000);
-                    } else {
-                        msg_panel.classList.remove('show');
-                        msg.innerHTML = '';
-                    }
+                    fetch('?is_logged').then(r => r.text()).then(data => {
+                        if (data['response'] === false) {
+                            $('#ajax-table_response').html('<span class="text-danger">Tiempo de sesion caducado.<br/>' +
+                                'Serás redirigido al login en unos segundos.</span>');
+                            setTimeout(function () {
+                                window.location.assign('?signout');
+                            }, 4000);
+                        } else {
+                            msg_panel.classList.remove('show');
+                            msg.innerHTML = '';
+                        }
+                    });
                 });
                 let user = document.getElementsByClassName('remitter')[i].innerHTML;
                 await toggle_message_read(btn_read[i], data, user);

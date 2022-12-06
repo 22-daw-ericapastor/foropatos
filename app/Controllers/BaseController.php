@@ -136,6 +136,7 @@ class BaseController
     function signout()
     {
         session_re_start();
+        check_user_activity();
         $this->signin();
     }
 

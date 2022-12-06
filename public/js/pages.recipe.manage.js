@@ -4,8 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const table_response = document.getElementById('ajax-table_response');
 
-    const updt_container = document.getElementById('uptd_rcp-container');
-
     let cur_url = window.location.href;
     if (cur_url.match(/\?/)) {
         cur_url = cur_url.substring(0, cur_url.indexOf('?'));
@@ -40,37 +38,48 @@ document.addEventListener('DOMContentLoaded', function () {
         const diff_options = document.querySelector('#difficulty').children;
         const index = document.querySelector('.paginate_button.current').getAttribute('data-dt-idx');
         for (let i = 0; i < table_data.length; i++) {
-            let data = table_data[i + index * 10];
+            let recipe_data = table_data[i + index * 10];
             if (update_link[i] && delete_link[i]) {
                 update_link[i].onclick = function () {
-                    /*
-                     * Fill form fields with recipe data
-                     */
-                    // Fill title
-                    $('#rcp_title').val(titles[i].innerHTML);
-                    // Fill description
-                    $('#description').val(data['description']);
-                    // Select difficulty
-                    let rcp_diff = data['difficulty'];
-                    for (let i = 0; i < diff_options.length; i++) {
-                        if (parseInt(diff_options[i].value) === rcp_diff) {
-                            diff_options[i].selected = true;
+                    fetch('?is_logged').then(r => r.text()).then(data => {
+                        if (data['response'] === false) {
+                            table_response.innerHTML = '<span class="text-danger">Tiempo de sesion caducado.<br/>' +
+                                'Serás redirigido al login en unos segundos.</span>';
+                            setTimeout(function () {
+                                window.location.assign('?signout');
+                            }, 4000);
+                        } else {
+                            /*
+                             * Fill form fields with recipe data
+                             */
+                            // Fill title
+                            $('#rcp_title').val(titles[i].innerHTML);
+                            // Fill description
+                            console.log(recipe_data['description']);
+                            $('#description').val(recipe_data['description']);
+                            // Select difficulty
+                            let rcp_diff = recipe_data['difficulty'];
+                            for (let i = 0; i < diff_options.length; i++) {
+                                if (parseInt(diff_options[i].value) === rcp_diff) {
+                                    diff_options[i].selected = true;
+                                }
+                            }
+                            // Fill image
+                            $('.updt_rcp-img')[0].style.background = 'url("' + baseurl + recipe_data['src'] + '")';
+                            // Fill making
+                            $('#making').val(recipe_data['making']);
+                            // Fill admixtures if not empty
+                            let admixt = recipe_data['admixtures'];
+                            if (admixt === '' || admixt === null) admixt = 'La lista está vacía';
+                            else $('#admixtures').val(admixt);
+                            $('#admixtures ~ label').html(admixt);
+                            // put slug in button submit value so it will submit for updating
+                            $('#updt-btn').val(recipe_data['slug']);
                         }
-                    }
-                    // Fill image
-                    $('.updt_rcp-img')[0].style.background = 'url("' + baseurl + data['src'] + '")';
-                    // Fill making
-                    $('#making').val(data['making']);
-                    // Fill admixtures if not empty
-                    let admixt = data['admixtures'];
-                    if (admixt === '' || admixt === null) admixt = 'La lista está vacía';
-                    else $('#admixtures').val(admixt);
-                    $('#admixtures ~ label').html(admixt);
-                    // put slug in button submit value so it will submit for updating
-                    $('#updt-btn').val(data['slug']);
+                    });
                 }
                 delete_link[i].onclick = async function () {
-                    await fetch('?delete_recipe=' + data['slug'])
+                    await fetch('?delete_recipe=' + recipe_data['slug'])
                         .then(res => res.text())
                         .then(data => {
                             table_response.innerHTML = data;
