@@ -13,8 +13,8 @@
                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                         <div class="divider-custom-line"></div>
                     </div>
-                    <h6 class="text-center my-5"><?php if (isset($data['response'])) echo ($data['response']); ?></h6>
-                    <h6 class="my-5 text-center" id="ajax-table_response"></h6>
+                    <h5 class="text-center my-5"><?php if (isset($data['response'])) echo ($data['response']); ?></h5>
+                    <h5 class="my-5 text-center" id="ajax-table_response"></h5>
                     <div class="table-wrapper">
                         <div class="add_rcp-btn">
                             <a href="?add_recipe" class="btn btn-primary">Añadir receta &#x2192;</a>
@@ -46,11 +46,11 @@
                                                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                                     <div class="divider-custom-line"></div>
                                                 </div>
-                                                <h6 class="text-center text-primary my-2">Los campos marcados con
-                                                    asterisco son obligatorios.</h6>
+                                                <h6 class="text-center text-primary my-2" id="modal-response">
+                                                    Los campos marcados con asterisco son obligatorios.</h6>
                                                 <!-- Contact Section Form-->
                                                 <div class="row justify-content-center">
-                                                    <div class="col-11">
+                                                    <div class="col-11" id="not_logged-response">
                                                         <form id="add_rcp-form" method="post" action="?updt_rcp"
                                                               enctype="multipart/form-data">
                                                             <!-- Title input-->

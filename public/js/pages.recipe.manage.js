@@ -40,11 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
         for (let i = 0; i < table_data.length; i++) {
             let recipe_data = table_data[i + index * 10];
             if (update_link[i] && delete_link[i]) {
-                update_link[i].onclick = function () {
-                    fetch('?is_logged').then(r => r.text()).then(data => {
+                update_link[i].onclick = async function () {
+                    await fetch('?is_logged').then(r => r.json()).then(data => {
+                        console.log('Signed in: ' + data['response']);
                         if (data['response'] === false) {
-                            table_response.innerHTML = '<span class="text-danger">Tiempo de sesion caducado.<br/>' +
-                                'Serás redirigido al login en unos segundos.</span>';
+                            $('#not_logged-response').html('');
+                            $('#modal-response').html('Tiempo de sesion caducado.<br/>Serás redirigido al login en unos segundos.')
                             setTimeout(function () {
                                 window.location.assign('?signout');
                             }, 4000);
@@ -55,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             // Fill title
                             $('#rcp_title').val(titles[i].innerHTML);
                             // Fill description
-                            console.log(recipe_data['description']);
                             $('#description').val(recipe_data['description']);
                             // Select difficulty
                             let rcp_diff = recipe_data['difficulty'];

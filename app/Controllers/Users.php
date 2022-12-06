@@ -110,9 +110,9 @@ class Users extends controller
         }
     }
 
-    function get_users()
+    function datatable_users()
     {
-        echo json_encode(['data' => model('Users')->get_users()]);
+        echo json_encode(['data' => model('Users')->datatable_users()]);
     }
 
     function toggle_active()

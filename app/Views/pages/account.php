@@ -105,14 +105,14 @@
                                 <div class="col-lg-11">
                                     <!-- Modal - Title-->
                                     <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Mensajes</h2>
-                                    <!-- Database response goes here-->
-                                    <h5 class="my-5 text-center" id="ajax-table_response"></h5>
                                     <!-- Icon Divider-->
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
+                                    <!-- Database response goes here-->
+                                    <h5 class="my-5 text-center" id="ajax-table_response"></h5>
                                     <!-- Modal Text-->
                                     <table id="msg-table" style="width: 100%;"
                                            class="msg-table table hover order-column compact table-responsive"></table>

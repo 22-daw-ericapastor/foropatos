@@ -168,9 +168,9 @@ class Users extends model
                         'username' => '<div class="username user-cell">' . $row['username'] . '</div>',
                         'toggle_active' => '<div class="user-cell">' . $this->format_is_active($row['is_active']) . '</div>',
                         'toggle_permissions' => '<div class="user-cell">' . $this->format_permissions($row['permissions']) . '</div>',
+                        'delete_user' => '<div class="user-cell">' . $this->format_delete() . '</div>',
                         'is_active' => $row['is_active'],
-                        'permissions' => $row['permissions'],
-                        'delete_user' => '<div class="user-cell">' . $this->format_delete() . '</div>'
+                        'permissions' => $row['permissions']
                     ];
                 }
                 return $json;

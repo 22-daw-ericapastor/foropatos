@@ -104,12 +104,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     $('#toggle-msg_modal').on('click', function (evt) {
         fetch('?is_logged').then(r => r.json()).then(data => {
+            console.log('Singed in: ' + data['response']);
             if (data['response'] === false) {
-                evt.preventDefault();
-                $('#msg-modal').style.display = 'none';
-                $('#msg-modal').classList.remove('show');
-                $('#session_check-response').html('Parece que el tiempo de tu sesión ha caducado.' +
-                    '<br/>Serás redirigido en unos segundos para que vuelvas a loggearte.');
+                $('#ajax-table_response').html('<span class="text-danger">Parece que el tiempo de tu sesión ha caducado.' +
+                    '<br/>Serás redirigido en unos segundos para que vuelvas a loggearte.</span>');
+                $('#msg-table').html('');
                 setTimeout(function () {
                     window.location.assign('?signout');
                 }, 4000);
