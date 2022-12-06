@@ -5,12 +5,14 @@ CREATE DATABASE foropatos;
 USE foropatos;
 
 CREATE TABLE users(
+  id INT UNSIGNED AUTO_INCREMENT,
   username VARCHAR(20),
   email VARCHAR(50),
   passwd VARCHAR(100),
   is_active TINYINT(1) DEFAULT 1,
   permissions TINYINT(1) DEFAULT 0,
-  PRIMARY KEY(username)
+  PRIMARY KEY(id),
+  KEY(username)
 );
 
 CREATE TABLE deleted_users(
@@ -23,6 +25,7 @@ CREATE TABLE deleted_users(
 );
 
 CREATE TABLE recipes(
+  id INT UNSIGNED AUTO_INCREMENT,
   slug VARCHAR(30),
   src VARCHAR(100),
   title VARCHAR(30),
@@ -33,7 +36,8 @@ CREATE TABLE recipes(
   points FLOAT DEFAULT 0,
   difficulty TINYINT DEFAULT 1,
   uploaded_date DATETIME DEFAULT NOW(),
-  PRIMARY KEY(slug)
+  PRIMARY KEY(id),
+  KEY (slug)
 );
 
 CREATE TABLE comments(

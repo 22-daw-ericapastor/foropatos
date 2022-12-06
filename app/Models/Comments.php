@@ -8,8 +8,24 @@ use mysqli_sql_exception;
 class Comments extends model
 {
 
+    /**
+     * Database table name
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @var string
+     */
     private string $table = 'comments';
 
+    /**
+     * Insert comment
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $username
+     * @param $slug
+     * @param $rating
+     * @param $comment
+     * @return bool
+     */
     public function comment($username, $slug, $rating, $comment): bool
     {
         $query = "INSERT INTO $this->table (username, recipe_slug, recipe_rating, comment_text) VALUES (?, ?, ?, ?)";
@@ -25,7 +41,16 @@ class Comments extends model
         return false;
     }
 
-    public function get_comment($username, $slug)
+    /**
+     * Get a comment from a user
+     * -----------------------------------------------------------------------------------------------------------------
+     * If any coincidences found, it will return true, otherwise false.
+     *
+     * @param $username
+     * @param $slug
+     * @return bool
+     */
+    public function get_comment($username, $slug): bool
     {
         $query = "SELECT * FROM $this->table WHERE username=? AND recipe_slug=?;";
         try {
@@ -42,6 +67,13 @@ class Comments extends model
         return false;
     }
 
+    /**
+     * Get all comments from Database.
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $slug
+     * @return array|false
+     */
     public function get_comments($slug)
     {
         $query = "SELECT * FROM $this->table WHERE recipe_slug=?";
@@ -53,10 +85,10 @@ class Comments extends model
             $results = [];
             while ($row = $res->fetch_assoc()) {
                 $results[] = [
-                    'username' => utf8_encode($row['username']),
+                    'username' => $row['username'],
                     'rating' => $row['recipe_rating'],
-                    'comment' => utf8_encode($row['comment_text']),
-                    'datetime' => utf8_encode($row['date_time'])
+                    'comment' => $row['comment_text'],
+                    'datetime' => $row['date_time']
                 ];
             }
             return $results;

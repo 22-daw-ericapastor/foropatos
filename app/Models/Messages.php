@@ -7,9 +7,24 @@ use mysqli_sql_exception;
 
 class Messages extends model
 {
-
+    /**
+     * Database table name
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @var string
+     */
     private string $table = 'messages';
 
+    /**
+     * Toggle message is_read
+     * -----------------------------------------------------------------------------------------------------------------
+     * See {@link \Controllers\Messages { msg_is_read()} }
+     *
+     * @param $is_read
+     * @param $username
+     * @param $slug
+     * @return bool
+     */
     function msg_is_read($is_read, $username, $slug): bool
     {
         $query = "UPDATE $this->table SET is_read=? WHERE username=? AND issue_slug=?;";
@@ -25,6 +40,15 @@ class Messages extends model
         return false;
     }
 
+    /**
+     * Insert message
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $username
+     * @param $issue
+     * @param $text
+     * @return bool
+     */
     function send_message($username, $issue, $text): bool
     {
         $query = "INSERT INTO $this->table (username, issue, issue_slug, msg_text) VALUES (?, ?, ?, ?);";
@@ -41,6 +65,13 @@ class Messages extends model
         return false;
     }
 
+    /**
+     * Delete message
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $slug
+     * @return bool
+     */
     function delmsg($slug): bool
     {
         $query = "DELETE FROM $this->table WHERE issue_slug=?;";
@@ -56,6 +87,14 @@ class Messages extends model
         return false;
     }
 
+    /**
+     * Get all messages
+     * -----------------------------------------------------------------------------------------------------------------
+     * The array with the data is formatted in a specific way to be read from Javascript and fit into a CSS style.
+     * See: {@link format_msg()} and {@link format_isread()}.
+     *
+     * @return array|false
+     */
     function get_messages()
     {
         $query = "SELECT * FROM $this->table ORDER BY date_time DESC";
@@ -83,6 +122,13 @@ class Messages extends model
         return false;
     }
 
+    /**
+     * Format HTML message title container
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $issue
+     * @return string
+     */
     function format_msg($issue): string
     {
         return '<div class="table-message-container">' .
@@ -90,6 +136,12 @@ class Messages extends model
             '    </div>';
     }
 
+    /**
+     * Format HTML button to toggle is_read
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @return string
+     */
     function format_isread(): string
     {
         return '

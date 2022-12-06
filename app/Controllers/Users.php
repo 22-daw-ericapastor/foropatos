@@ -6,6 +6,15 @@ use \Controllers\BaseController as controller;
 
 class Users extends controller
 {
+
+    /**
+     * Change username
+     * -----------------------------------------------------------------------------------------------------------------
+     * Checks username doesn't have any special characters, if the username changed or not, and if the new username
+     * is not already taken by another user; then attempts to update the Database.
+     *
+     * @return void
+     */
     function change_username()
     {
         $data['page'] = 'my_account';
@@ -18,7 +27,6 @@ class Users extends controller
                     if ($new_username !== $old_username) {
                         if (!$model->get_user($new_username)) {
                             if ($model->change_username($old_username, $new_username)) {
-                                $data ['response'] = '<p class="h6 mt-3 text-success text-center">¡Todo listo! Tu nombre de usuario cambió.</p>';
                                 $_SESSION['__user']['username'] = $new_username;
                             } else {
                                 $data['response'] = '<p class="h6 mt-3 text-danger text-center">Ha habido algún fallo interno,
@@ -43,6 +51,14 @@ class Users extends controller
         template('pages/account', $data);
     }
 
+    /**
+     * Change password
+     * -----------------------------------------------------------------------------------------------------------------
+     * Checks that the old password is correct, that it's not the same as the old one, that the new one has 6 or more
+     * characters, and that the repeat password is equal to the new one. Then attempts to update the Database.
+     *
+     * @return void
+     */
     function change_passwd()
     {
         $data['page'] = 'my_account';
@@ -90,6 +106,13 @@ class Users extends controller
         template('pages/account', $data);
     }
 
+    /**
+     * Deactivate account
+     * -----------------------------------------------------------------------------------------------------------------
+     * Set is_active field from users table in Database to 0, checking that it's not the last admin user.
+     *
+     * @return void
+     */
     function acc_deactivate()
     {
         $username = $_SESSION['__user']['username'];
@@ -110,11 +133,25 @@ class Users extends controller
         }
     }
 
+    /**
+     * Get users for datatable
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @return void
+     */
     function datatable_users()
     {
         echo json_encode(['data' => model('Users')->datatable_users()]);
     }
 
+    /**
+     * Toggle user activity
+     * -----------------------------------------------------------------------------------------------------------------
+     * Set is_active field from users table in Database to 1 or 0 depending on the $_GET parameter received. It won't
+     * set to 0 if the user is the last admin.
+     *
+     * @return void
+     */
     function toggle_active()
     {
         if (isset($_GET['toggle_active']) && isset($_GET['user'])) {
@@ -145,6 +182,14 @@ class Users extends controller
         }
     }
 
+    /**
+     * Toggle users permissions
+     * -----------------------------------------------------------------------------------------------------------------
+     * Set permissions to 0 or 1 in the users table from Database depending on the $_GET parameter received. It won't set
+     * to 0 if the user is the last admin.
+     *
+     * @return void
+     */
     function toggle_permissions()
     {
         if (isset($_GET['toggle_permissions']) && isset($_GET['user'])) {
@@ -174,6 +219,14 @@ class Users extends controller
         }
     }
 
+    /**
+     * Delete user
+     * -----------------------------------------------------------------------------------------------------------------
+     * If the user is not the last admin, attempts to delete it from Database, first inserting it into the deleted_users
+     * table.
+     *
+     * @return void
+     */
     function delete_user()
     {
         if (isset($_GET['delete_user'])) {

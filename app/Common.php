@@ -115,7 +115,6 @@ function check_user_activity()
         || (isset($_SESSION['last_acted_on']) && (time() - $_SESSION['last_acted_on'] > timeout))) {
         session_re_start();
     } else {
-        session_regenerate_id(true);
         $_SESSION['last_acted_on'] = time();
     }
 }

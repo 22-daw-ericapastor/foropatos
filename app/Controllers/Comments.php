@@ -10,18 +10,21 @@ class Comments extends controller
     /**
      * Publish comment
      * -----------------------------------------------------------------------------------------------------------------
+     * Checks if the user is in session and if the values required are filled.
+     * By calling {@link \Models\Comments}->comment() it tries to insert the comment into the Database.
+     * It also calls to {@link \Models\Recipes}->rating() to update the rating received in the comment.
      *
      * @return void
      */
     function comment(): void
     {
-        if (isset($_SESSION['__user']) && isset($_GET['comment']) && isset($_GET['slug'])) {
-            $username = $_SESSION['__user']['username'];
-            $slug = $_GET['slug'];
-            $rating = $_GET['rating'];
-            $comment = validate($_GET['comment']);
-            if ($comment != '') {
-                if ($rating != "0") {
+        if (isset($_SESSION['__user'])) {
+            if (isset($_GET['comment']) && isset($_GET['slug']) && $_GET['comment'] !== '') {
+                if (isset($_GET['rating']) && $_GET['rating'] != "0") {
+                    $username = $_SESSION['__user']['username'];
+                    $slug = $_GET['slug'];
+                    $rating = $_GET['rating'];
+                    $comment = validate($_GET['comment']);
                     if (!model('Comments')->get_comment($username, $slug)) {
                         if (model('Comments')->comment($username, $slug, $rating, $comment) && model('Recipes')->rating($slug, $rating)) {
                             echo '<p class="text-success">¡Comentario enviado con éxito!';
@@ -35,7 +38,7 @@ class Comments extends controller
                     echo '<p class="text-danger">Selecciona una valoración.</p>';
                 }
             } else {
-                echo '<p class="text-danger">No puedes enviar un comentario vacío, pedazo de bárbaro. ^^</p>';
+                echo '<p class="text-danger">No puedes enviar un comentario vacío.</p>';
             }
         } else {
             echo '<p class="text-danger">Parece que el tiempo de tu sesión ha caducado.
@@ -46,7 +49,7 @@ class Comments extends controller
     /**
      * Get comments list
      * -----------------------------------------------------------------------------------------------------------------
-     * Retrieve all the comments stored in Database
+     * Retrieve all the comments stored in Database.
      *
      * @return void
      */

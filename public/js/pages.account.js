@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function () {
         /* Paging index in Datatable*/
         const index = document.querySelector('.paginate_button.current').getAttribute('data-dt-idx');
         for (let i = 0; i < table_data.length; i++) {
-            let data = table_data[i + index * 10];
+            let cell_data = table_data[i + index * 10];
             if (title[i] && btn_read[i] && del_msg_btn[i]) {
                 // open msg container
                 title[i].addEventListener('click', function () {
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             }, 4000);
                         } else {
                             msg_panel.classList.add('show');
-                            msg.innerHTML = data['msg_text'];
+                            msg.innerHTML = cell_data['msg_text'];
                         }
                     });
                 });
@@ -178,8 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 });
                 let user = document.getElementsByClassName('remitter')[i].innerHTML;
-                await toggle_message_read(btn_read[i], data, user);
-                await delete_message(del_msg_btn[i], data);
+                await toggle_message_read(btn_read[i], cell_data, user);
+                await delete_message(del_msg_btn[i], cell_data);
             }
         }
 

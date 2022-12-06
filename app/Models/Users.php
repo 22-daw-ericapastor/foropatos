@@ -7,9 +7,24 @@ use mysqli_sql_exception;
 
 class Users extends model
 {
-
+    /**
+     * Database table name
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @var string
+     */
     private string $table = 'users';
 
+    /**
+     * Insert new user
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $username
+     * @param $email
+     * @param $passwd
+     * @param $permissions
+     * @return bool
+     */
     function new_user($username, $email, $passwd, $permissions = null): bool
     {
         if (!isset($permissions)) $permissions = 0;
@@ -27,6 +42,16 @@ class Users extends model
         return false;
     }
 
+    /**
+     * Get user partially
+     * -----------------------------------------------------------------------------------------------------------------
+     * If password isn't set, returns the number of rows of the result of the username, if it's set and correct, attempts
+     * to return some data to later insert it into the @param $username
+     * @param $passwd
+     * @return array|false|string
+     * @link $_SESSION superglobal.
+     *
+     */
     function get_user($username, $passwd = null)
     {
         $query = "SELECT * FROM $this->table where username=?";
@@ -56,6 +81,14 @@ class Users extends model
         return false;
     }
 
+    /**
+     * Get all parameters from a user
+     * -----------------------------------------------------------------------------------------------------------------
+     * Attempts to get all parameters from a user, no matter what.
+     *
+     * @param $username
+     * @return array|false|string|null
+     */
     function get_all_from_user($username)
     {
         $query = "SELECT * FROM $this->table where username=?";
@@ -73,6 +106,14 @@ class Users extends model
         return false;
     }
 
+    /**
+     * Change username
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $old_username
+     * @param $new_username
+     * @return bool|string
+     */
     function change_username($old_username, $new_username)
     {
         $query = "UPDATE $this->table SET username=? WHERE username=?;";
@@ -88,6 +129,14 @@ class Users extends model
         return false;
     }
 
+    /**
+     * Change password
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $username
+     * @param $passwd
+     * @return bool|string
+     */
     function change_passwd($username, $passwd)
     {
         $query = "UPDATE $this->table SET passwd=? WHERE username=?;";
@@ -104,7 +153,15 @@ class Users extends model
         return false;
     }
 
-    function toggle_active($username, $is_active = 0): bool
+    /**
+     * Toggle is_active
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param string $username
+     * @param int $is_active
+     * @return bool
+     */
+    function toggle_active(string $username, int $is_active = 0): bool
     {
         try {
             if ($is_active === 0) {
@@ -125,7 +182,15 @@ class Users extends model
         return false;
     }
 
-    function toggle_permissions($permissions, $username)
+    /**
+     * Toggle permissions
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param int $permissions
+     * @param string $username
+     * @return bool|string
+     */
+    function toggle_permissions(int $permissions, string $username)
     {
         $query = "UPDATE $this->table SET permissions=? WHERE username=?;";
         try {
@@ -140,6 +205,13 @@ class Users extends model
         return false;
     }
 
+    /**
+     * Delete user
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param string $username
+     * @return bool
+     */
     function delete_user(string $username): bool
     {
         $query = "DELETE FROM $this->table WHERE username=?;";
@@ -155,6 +227,13 @@ class Users extends model
         return false;
     }
 
+    /**
+     * Get users for Datatable
+     * -----------------------------------------------------------------------------------------------------------------
+     * Attempts to return an array formatter in HTML with the info of users for a Datatable from Database.
+     *
+     * @return array|false|string
+     */
     function datatable_users()
     {
         $query = "SELECT * from $this->table;";
@@ -181,6 +260,13 @@ class Users extends model
         return false;
     }
 
+    /**
+     * Format is_active cell for Datatable
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $is_active
+     * @return string
+     */
     function format_is_active($is_active): string
     {
         $status = $is_active === 1 ? "Desactivar" : "Activar";
@@ -192,6 +278,13 @@ class Users extends model
             '</div>';
     }
 
+    /**
+     * Format permissions cell for Datatable
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @param $permissions
+     * @return string
+     */
     function format_permissions($permissions): string
     {
         $level = $permissions == 1 ? 'Bajar de nivel' : 'Subir de nivel';
@@ -203,6 +296,12 @@ class Users extends model
             '</div>';
     }
 
+    /**
+     * Format delete cell for Datatable
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @return string
+     */
     function format_delete(): string
     {
         return
@@ -213,6 +312,12 @@ class Users extends model
             '</div>';
     }
 
+    /**
+     * Count how many admins there are
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @return mixed
+     */
     function count_admins()
     {
         $query = "SELECT COUNT(*) from $this->table WHERE permissions=1 GROUP BY username;";

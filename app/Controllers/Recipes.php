@@ -11,7 +11,7 @@ class Recipes extends controller
      * Get recipes for Home page
      * -----------------------------------------------------------------------------------------------------------------
      * Retrieve all recipes stored in Database to fill the main page. This method is called form Javascript by an AJAX
-     * call and it is encoded in .json so it can be read easily.
+     * call and it is encoded in JSON so it can be read easily.
      */
     function get_recipes(): void
     {
@@ -21,7 +21,7 @@ class Recipes extends controller
     /**
      * Get recipes for Datatable
      * -----------------------------------------------------------------------------------------------------------------
-     * Retrieve all recipes in a special format to fill a Datatable in the recipes manage admin page.
+     * Retrieve all recipes with a different method that gives them a special format to fill a table.
      *
      * @return void
      */
@@ -31,6 +31,10 @@ class Recipes extends controller
     }
 
     /**
+     * Add recipe
+     * -----------------------------------------------------------------------------------------------------------------
+     * Checks all that is needed to create a new entry for a new recipe before attempting the insert into Database.
+     *
      * @return void
      */
     function add_recipe(): void
@@ -81,6 +85,13 @@ class Recipes extends controller
         template('pages/addrcp', $data);
     }
 
+    /**
+     * Update recipe
+     * -----------------------------------------------------------------------------------------------------------------
+     * Checks all that is needed to create a new entry for a new recipe before attempting an update into Database.
+     *
+     * @return void
+     */
     function updt_rcp()
     {
         $data['page'] = 'recipe_manage';
@@ -134,6 +145,13 @@ class Recipes extends controller
         template('pages/recipe.manage', $data);
     }
 
+    /**
+     * Delete recipe
+     * -----------------------------------------------------------------------------------------------------------------
+     * Attempts to delete a recipe.
+     *
+     * @return void
+     */
     function delete_recipe()
     {
         if (isset($_SESSION['__user']) && $_SESSION['__user']['permissions'] === 1) {

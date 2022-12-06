@@ -7,9 +7,22 @@ use mysqli_sql_exception;
 
 class Recipes extends model
 {
-
+    /**
+     * Database table name
+     * -----------------------------------------------------------------------------------------------------------------
+     *
+     * @var string
+     */
     private string $table = 'recipes';
 
+    /**
+     * Get all recipes in raw
+     * -----------------------------------------------------------------------------------------------------------------
+     * Attempts to return a raw array from the {@link fetch_assoc()} method.
+     *
+     * @param $slug
+     * @return array|false
+     */
     function get_recipes($slug = null)
     {
         try {
@@ -37,6 +50,13 @@ class Recipes extends model
         return false;
     }
 
+    /**
+     * Get all recipes for Datatable
+     * -----------------------------------------------------------------------------------------------------------------
+     * Attempts to return an HTML formatted array with the recipes info for a Datatable.
+     *
+     * @return array|false
+     */
     function datatable_recipes()
     {
         $query = "SELECT * FROM $this->table ORDER BY uploaded_date DESC;";
@@ -71,6 +91,15 @@ class Recipes extends model
         return false;
     }
 
+    /**
+     * Update rating
+     * -----------------------------------------------------------------------------------------------------------------
+     * It makes a calculation to update the rating by calling {@link get_ratings} and then attempts to update the Database.
+     *
+     * @param $slug
+     * @param $comment_rating
+     * @return bool
+     */
     function rating($slug, $comment_rating): bool
     {
         $rate = $this->get_ratings($slug, $comment_rating);
@@ -87,6 +116,13 @@ class Recipes extends model
         return false;
     }
 
+    /**
+     * Calculate new rating
+     * -----------------------------------------------------------------------------------------------------------------
+     * @param $slug
+     * @param $comment_rating
+     * @return array
+     */
     function get_ratings($slug, $comment_rating): array
     {
         // get the recipe from database
@@ -106,6 +142,12 @@ class Recipes extends model
         return ['ratings' => $num_ratings, 'points' => $points_media];
     }
 
+    /**
+     * Insert a recipe
+     * -----------------------------------------------------------------------------------------------------------------
+     * @param $params
+     * @return bool
+     */
     function add_recipe($params): bool
     {
         $query = "INSERT INTO $this->table (slug, src, title, description, admixtures, making, difficulty) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -128,6 +170,12 @@ class Recipes extends model
         return false;
     }
 
+    /**
+     * Update a recipe
+     * -----------------------------------------------------------------------------------------------------------------
+     * @param $params
+     * @return bool
+     */
     function updt_rcp($params): bool
     {
         $query = "UPDATE $this->table SET slug=?, src=?, title=?, description=?, admixtures=?, making=?, difficulty=? WHERE slug=?;";
@@ -151,6 +199,12 @@ class Recipes extends model
         return false;
     }
 
+    /**
+     * Delete a recipe
+     * -----------------------------------------------------------------------------------------------------------------
+     * @param $slug
+     * @return bool
+     */
     function delete_recipe($slug): bool
     {
         $query = "DELETE FROM $this->table WHERE slug=?;";

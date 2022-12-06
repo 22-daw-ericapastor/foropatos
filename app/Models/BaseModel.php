@@ -13,6 +13,10 @@ class BaseModel
     private string $passwd = '';
     private string $db = 'foropatos';
 
+    /**
+     * All the children of this class will receive {@link $conn} and will be able to access Database by only creating
+     * an object of those classes.
+     */
     function __construct()
     {
         try {
