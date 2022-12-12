@@ -113,7 +113,7 @@ function check_user_activity()
 {
     if ((isset($_SESSION['__user']) && $_SESSION['__user']['is_active'] === 0)
         || (isset($_SESSION['last_acted_on']) && (time() - $_SESSION['last_acted_on'] > timeout))) {
-        session_re_start();
+        //session_re_start();
     } else {
         $_SESSION['last_acted_on'] = time();
     }
